@@ -12,11 +12,8 @@
     <link href="{{asset('/assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('/assets/css/templatemo-xtra-blog.css')}}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-<!--
-    
-TemplateMo 553 Xtra Blog
-
-https://templatemo.com/tm-553-xtra-blog
+   
+   
 
 -->
 </head>
@@ -87,6 +84,10 @@ https://templatemo.com/tm-553-xtra-blog
                         <i class="far fa-comments"></i>
                        Generate report
                     </a></li>
+                    {{--<li class="tm-nav-item"><a href="{{route('logout.logout')}}" class="tm-nav-link">
+                        <i class="fas fa-pen"></i>
+                        Logout
+                    </a></li>--}}
                 </ul>
             </nav>
             <div class="tm-mb-65">

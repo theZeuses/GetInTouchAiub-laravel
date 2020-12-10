@@ -45,4 +45,7 @@ class adminControllerad extends Controller
     public function ViewReportad(){
         return view('Admin.Report');
     }
+    public function VieweditProfilead(){
+        return view('Admin.EditPro');
+    }
 }
