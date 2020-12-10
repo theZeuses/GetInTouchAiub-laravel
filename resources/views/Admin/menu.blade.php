@@ -28,62 +28,62 @@ https://templatemo.com/tm-553-xtra-blog
             </button>
             <div class="tm-site-header">
 				<div class="login100-form-avatar">
-					<img style="width:100px;height:100px;margin-left: 25%;"src="/assets/images/avatar-01.jpg" alt="AVATAR">
+					<img style="width:100px;height:100px;margin-left: 25%;"src="{{asset('/assets/images/avatar-01.jpg')}}" alt="AVATAR">
 				</div>
                            
                 <h1 class="text-center">GetInTouchAiub</h1>
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
-                    <li class="tm-nav-item "><a href="/Adminhome" class="tm-nav-link">
+                <li class="tm-nav-item "><a href="{{route('Admin.Viewhomead')}}" class="tm-nav-link">
                         <i class="fas fa-home"></i>
 						AdminHome
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/post" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.Viewpostad')}}" class="tm-nav-link">
                         <i class="fas fa-pen"></i>
                         Post
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/Insert" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.Viewinsertad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Insert
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/PendingPost" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewPendingPostReqad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Prnding Post Request
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/PendingSignup" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewPendingSignupReqad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Pending Signup Request
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/AdminList" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewAdminlistad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Admin List
                     </a></li>
-					<li class="tm-nav-item"><a href="/Adminhome/userlist" class="tm-nav-link">
+					<li class="tm-nav-item"><a href="{{route('Admin.ViewUserlistad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         User List
                     </a></li>
-					<li class="tm-nav-item"><a href="/Adminhome/ContentControllerList" class="tm-nav-link">
+					<li class="tm-nav-item"><a href="{{route('Admin.ViewCCListad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Content Controller List
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/AccountControllerList" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewACListad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Account Controller List
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/Blocklist" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewBlockListad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Block List
 					</a></li>
-					<li class="tm-nav-item"><a href="/Adminhome/Adminprofile" class="tm-nav-link">
+					<li class="tm-nav-item"><a href="{{route('Admin.ViewProfilead')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Profile
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/Notification" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewNotificationad')}}" class="tm-nav-link">
                         <i class="far fa-comments"></i>
                         Notification
                     </a></li>
-                    <li class="tm-nav-item"><a href="/Adminhome/report" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('Admin.ViewReportad')}}" class="tm-nav-link">
                         <i class="far fa-comments"></i>
                        Generate report
                     </a></li>
