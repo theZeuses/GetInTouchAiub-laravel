@@ -59,7 +59,7 @@ hr {
     margin-bottom: 115px;
 }
 
-.tm-site-logo {
+/*.tm-site-logo {
     width: 75px;
     height: 75px;
     border-radius: 50%;
@@ -69,7 +69,7 @@ hr {
     justify-content: center;
 }
 
-.tm-site-logo i { color: #0CC; }
+.tm-site-logo i { color: #0CC; }*/
 
 .tm-main {
     margin-left: 400px;
