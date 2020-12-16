@@ -29,6 +29,7 @@
 		<div class="container-login100" style="background-image: url('/assets/contentController/images/img-01.jpg');">
 			<div class="wrap-login100 p-t-190 p-b-30">
 				<form class="login100-form validate-form" method="post">
+					@csrf
 					<div class="login100-form-avatar">
 						<img src="/assets/contentController/images/avatar-01.jpg" alt="AVATAR">
 					</div>
