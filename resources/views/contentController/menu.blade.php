@@ -27,32 +27,32 @@
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
-                    <li class="tm-nav-item {{ $clicked[0] }}"><a href="/contentcontroller" class="tm-nav-link">
+                    <li class="tm-nav-item {{ $clicked[0] }}"><a href="{{ route('contentController.home') }}" class="tm-nav-link">
                         <i class="fas fa-home"></i>
 						Home
                     </a></li>
-                    <li class="tm-nav-item {{ $clicked[1] }}"><a href="/contentcontroller/post/request" class="tm-nav-link">
+                    <li class="tm-nav-item {{ $clicked[1] }}"><a href="{{ route('contentController.postRequest') }}" class="tm-nav-link">
                         <i class="fas fa-pen"></i>
                         Post Requests
                     </a></li>
                     
-                    <li class="tm-nav-item {{ $clicked[2] }}"><a href="/contentcontroller/announcement" class="tm-nav-link">
+                    <li class="tm-nav-item {{ $clicked[2] }}"><a href="{{ route('contentController.announcement') }}" class="tm-nav-link">
                         <i class="fas fa-bullhorn"></i>
                         Announcemnet
                     </a></li>
-                    <li class="tm-nav-item {{ $clicked[3] }}"><a href="/contentcontroller/users" class="tm-nav-link">
+                    <li class="tm-nav-item {{ $clicked[3] }}"><a href="{{ route('contentController.userList') }}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Users
                     </a></li>
-                    <li class="tm-nav-item {{ $clicked[4] }}"><a href="/contentcontroller/profile" class="tm-nav-link">
+                    <li class="tm-nav-item {{ $clicked[4] }}"><a href="{{ route('contentController.profile') }}" class="tm-nav-link">
                         <i class="fas fa-user"></i>
                         Profile
                     </a></li>
-					<li class="tm-nav-item {{ $clicked[5] }}"><a href="/contentcontroller/reports" class="tm-nav-link">
+					<li class="tm-nav-item {{ $clicked[5] }}"><a href="{{ route('contentController.reports') }}" class="tm-nav-link">
                         <i class="fas fa-file-pdf"></i>
                         Reports
                     </a></li>
-					<li class="tm-nav-item {{ $clicked[6] }}"><a href="/contentcontroller/contribution" class="tm-nav-link">
+					<li class="tm-nav-item {{ $clicked[6] }}"><a href="{{ route('contentController.contribution') }}" class="tm-nav-link">
                         <i class="fas fa-chart-bar"></i>
                         Contribution
                     </a></li>
