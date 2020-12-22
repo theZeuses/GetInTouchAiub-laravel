@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AnnouncementRequest;
 use App\Models\GeneralUser;
 use Illuminate\Http\Request;
 use App\Models\PostRequest;
+use App\Models\Announcement;
+use App\Models\ContentControlManager;
 
 class contentControllerController extends Controller
 {
@@ -44,5 +47,38 @@ class contentControllerController extends Controller
 
     public function analyzePoster($pid, $gid){
 
+    }
+
+    public function announcement(Request $req){
+        $announcements = Announcement::where('ccid',$req->session()->get('username'))->get();
+
+        if(count($announcements) > 0){
+            $cc = ContentControlManager::where('ccid',$announcements[0]->ccid)->get();
+            return view('contentController.announcement.announcement',['clicked'=>$this->clicker(2), 'announcements'=>$announcements, 'cc'=> $cc[0]]);
+        }else{
+            return view('contentController.announcement.announcement-zero',['clicked'=>$this->clicker(2), 'announcements'=>$announcements]);
+        }
+    }
+
+    public function createAnnouncement(){
+        return view('contentController.announcement.create', ['clicked'=>$this->clicker(2)]);
+    }
+
+    public function storeAnnouncement(AnnouncementRequest $req){
+        $announcement = new Announcement();
+        $announcement->ccid = $req->session()->get('username');
+        $announcement->subject = $req->subject;
+        $announcement->body = $req->body;
+
+        $announcement->save();
+        return redirect()->route('contentController.announcement');
+    }
+
+    public function updateAnnouncement(){
+        
+    }
+
+    public function deleteAnnouncement(){
+        
     }
 }
