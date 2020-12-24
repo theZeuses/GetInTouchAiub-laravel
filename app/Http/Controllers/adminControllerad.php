@@ -38,9 +38,11 @@ class adminControllerad extends Controller
         return view('Admin.penSignupreq');
     }
     public function ViewAdminlistad(){
-        return view('Admin.Adminlist');
+        $adminlist=AdminModel::all();
+        return view('Admin.Adminlist')->with('adminlist', $adminlist);
     }
     public function ViewACListad(){
+
         return view('Admin.AClist');
     }
     public function ViewCCListad(){
