@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminModel;
 use App\Models\AdminPostModel;
 use App\Models\PostModel;
+use App\Models\AccountControllerModel;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class adminControllerad extends Controller
                                     ->with ('adminpost',$adminpst);
     }
     public function Viewpostad(Request $req){
-        $adminpst=AdminPostModel::where('adminid', $req->session()->pull('username'))
+        $adminpst=AdminPostModel::where('adminid', $req->session()->get('username'))
                                         ->get();
         return view('Admin.Post')->with('ownpost',$adminpst);
     }
@@ -42,9 +43,17 @@ class adminControllerad extends Controller
         return view('Admin.Adminlist')->with('adminlist', $adminlist);
     }
     public function ViewACListad(){
-
-        return view('Admin.AClist');
+        $Aclist=AccountControllerModel::all();
+        return view('Admin.AClist')->with('Aclist', $Aclist);
     }
+    public function blockac($id){
+        //return redirect('/admin');
+    }
+    public function deleteac($id){
+        //return redirect('/admin');
+    }
+
+
     public function ViewCCListad(){
         return view('Admin.CClist');
     }
