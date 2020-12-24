@@ -34,7 +34,7 @@
                     <span>by Admin Nat</span>
                 </div>
             </article>-->
-
+ 
             <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">General User Posts</h1>
             </div>
@@ -70,6 +70,9 @@
                 </article>
                 @endfor
                 
+            
+        </div>
+        <div lass="row tm-row">
             <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">Admin Posts</h1>
             </div>

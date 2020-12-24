@@ -18,8 +18,10 @@ class adminControllerad extends Controller
         return view('Admin.AdminHome')->with ('post',$pst)
                                     ->with ('adminpost',$adminpst);
     }
-    public function Viewpostad(){
-        return view('Admin.Post');
+    public function Viewpostad(Request $req){
+        $adminpst=AdminPostModel::where('adminid', $req->session()->pull('username'))
+                                        ->get();
+        return view('Admin.Post')->with('ownpost',$adminpst);
     }
     public function deletegupostad($id){
         $post=PostModel::find($id)->delete();
