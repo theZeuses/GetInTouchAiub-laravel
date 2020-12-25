@@ -41,7 +41,8 @@ class adminControllerad extends Controller
         return view('Admin.penPostReq')->with('penpost', $penpost);
     }
     public function ViewPendingSignupReqad(){
-        return view('Admin.penSignupreq');
+        $pensignup=RegistrationRequestModel::all();
+        return view('Admin.penSignupreq')->with('pensignup', $pensignup);
     }
     public function ViewAdminlistad(){
         $adminlist=AdminModel::all();
