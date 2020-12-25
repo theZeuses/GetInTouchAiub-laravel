@@ -20,6 +20,97 @@
                     </form>
                 </div>                
             </div>   
+            <div class="tm-site-header ">          
+                <h1  style ="color: skyblue;"class="text-center">Account Controller List</h1>
+            </div>           
+            <div class="row tm-row">
+                <div>
+                <div id ="adlist">
+                    
+               
+                    <table border="1">
+                        <tr>
+                            <th>picture</th>
+                            
+                            <th>Admin Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>DoB</th>
+                            <th>Address</th>
+                            
+                            <th>Action</th>
+                        </tr>
+                       @for($i=0; $i<count($Acblocklist); $i++ )
+                        <tr>
+                            <td> {{$Acblocklist[$i]['profilepicture']}}</td>
+                                
+                                <td>{{$Acblocklist[$i]['acid']}} </td> 
+                                <td>{{$Acblocklist[$i]['name']}} </td>
+                                <td> {{$Acblocklist[$i]['email']}} </td>
+                                <td>{{$Acblocklist[$i]['gender']}} </td>
+                                <td>{{$Acblocklist[$i]['dob']}} </td>
+                                <td>{{ $Acblocklist[$i]['address']}} </td>
+                                
+                               
+                                <td>
+                                   
+                                    {{--<a href="route(Admin.blockac),{{$Acblocklist[$i]['acid']}}">Block</a> | 
+                                    <a href="route(Admin.deleteac),{{$Acblocklist[$i]['acid']}}">Delete</a>  
+                                --}}</td>
+                             
+                            @endfor
+                        </tr>
+                    </table>
+                     </div>
+                  
+            <div class="tm-site-header ">          
+                <h1  style ="color: skyblue;"class="text-center">Content Controller List</h1>
+            </div>  
+                     
+            <div class="row tm-row">
+                <div>
+                <div id ="adlist">
+                    
+               
+                    <table border="1">
+                        <tr>
+                            <th>picture</th>
+                            
+                            <th>Content Controller Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>DoB</th>
+                            <th>Address</th>
+                            
+                            <th>Action</th>
+                        </tr>
+                        
+                       @for($i=0; $i<count($Ccblocklist); $i++ )
+                        <tr>
+                            <td> {{$Ccblocklist[$i]['profilepicture']}}</td>
+                                
+                                <td>{{$Ccblocklist[$i]['ccid']}} </td> 
+                                <td>{{$Ccblocklist[$i]['name']}} </td>
+                                <td> {{$Ccblocklist[$i]['email']}} </td>
+                                <td>{{$Ccblocklist[$i]['gender']}} </td>
+                                <td>{{$Ccblocklist[$i]['dob']}} </td>
+                                <td>{{ $Ccblocklist[$i]['address']}} </td>
+                                
+                               
+                                <td>
+                                   {{--<a href="route(Admin.unblockcc),{{$blkCc[$i]['ccid']}}">Block</a> | 
+                                    <a href="route(Admin.deletecc),{{$blkCc[$i]['ccid']}}">Delete</a> --}}
+                                </td>
+                             
+                            @endfor
+                        </tr>
+                    </table>
+                     </div>
+                </div>   
+                             
+            </div>           
               <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">General User List</h1>
             </div>           
