@@ -89,7 +89,15 @@ class adminControllerad extends Controller
 
 
     public function ViewBlockListad(){
-        return view('Admin.Blocklist');
+        $blkAc=AccountControllerModel::where('accountstatus','Blocked')
+                                        ->get();
+        $blkCc=ContentControllerModel::where('accountstatus','Blocked')
+                                         ->get();
+        $blkgu=GeneralUserModel::where('accountstatus','Blocked')
+                                        ->get();
+        return view('Admin.Blocklist')->with('Acblocklist',$blkAc)
+                                        ->with('Ccblocklist',$blkCc)
+                                        ->with('Gublocklist',$blkgu);
     }
     public function ViewProfilead(){
         return view('Admin.AdProfile');
