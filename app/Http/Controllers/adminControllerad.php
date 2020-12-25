@@ -40,6 +40,27 @@ class adminControllerad extends Controller
         $penpost=GeneralUserPostRequest::all();
         return view('Admin.penPostReq')->with('penpost', $penpost);
     }
+    public function approvepenpostreq($id,Request $req){
+        $penpost=GeneralUserPostRequest::where('id',$id)->get();
+        //print_r($pensign);
+        $gupst = new GeneralUserPost;
+        
+        $gupst->guid = $penpost[0]['guid'];
+        $gupst->text = $penpost[0]['text'];
+        $gupst->file = $penpost[0]['file'];
+        $gupst->approvedby = $req->session()->get('username');
+        $gupst->save();
+
+        $penpost=GeneralUserPostRequest::where('id',$id)->delete();
+        return redirect ('/Admin/PendingPostReq');
+
+    }
+    public function deletepenpostreq($id){
+       
+        $penpost=GeneralUserPostRequest::where('id',$id)->delete();
+        return redirect ('/Admin/PendingPostReq');
+
+    }
     public function ViewPendingSignupReqad(){
         $pensignup=RegistrationRequest::all();
         return view('Admin.penSignupreq')->with('pensignup', $pensignup);

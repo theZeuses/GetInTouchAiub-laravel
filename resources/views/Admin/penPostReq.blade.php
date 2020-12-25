@@ -30,9 +30,9 @@
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between">
-                            
-                            <span> <a href="/Adminhome/ApprovePostreq/{{$penpost[$i]['id']}}">Approve</a> </span>
-                            <span > <a  style="color: red;"href="/Adminhome/RemovePostreq/{{$penpost[$i]['id']}}">Remove</a> </span>
+                             
+                            <span> <a href="{{route('Admin.approvepenpostreq',$penpost[$i]['id'])}}">Approve</a> </span>
+                            <span > <a  style="color: red;"href="{{route('Admin.deletepenpostreq',$penpost[$i]['id'])}}">Remove</a> </span>
                         </div>
                     </article>
                     @endfor
