@@ -8,6 +8,8 @@ use App\Models\PostModel;
 use App\Models\AccountControllerModel;
 use App\Models\ContentControllerModel;
 use App\Models\GeneralUserModel;
+use App\Models\RegistrationRequestModel;
+use App\Models\GuPostRequestModel;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,8 @@ class adminControllerad extends Controller
         return view('Admin.Insert');
     }
     public function ViewPendingpostad(){
-        return view('Admin.penPostReq');
+        $penpost=GuPostRequestModel::all();
+        return view('Admin.penPostReq')->with('penpost', $penpost);
     }
     public function ViewPendingSignupReqad(){
         return view('Admin.penSignupreq');
