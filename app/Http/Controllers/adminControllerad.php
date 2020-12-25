@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 //use app\Models;
-use App\Models\AdminModel;
-use App\Models\AdminPostModel;
-use App\Models\PostModel;
-use App\Models\AccountControllerModel;
-use App\Models\ContentControllerModel;
-use App\Models\GeneralUserModel;
-use App\Models\RegistrationRequestModel;
-use App\Models\GuPostRequestModel;
+use App\Models\Admin;
+use App\Models\AdminPost;
+use App\Models\GeneralUserPost;
+use App\Models\AccountController;
+use App\Models\ContentController;
+use App\Models\GeneralUser;
+use App\Models\RegistrationRequest;
+use App\Models\GeneralUserPostRequest;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
 class adminControllerad extends Controller
 {
     public function Viewhomead(){
-      $pst= PostModel::all();
-      $adminpst=AdminPostModel::all();
+      $pst= GeneralUserPost::all();
+      $adminpst=AdminPost::all();
       //print_r($adminpst);
       //print_r($pst);
         return view('Admin.AdminHome')->with ('post',$pst)
                                     ->with ('adminpost',$adminpst);
     }
     public function Viewpostad(Request $req){
-        $adminpst=AdminPostModel::where('adminid', $req->session()->get('username'))
+        $adminpst=AdminPost::where('adminid', $req->session()->get('username'))
                                         ->get();
         return view('Admin.Post')->with('ownpost',$adminpst);
     }
     public function deletegupostad($id){
-        $post=PostModel::find($id)->delete();
+        $post=GeneralUserPost::find($id)->delete();
         
         return redirect('Admin/'); 
     }
@@ -37,19 +37,19 @@ class adminControllerad extends Controller
         return view('Admin.Insert');
     }
     public function ViewPendingpostad(){
-        $penpost=GuPostRequestModel::all();
+        $penpost=GeneralUserPostRequest::all();
         return view('Admin.penPostReq')->with('penpost', $penpost);
     }
     public function ViewPendingSignupReqad(){
-        $pensignup=RegistrationRequestModel::all();
+        $pensignup=RegistrationRequest::all();
         return view('Admin.penSignupreq')->with('pensignup', $pensignup);
     }
     public function ViewAdminlistad(){
-        $adminlist=AdminModel::all();
+        $adminlist=Admin::all();
         return view('Admin.Adminlist')->with('adminlist', $adminlist);
     }
     public function ViewACListad(){
-        $Aclist=AccountControllerModel::all();
+        $Aclist=AccountController::all();
         return view('Admin.AClist')->with('Aclist', $Aclist);
     }
     public function blockac($id){
@@ -61,7 +61,7 @@ class adminControllerad extends Controller
 
 
     public function ViewCCListad(){
-        $Cclist=ContentControllerModel::all();
+        $Cclist=ContentController::all();
         return view('Admin.CClist')->with('Cclist', $Cclist);
        // return view('Admin.CClist');
     }
@@ -75,7 +75,7 @@ class adminControllerad extends Controller
 
     
     public function ViewUserlistad(){
-        $Gulist=GeneralUserModel::all();
+        $Gulist=GeneralUser::all();
         return view('Admin.GUlist')->with('Gulist', $Gulist);
        
        // return view('Admin.GUlist');
@@ -89,11 +89,11 @@ class adminControllerad extends Controller
 
 
     public function ViewBlockListad(){
-        $blkAc=AccountControllerModel::where('accountstatus','Blocked')
+        $blkAc=AccountController::where('accountstatus','Blocked')
                                         ->get();
-        $blkCc=ContentControllerModel::where('accountstatus','Blocked')
+        $blkCc=ContentController::where('accountstatus','Blocked')
                                          ->get();
-        $blkgu=GeneralUserModel::where('accountstatus','Blocked')
+        $blkgu=GeneralUser::where('accountstatus','Blocked')
                                         ->get();
         return view('Admin.Blocklist')->with('Acblocklist',$blkAc)
                                         ->with('Ccblocklist',$blkCc)
