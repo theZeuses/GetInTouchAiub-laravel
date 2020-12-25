@@ -44,6 +44,26 @@ class adminControllerad extends Controller
         $pensignup=RegistrationRequest::all();
         return view('Admin.penSignupreq')->with('pensignup', $pensignup);
     }
+    public function approvepensignupreq($id){
+        $pensign=RegistrationRequest::where('guid',$id)->get();
+        //print_r($pensign);
+        $gu = new GeneralUser;
+        
+        $gu->guid = $pensign[0]['guid'];
+        $gu->name = $pensign[0]['name'];
+        $gu->email = $pensign[0]['email'];
+        $gu->gender = $pensign[0]['gender'];
+        $gu->dob = $pensign[0]['dob'];
+        $gu->address = $pensign[0]['address'];
+        $gu->profilepicture = $pensign[0]['profilepicture'];
+        $gu->userstatus = $pensign[0]['userstatus'];
+        $gu->accountstatus = 'Active';
+        $gu->save();
+
+        $pensign=RegistrationRequest::where('guid',$id)->delete();
+        return redirect ('/Admin/PendingSignupReq');
+
+    }
     public function ViewAdminlistad(){
         $adminlist=Admin::all();
         return view('Admin.Adminlist')->with('adminlist', $adminlist);

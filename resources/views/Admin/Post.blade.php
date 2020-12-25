@@ -44,6 +44,10 @@
             
             <span>Posted by Admin :- {{$ownpost[$i]['adminid']}}</span>
         </div>
+        <div class="d-flex justify-content-between">
+            
+            <span>Posted by Admin :- {{$ownpost[$i]['adminid']}}</span>
+        </div>
     </article>
     @endfor
     
