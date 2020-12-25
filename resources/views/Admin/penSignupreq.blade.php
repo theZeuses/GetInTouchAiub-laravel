@@ -40,7 +40,7 @@
                                
                                 <td>
                                     <a href="{{route('Admin.approvepensignupreq',$pensignup[$i]['guid'])}}">Approve</a> |
-                                    <a style="color: red;" href="/Adminhome/removegureq/{{$pensignup[$i]['guid']}}">Delete</a>  
+                                    <a style="color: red;" href="{{route('Admin.deletepensignupreq',$pensignup[$i]['guid'])}}">Delete</a>  
                                 </td>
                             
                             @endfor

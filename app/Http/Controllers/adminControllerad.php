@@ -64,6 +64,14 @@ class adminControllerad extends Controller
         return redirect ('/Admin/PendingSignupReq');
 
     }
+    public function deletepensignupreq($id){
+       
+        $pensign=RegistrationRequest::where('guid',$id)->delete();
+        return redirect ('/Admin/PendingSignupReq');
+
+    }
+
+
     public function ViewAdminlistad(){
         $adminlist=Admin::all();
         return view('Admin.Adminlist')->with('adminlist', $adminlist);
