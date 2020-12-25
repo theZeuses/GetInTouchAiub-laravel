@@ -70,32 +70,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li>
 									<ul class="agileits-address-text ">
 										<li class="agile-it-adress-left"><b>USER ID</b></li>
-										<li><span>:</span>shazib1</li>
+										<li><span>:</span>{{$pro[0]['adminid']}}</li>
 									</ul>
 								</li>
 								<li>
 									<ul class="agileits-address-text ">
 										<li class="agile-it-adress-left"><b>NAME</b></li>
-										<li><span>:</span>Shahriyar Shazib</li>
+										<li><span>:</span>{{$pro[0]['name']}}</li>
 									</ul>
 								</li>
 								<li>
 									<ul class="agileits-address-text ">
 										<li class="agile-it-adress-left"><b>D.O.B</b></li>
-										<li><span>:</span>16/02/98</li>
+										<li><span>:</span>{{$pro[0]['dob']}}</li>
 									</ul>
 								</li>
 								
 								<li>
 									<ul class="agileits-address-text">
 										<li class="agile-it-adress-left"><b>ADDRESS</b></li>
-										<li><span>:</span>Gazipur</li>
+										<li><span>:</span>{{$pro[0]['address']}}</li>
 									</ul>
 								</li>
 								<li>
 									<ul class="agileits-address-text">
 										<li class="agile-it-adress-left"><b>E-MAIL</b></li>
-										<li><span>:</span><a href="mailto:example@mail.com"> shazib.shahriyar@gmail.com</a></li>
+										<li><span>:</span><a href="mailto:example@mail.com">{{$pro[0]['email']}}</a></li>
 									</ul>
 								</li>
 								
@@ -126,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="w3ls_footer_grid_leftr">
 							<h4>Location</h4>
-							<p>Gazipur</p>
+							<p>{{$pro[0]['address']}}</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -136,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="w3ls_footer_grid_leftr">
 							<h4>Email</h4>
-							<a href="mailto:info@example.com">shazib.shahriyar@gmail.com</a>
+							<a href="mailto:info@example.com">{{$pro[0]['email']}}</a>
 						</div>
 						<div class="clearfix"> </div>
 					</div>

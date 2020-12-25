@@ -99,8 +99,9 @@ class adminControllerad extends Controller
                                         ->with('Ccblocklist',$blkCc)
                                         ->with('Gublocklist',$blkgu);
     }
-    public function ViewProfilead(){
-        return view('Admin.AdProfile');
+    public function ViewProfilead(Request $req){
+        $pro=Admin::where('adminid',$req->session()->get('username'))->get();
+        return view('Admin.AdProfile')->with('pro',$pro);
     }
     public function ViewNotificationad(){
         return view('Admin.Mynotification');
