@@ -6,6 +6,8 @@ use App\Models\AdminModel;
 use App\Models\AdminPostModel;
 use App\Models\PostModel;
 use App\Models\AccountControllerModel;
+use App\Models\ContentControllerModel;
+use App\Models\GeneralUserModel;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
@@ -55,11 +57,33 @@ class adminControllerad extends Controller
 
 
     public function ViewCCListad(){
-        return view('Admin.CClist');
+        $Cclist=ContentControllerModel::all();
+        return view('Admin.CClist')->with('Cclist', $Cclist);
+       // return view('Admin.CClist');
     }
+
+    public function blockcc($id){
+        //return redirect('/admin');
+    }
+    public function deletecc($id){
+        //return redirect('/admin');
+    }
+
+    
     public function ViewUserlistad(){
-        return view('Admin.GUlist');
+        $Gulist=GeneralUserModel::all();
+        return view('Admin.GUlist')->with('Gulist', $Gulist);
+       
+       // return view('Admin.GUlist');
     }
+    public function blockgu($id){
+        //return redirect('/admin');
+    }
+    public function deletegu($id){
+        //return redirect('/admin');
+    }
+
+
     public function ViewBlockListad(){
         return view('Admin.Blocklist');
     }
