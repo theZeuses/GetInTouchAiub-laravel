@@ -184,6 +184,8 @@ class adminControllerad extends Controller
 
     }
     public function deleteblockac($id){
+        AccountController::where('acid',$id)->delete();
+        return redirect('/Admin/BlockList/');
 
     }
     public function deleteblockcc($id){
