@@ -53,7 +53,7 @@
                                 
                                
                                 <td>
-                                    <a href="route('Admin.ViewNotificationad'),{{$adminlist[$i]['adminid']}}">Notification</a> 
+                                    <a href="{{route('Admin.ViewNotificationad',$adminlist[$i]['adminid'])}}">Notification</a> 
                                 </td>
                              
                             @endfor

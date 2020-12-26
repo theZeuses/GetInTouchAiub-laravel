@@ -106,10 +106,13 @@ class adminControllerad extends Controller
         return view('Admin.Adminlist')->with('adminlist', $adminlist);
     }
     public function ViewACListad(){
-        $Aclist=AccountController::all();
+        $Aclist=AccountController::where('accountstatus','Active')->get();
         return view('Admin.AClist')->with('Aclist', $Aclist);
     }
     public function blockac($id){
+        AccountController::where('acid',$id)
+                    ->update(['accountstatus'=>'Blocked']);
+        return redirect('/Admin/ACList');
         //return redirect('/admin');
     }
     public function deleteac($id){
@@ -118,7 +121,7 @@ class adminControllerad extends Controller
 
 
     public function ViewCCListad(){
-        $Cclist=ContentController::all();
+        $Cclist=ContentController::where('accountstatus','Active')->get();
         return view('Admin.CClist')->with('Cclist', $Cclist);
        // return view('Admin.CClist');
     }
@@ -132,7 +135,7 @@ class adminControllerad extends Controller
 
     
     public function ViewUserlistad(){
-        $Gulist=GeneralUser::all();
+        $Gulist=GeneralUser::where('accountstatus','Active')->get();
         return view('Admin.GUlist')->with('Gulist', $Gulist);
        
        // return view('Admin.GUlist');
