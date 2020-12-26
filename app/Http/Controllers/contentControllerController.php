@@ -74,8 +74,19 @@ class contentControllerController extends Controller
         return redirect()->route('contentController.announcement');
     }
 
-    public function updateAnnouncement(){
-        
+    public function updateAnnouncement($id){
+        $announcement = Announcement::find($id);
+        return view('contentController.announcement.update', ['clicked'=>$this->clicker(2), 'announcement'=>$announcement]);
+    }
+
+    public function storeUpdatedAnnouncement(AnnouncementRequest $req, $id){
+        $announcement = Announcement::find($id);
+        $announcement->ccid = $req->session()->get('username');
+        $announcement->subject = $req->subject;
+        $announcement->body = $req->body;
+
+        $announcement->save();
+        return redirect()->route('contentController.announcement');
     }
 
     public function deleteAnnouncement(){
