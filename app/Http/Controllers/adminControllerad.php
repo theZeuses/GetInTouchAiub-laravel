@@ -148,7 +148,8 @@ class adminControllerad extends Controller
         return redirect('/Admin/Userlist/');
     }
     public function deletegu($id){
-        //return redirect('/admin');
+        GeneralUser::where('guid',$id)->delete();
+        return redirect('/Admin/Userlist/');
     }
 
 
