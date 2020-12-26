@@ -28,6 +28,6 @@ Route::group(['middleware' => ['sess']], function () {
     Route::group(['middleware' => ['AccountController']], function () {
         Route::get('/achome', [accountControllerController::class,'achome'])->name('accountController.achome');
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
-        Route::post('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');
+        Route::get('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');
     });
 });
