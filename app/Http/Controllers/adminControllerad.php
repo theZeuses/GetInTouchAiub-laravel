@@ -172,6 +172,9 @@ class adminControllerad extends Controller
         return redirect('/Admin/BlockList');
     }
     public function unblockcc($id){
+        ContentController::where('ccid',$id)
+        ->update(['accountstatus'=>'Active']);
+        return redirect('/Admin/BlockList/');
 
     }
     public function unblockac($id){
