@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\logoutController;
+use App\Http\Controllers\accountControllerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    return redirect('/login');
+});
+
+Route::get('/login', [loginController::class,'index']);
+Route::post('/login', [loginController::class,'verify']);
+Route::get('/logout', [logoutController::class,'index']);
+
+Route::group(['middleware' => ['sess']], function () {
+    Route::group(['middleware' => ['AccountController']], function () {
+        Route::get('/achome', [accountControllerController::class,'achome'])->name('accountController.achome');
+    });
 });
