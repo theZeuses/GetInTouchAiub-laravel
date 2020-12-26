@@ -55,9 +55,9 @@
                                
                                 <td>
                                    
-                                    {{--<a href="route(Admin.blockac),{{$Acblocklist[$i]['acid']}}">Block</a> | 
-                                    <a href="route(Admin.deleteac),{{$Acblocklist[$i]['acid']}}">Delete</a>  
-                                --}}</td>
+                                    <a href="{{route('Admin.unblockac',$Acblocklist[$i]['acid'])}}">UnBlock</a> | 
+                                    <a href="{{route('Admin.deleteblockac',$Acblocklist[$i]['acid'])}}">Delete</a>  
+                                </td>
                              
                             @endfor
                         </tr>

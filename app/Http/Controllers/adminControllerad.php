@@ -178,6 +178,9 @@ class adminControllerad extends Controller
 
     }
     public function unblockac($id){
+        AccountController::where('acid',$id)
+        ->update(['accountstatus'=>'Active']);
+        return redirect('/Admin/BlockList');
 
     }
     public function deleteblockac($id){
