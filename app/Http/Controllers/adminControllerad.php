@@ -10,6 +10,7 @@ use App\Models\ContentController;
 use App\Models\GeneralUser;
 use App\Models\RegistrationRequest;
 use App\Models\GeneralUserPostRequest;
+use App\Models\User;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,13 @@ class adminControllerad extends Controller
         $gu->userstatus = $pensign[0]['userstatus'];
         $gu->accountstatus = 'Active';
         $gu->save();
+
+        $user=new User;
+        $user->userid=$pensign[0]['guid'];
+        $user->password='1';
+        $user->usertype='General User';
+        $user->accountstatus='Active';
+        $user->save();
 
         $pensign=RegistrationRequest::where('guid',$id)->delete();
         return redirect ('/Admin/PendingSignupReq');
