@@ -143,7 +143,9 @@ class adminControllerad extends Controller
        // return view('Admin.GUlist');
     }
     public function blockgu($id){
-        //return redirect('/admin');
+        GeneralUser::where('guid',$id)
+        ->update(['accountstatus'=>'Blocked']);
+        return redirect('/Admin/Userlist/');
     }
     public function deletegu($id){
         //return redirect('/admin');

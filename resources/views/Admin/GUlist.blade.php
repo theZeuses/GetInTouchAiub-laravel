@@ -54,7 +54,7 @@
                                
                                 <td>
                                     <a href="route(Admin.ViewNotificationad),{{$Gulist[$i]['guid']}}">Notification</a>  |
-                                    <a href="route(Admin.blockgu),{{$Gulist[$i]['guid']}}">Block</a> | 
+                                    <a href="{{route('Admin.blockgu',$Gulist[$i]['guid'])}}">Block</a> | 
                                     <a href="route(Admin.deletegu),{{$Gulist[$i]['guid']}}">Delete</a>  
                                 </td>
                              
