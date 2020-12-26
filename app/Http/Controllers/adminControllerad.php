@@ -187,10 +187,12 @@ class adminControllerad extends Controller
 
     }
     public function deleteblockcc($id){
+        
 
     }
     public function deleteblockgu($id){
-
+        GeneralUser::where('guid',$id)->delete();
+        return redirect('/Admin/BlockList/');
     }
     public function ViewProfilead(Request $req){
         $pro=Admin::where('adminid',$req->session()->get('username'))->get();
