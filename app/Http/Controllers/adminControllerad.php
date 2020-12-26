@@ -127,7 +127,9 @@ class adminControllerad extends Controller
     }
 
     public function blockcc($id){
-        //return redirect('/admin');
+        ContentController::where('ccid',$id)
+        ->update(['accountstatus'=>'Blocked']);
+        return redirect('/Admin/CCList/');
     }
     public function deletecc($id){
         //return redirect('/admin');
