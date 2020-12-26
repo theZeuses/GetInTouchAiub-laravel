@@ -100,8 +100,8 @@
                                 
                                
                                 <td>
-                                   {{--<a href="route(Admin.unblockcc),{{$blkCc[$i]['ccid']}}">Block</a> | 
-                                    <a href="route(Admin.deletecc),{{$blkCc[$i]['ccid']}}">Delete</a> --}}
+                                    <a href="{{route('Admin.unblockcc',$Ccblocklist[$i]['ccid'])}}">UnBlock</a> | 
+                                    <a href="{{route('Admin.deleteblockcc',$Ccblocklist[$i]['ccid'])}}">Delete</a>  
                                 </td>
                              
                             @endfor
