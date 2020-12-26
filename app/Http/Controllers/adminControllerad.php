@@ -133,7 +133,7 @@ class adminControllerad extends Controller
         return redirect('/Admin/CCList/');
     }
     public function deletecc($id){
-        ContentController::where('guid',$id)->delete();
+        ContentController::where('ccid',$id)->delete();
         return redirect('/Admin/CCList/');
     }
 
@@ -187,7 +187,8 @@ class adminControllerad extends Controller
 
     }
     public function deleteblockcc($id){
-        
+        ContentController::where('ccid',$id)->delete();
+        return redirect('/Admin/BlockList/');
 
     }
     public function deleteblockgu($id){
