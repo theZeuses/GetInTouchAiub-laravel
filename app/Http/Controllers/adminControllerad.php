@@ -116,7 +116,8 @@ class adminControllerad extends Controller
         //return redirect('/admin');
     }
     public function deleteac($id){
-        //return redirect('/admin');
+        AccountController::where('acid',$id)->delete();
+        return redirect('/Admin/ACList');
     }
 
 
@@ -132,7 +133,7 @@ class adminControllerad extends Controller
         return redirect('/Admin/CCList/');
     }
     public function deletecc($id){
-        ContentController::where('ccid',$id)->delete();
+        ContentController::where('guid',$id)->delete();
         return redirect('/Admin/CCList/');
     }
 
