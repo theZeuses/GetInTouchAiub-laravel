@@ -166,6 +166,26 @@ class adminControllerad extends Controller
                                         ->with('Ccblocklist',$blkCc)
                                         ->with('Gublocklist',$blkgu);
     }
+    public function unblockgu($id){
+        GeneralUser::where('guid',$id)
+        ->update(['accountstatus'=>'Active']);
+        return redirect('/Admin/BlockList');
+    }
+    public function unblockcc($id){
+
+    }
+    public function unblockac($id){
+
+    }
+    public function deleteblockac($id){
+
+    }
+    public function deleteblockcc($id){
+
+    }
+    public function deleteblockgu($id){
+
+    }
     public function ViewProfilead(Request $req){
         $pro=Admin::where('adminid',$req->session()->get('username'))->get();
         return view('Admin.AdProfile')->with('pro',$pro);

@@ -145,8 +145,8 @@
                                 
                                
                                 <td>
-                                    <a href="route(Admin.blockgu),{{$Gublocklist[$i]['guid']}}">UnBlock</a> | 
-                                    <a href="route(Admin.deletegu),{{$Gublocklist[$i]['guid']}}">Delete</a>  
+                                    <a href="{{route('Admin.unblockgu',$Gublocklist[$i]['guid'])}}">UnBlock</a> | 
+                                    <a href="{{route('Admin.deleteblockgu',$Gublocklist[$i]['guid'])}}">Delete</a>  
                                 </td>
                              
                             @endfor
