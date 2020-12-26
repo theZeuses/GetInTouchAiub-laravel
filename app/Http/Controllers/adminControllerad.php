@@ -132,7 +132,8 @@ class adminControllerad extends Controller
         return redirect('/Admin/CCList/');
     }
     public function deletecc($id){
-        //return redirect('/admin');
+        ContentController::where('ccid',$id)->delete();
+        return redirect('/Admin/CCList/');
     }
 
     

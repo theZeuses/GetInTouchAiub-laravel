@@ -55,7 +55,7 @@
                                 <td>
                                     <a href="route(Admin.ViewNotificationad),{{$Cclist[$i]['ccid']}}">Notification</a>  |
                                     <a href="{{route('Admin.blockcc',$Cclist[$i]['ccid'])}}">Block</a> | 
-                                    <a href="route(Admin.deletecc),{{$Cclist[$i]['ccid']}}">Delete</a>  
+                                    <a href="{{route('Admin.deletecc',$Cclist[$i]['ccid'])}}">Delete</a>  
                                 </td>
                              
                             @endfor
