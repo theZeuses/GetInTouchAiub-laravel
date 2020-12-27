@@ -14,9 +14,16 @@ use App\Models\adminnotice;
 use App\Models\User;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
+use App\Http\Requests\notice;
+use Validator;
+
 
 class adminControllerad extends Controller
 {
+    protected $req;
+    public function __construct(Request $request) {
+        $this->req = $request;
+    }
     public function Viewhomead(){
       $pst= GeneralUserPost::all();
       $adminpst=AdminPost::all();
@@ -206,6 +213,7 @@ class adminControllerad extends Controller
         $notice =adminnotice::where('adminid',$req->session()->get('username'))->get();
         return view('Admin.Mynotification')->with('notice', $notice);
     }
+    
     public function Editexsistingnotice(){
         //return view('Admin.Report');
     }
@@ -214,6 +222,23 @@ class adminControllerad extends Controller
         return redirect('Admin/notification');
         //return view('Admin.EditPro');
     }
+    public function ViewCreateNotificationad($id){
+        
+       // print_r($this->req->session()->get('username'));
+        return view('Admin.addNotification')->with('userid',$id)->with('adminid',$this->req->session()->get('username'));
+    }
+    public function ViewCreateNotificationpostad($id,notice $n){
+        
+         print_r('submited');
+         $ntc = new adminnotice;
+        $ntc->adminid = $this->req->adminid;
+        $ntc->subject = $this->req->subject;
+        $ntc->body = $this->req->body;
+        $ntc->towhom = $this->req->userid;
+        $ntc->save();
+        return redirect ('Admin/notification');
+         //return view('Admin.addNotification')->with('userid',$id)->with('adminid',$this->req->session()->get('username'));
+     }
     public function ViewReportad(){
         return view('Admin.Report');
     }

@@ -1,5 +1,5 @@
 @include('Admin.menu');
-@include('Admin.menu');
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
