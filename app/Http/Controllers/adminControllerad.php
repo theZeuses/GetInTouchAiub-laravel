@@ -206,6 +206,14 @@ class adminControllerad extends Controller
         $notice =adminnotice::where('adminid',$req->session()->get('username'))->get();
         return view('Admin.Mynotification')->with('notice', $notice);
     }
+    public function Editexsistingnotice(){
+        //return view('Admin.Report');
+    }
+    public function deleteexsistingnotice($id){
+        adminnotice::where('id',$id)->delete();
+        return redirect('Admin/notification');
+        //return view('Admin.EditPro');
+    }
     public function ViewReportad(){
         return view('Admin.Report');
     }

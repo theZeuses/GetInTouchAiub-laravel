@@ -36,7 +36,13 @@
         </div>
         <div class="d-flex justify-content-between">
             
-            <span>Posted For :- {{$notice[$i]['towhom']}}</span>
+            <span style ="color:red">Posted For :- {{$notice[$i]['towhom']}}</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+                        
+            <a href="{{route('Admin.Editexsistingnotice',$notice[$i]['id'])}}"style="text-align:right" >Edit</a>
+            <a href="{{route('Admin.deleteexsistingnotice',$notice[$i]['id'])}}"style="color:red;text-align:right" >Delete</a>
         </div>
     </article>
     @endfor
