@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\AnnouncementRequest;
-use Brian2694\Toastr\Facades\Toastr;
 use App\Models\GeneralUser;
-use Illuminate\Http\Request;
 use App\Models\PostRequest;
 use App\Models\Announcement;
+use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
+use App\Http\Requests\AnnouncementRequest;
 
 class contentControllerController extends Controller
 {
@@ -72,6 +71,7 @@ class contentControllerController extends Controller
         $announcement->body = $req->body;
 
         $announcement->save();
+        Toastr::success('New announcement added successfully','', ["positionClass" => "toast-top-right"]);
         return redirect()->route('contentController.announcement');
     }
 
@@ -92,7 +92,10 @@ class contentControllerController extends Controller
         return redirect()->route('contentController.announcement');
     }
 
-    public function deleteAnnouncement(){
-        
+    public function deleteAnnouncement($id){
+        $announcement = Announcement::find($id);
+        $announcement->delete();
+        Toastr::success('Announcement deleted successfully','', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('contentController.announcement');
     }
 }
