@@ -10,6 +10,7 @@ use App\Models\ContentController;
 use App\Models\GeneralUser;
 use App\Models\RegistrationRequest;
 use App\Models\GeneralUserPostRequest;
+use App\Models\adminnotice;
 use App\Models\User;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
@@ -201,8 +202,9 @@ class adminControllerad extends Controller
         $pro=Admin::where('adminid',$req->session()->get('username'))->get();
         return view('Admin.AdProfile')->with('pro',$pro);
     }
-    public function ViewNotificationad(){
-        return view('Admin.Mynotification');
+    public function ViewNotificationad(Request $req){
+        $notice =adminnotice::where('adminid',$req->session()->get('username'))->get();
+        return view('Admin.Mynotification')->with('notice', $notice);
     }
     public function ViewReportad(){
         return view('Admin.Report');
