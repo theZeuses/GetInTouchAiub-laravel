@@ -9,6 +9,7 @@
     <link href="/assets/contentController/css/templatemo-xtra-blog.css" rel="stylesheet">
     <link href="/assets/contentController/css/content-controller.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 </head>
 
 <body>
