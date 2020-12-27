@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AnnouncementRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Models\GeneralUser;
 use Illuminate\Http\Request;
 use App\Models\PostRequest;
@@ -86,7 +87,8 @@ class contentControllerController extends Controller
         $announcement->body = $req->body;
 
         $announcement->save();
-        $req->session()->flash('success', 'Announcement updated successfully');
+        //$req->session()->flash('success', 'Announcement updated successfully');
+        Toastr::success('Announcement updated successfully','', ["positionClass" => "toast-top-right"]);
         return redirect()->route('contentController.announcement');
     }
 

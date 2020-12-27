@@ -49,10 +49,11 @@
         </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    @if(Session::has('success'))
+    {{-- @if(Session::has('success'))
         <script>
             toastr.success("{{ session('success') }}");
         </script>
-    @endif
+    @endif --}}
+    {!! Toastr::message() !!}
 </body>
 </html>
