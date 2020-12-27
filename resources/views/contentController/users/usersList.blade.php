@@ -29,8 +29,8 @@
                                         <td>{{ $userlist[$i]->email }}</td>
                                         <td>
                                             <div class="tm-prev-next-wrapper d-inline">
-                                                <a href="{{ route('contentController.usersProfile',$userlist[$i]->guid) }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Profile</a>
-                                                <a href="{{ route('contentController.usersReport',$userlist[$i]->guid) }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Report</a>
+                                                <a href="{{ route('contentController.usersProfile',$userlist[$i]->id) }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Profile</a>
+                                                <a href="{{ route('contentController.usersReport',$userlist[$i]->id) }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Report</a>
                                             </div> 
                                         </td>
                                     </tr>
