@@ -31,9 +31,12 @@ Route::group(['middleware' => ['sess']], function () {
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
         Route::get('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');
-        //cc
+        //content controller
         Route::get('/accclist',[accountControllerController::class,'accclist'])->name('accountController.cclist');
         Route::get('/acsearchcc',[accountControllerController::class,'acsearchcc'])->name('accountController.acsearchcc');
+        //general user
+        Route::get('/acgulist',[accountControllerController::class,'acgulist'])->name('accountController.gulist');
+        Route::get('/acsearchgu',[accountControllerController::class,'acsearchgu'])->name('accountController.acsearchgu');
 
     });
 });

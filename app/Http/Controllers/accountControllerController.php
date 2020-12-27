@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\AccountControlManager;
 use App\Models\Admin;
 use App\Models\ContentControlManager;
+use App\Models\GeneralUser;
 
 class accountControllerController extends Controller
 {
@@ -32,5 +33,15 @@ class accountControllerController extends Controller
    
             $cclist = ContentControlManager::where('name','like','%'.$req->key.'%')->get();          
             return json_encode($cclist);
+    }
+    //general user
+    public function acgulist(){
+        $gulist = GeneralUser::all();
+        return view('accountController.acGUList',['gulist'=>$gulist]);
+    }
+    public function acsearchgu(Request $req){
+   
+            $gulist = GeneralUser::where('name','like','%'.$req->key.'%')->get();          
+            return json_encode($gulist);
     }
 }
