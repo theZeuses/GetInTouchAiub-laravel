@@ -86,6 +86,7 @@ class contentControllerController extends Controller
         $announcement->body = $req->body;
 
         $announcement->save();
+        $req->session()->flash('success', 'Announcement updated successfully');
         return redirect()->route('contentController.announcement');
     }
 
