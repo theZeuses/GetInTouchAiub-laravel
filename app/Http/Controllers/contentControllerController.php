@@ -103,4 +103,9 @@ class contentControllerController extends Controller
         $userlist = GeneralUser::all();
         return view('contentController.users.usersList', ['clicked'=>$this->clicker(3), 'userlist'=>$userlist]);
     }
+
+    public function usersProfile($id){
+        $user = GeneralUser::find($id);
+        return view('contentController.users.profile', ['clicked'=>$this->clicker(3), 'user'=>$user]);
+    }
 }
