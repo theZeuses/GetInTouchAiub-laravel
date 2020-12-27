@@ -98,4 +98,9 @@ class contentControllerController extends Controller
         Toastr::success('Announcement deleted successfully','', ["positionClass" => "toast-top-right"]);
         return redirect()->route('contentController.announcement');
     }
+
+    public function users(){
+        $userlist = GeneralUser::all();
+        return view('contentController.users.usersList', ['clicked'=>$this->clicker(3), 'userlist'=>$userlist]);
+    }
 }
