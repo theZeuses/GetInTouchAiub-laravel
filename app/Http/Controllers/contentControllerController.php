@@ -173,4 +173,11 @@ class contentControllerController extends Controller
         return view('contentController.reports.reports', ['clicked'=>$this->clicker(5)]);
     }
     
+    public function usersReport(){
+        $data = [];
+        $data[0] = GeneralUser::where('accountstatus', 'Active')->count();
+        $data[1] = GeneralUser::where('accountstatus', 'Blocked')->count();
+        $data[2] = WarningUser::distinct('guid')->count();
+        return view('contentController.reports.usersReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
+    }
 }
