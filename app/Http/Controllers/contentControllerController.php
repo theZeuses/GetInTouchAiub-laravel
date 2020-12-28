@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
 use App\Http\Requests\AnnouncementRequest;
+use App\Models\GeneralUserPost;
+use App\Models\WarningUser;
 
 class contentControllerController extends Controller
 {
@@ -121,5 +123,26 @@ class contentControllerController extends Controller
     public function usersProfile($id){
         $user = GeneralUser::find($id);
         return view('contentController.users.profile', ['clicked'=>$this->clicker(3), 'user'=>$user]);
+    }
+
+    public function usersReport($id){
+        $data = [];
+        $generalUser = GeneralUser::find($id)->first();
+        $data[0] = GeneralUserPost::where('guid', $generalUser->guid)->count();
+        $notApproved = WarningUser::where('guid', $generalUser->guid)->get();
+        $data[1] = 0;
+        foreach($notApproved as $obj){
+            if(strlen($obj->warningtext) == 0){
+                $data[1] += 1;
+            }
+        }
+        $data[2] = 0;
+        foreach($notApproved as $obj){
+            if(strlen($obj->warningtext) > 0){
+                $data[2] += 1;
+            }
+        }
+        return view('contentController.users.individualReport', ['clicked'=>$this->clicker(3), 'user'=>$generalUser, 'data'=>$data]);
+
     }
 }
