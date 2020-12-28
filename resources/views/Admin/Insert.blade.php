@@ -26,11 +26,17 @@ https://templatemo.com/tm-553-xtra-blog
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
+                    <div style="color: red">
+                        @foreach($errors->all() as $err)
+                    **
+                    {{$err}}<br>
+                    @endforeach
+                    </div>
                      <form method="post" class="form-inline tm-mb-80">   
                      <table>
                          <tr  style="text-align:center">
                             <td colspan="2">
-                                <input style="height : 70px;width:100px;margin-left:20%;"class="tm-search-input" name="name" type="image" placeholder=" Upload new pic" aria-label="Pic" >
+                                <input style="height : 70px;width:100px;margin-left:20%;"class="tm-search-input" name="pic" type="image" placeholder=" Upload new pic" aria-label="Pic" >
                             
                             </td>
                          </tr>
@@ -45,7 +51,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">User Id :</h2>
                             </td>
                             <td>
-                            <input style="height : 70px;"class="form-control tm-search-input" name="userid" type="text" placeholder=" Userid.." aria-label="Uid" >
+                            <input style="height : 70px;"class="form-control tm-search-input" name="userid" type="text" placeholder=" Userid.." aria-label="Uid"value="{{old('userid')}}"   >
                             </td>
                          </tr>
                           <tr  style="text-align:center">
@@ -53,7 +59,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Name :</h2>
                             </td>
                             <td>
-                            <input style="height : 70px;"class="form-control tm-search-input" name="name" type="text" placeholder=" Name.." aria-label="country" >
+                            <input style="height : 70px;"class="form-control tm-search-input" name="name" type="text" placeholder=" Name.." aria-label="country"value="{{old('name')}}"   >
                             </td>
                          </tr>
                             <tr  style="text-align:center">
@@ -61,7 +67,7 @@ https://templatemo.com/tm-553-xtra-blog
                                 <h2 class="tm-pt-30 tm-color-primary tm-post-title">Email :</h2>
                                 </td>
                                 <td>
-                                <input style="height : 70px;"class="form-control tm-search-input"  name="email" type="email" placeholder="something@mail.com" aria-label="vplace" >
+                                <input style="height : 70px;"class="form-control tm-search-input"  name="email" type="email" placeholder="something@mail.com" aria-label="vplace"value="{{old('email')}}"  >
                                 </td>
                             </tr>
                           <tr  style="text-align:center">
@@ -69,7 +75,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Address :</h2>
                             </td>
                             <td>
-                            <input style="height : 170px;"class="form-control tm-search-input"  name="add" type="text" placeholder="Address.." aria-label="shistory" >
+                            <input style="height : 170px;"class="form-control tm-search-input"  name="add" type="text" placeholder="Address.." aria-label="shistory" value="{{old('add')}}"  >
                             </td>
                          </tr>
                          <tr  style="text-align:center">
@@ -77,7 +83,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Gender :</h2>
                             </td>
                             <td>
-                            <select style="height : 70px;"class="form-control tm-search-input" name="gender">
+                            <select style="height : 70px;"class="form-control tm-search-input" name="gender" value="{{old('gender')}} " >
                                 <option  value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -90,7 +96,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">DOB :</h2>
                             </td>
                             <td>
-                            <input style="height : 70px;"class="form-control tm-search-input"  name="dob" type="date" placeholder="Cost.." aria-label="cost" >
+                            <input style="height : 70px;"class="form-control tm-search-input"  name="dob" type="date" placeholder="Cost.." aria-label="cost" value="{{old('dob')}}">
                             </td>
                          </tr>
                          <tr  style="text-align:center">
@@ -98,9 +104,8 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Type :</h2>
                             </td>
                             <td>
-                            <select style="height : 70px;"class="form-control tm-search-input" name="gender">
-                                <option  value="Account Control Manager
-                                ">Account Control Manager</option>
+                            <select style="height : 70px;"class="form-control tm-search-input" name="type">
+                                <option  value="Account Control Manager">Account Control Manager</option>
                                 <option value="Content Control Manager">Content Control Manager</option>
                             </select>
                             
