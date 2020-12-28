@@ -107,7 +107,7 @@ $(function() {
       dataType: "json",
       success: function(announcements) {
         var announcement = announcements.announcement;
-        var cc = announcements.ccname;
+        var cc = announcements.contentController;
         console.log(announcement);
         var html = '';
         if(announcement.length > 0){
@@ -115,7 +115,7 @@ $(function() {
             html += '<div class="row tm-row tm-row-post"><article class="col-12 col-md-6 tm-post tm-post-post"><hr class="tm-hr-primary tm-hr-primary-post">';
             html += '<h2 class="tm-pt-30 tm-color-primary tm-post-title">'+announcement[i].subject+'</h2><p class="tm-pt-30">'+announcement[i].body+'</p>';
             html += '<div class="d-flex justify-content-between tm-pt-45"><span class="tm-color-primary">June 24, 2020</span></div><hr>';
-            html += '<div class="d-flex justify-content-between"><span>by <a>'+cc[0].name+'</a></span></div></article></div>';
+            html += '<div class="d-flex justify-content-between"><span>by <a>'+cc[i].name+'</a></span></div></article></div>';
             html += '<div class="row tm-row tm-mt-100 tm-mb-75"><div class="tm-prev-next-wrapper">';
             html += '<a href="/contentcontroller/announcement/update/'+announcement[i].id+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20 announcement__btn__update">Update</a>';
             html += '<a href="/contentcontroller/announcement/delete/'+announcement[i].id+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next announcement__btn__delete">Delete</a></div></div>';

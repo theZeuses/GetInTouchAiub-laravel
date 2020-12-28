@@ -99,6 +99,20 @@ class contentControllerController extends Controller
         return redirect()->route('contentController.announcement');
     }
 
+    public function searchAnnouncement($query){
+        $data = json_decode($query);
+        if(strlen($data->query) > 0){
+            $announcements = Announcement::where('subject','LIKE','%'.$data->query.'%')->get();
+        }else{
+            $announcements = Announcement::all();
+        }
+        $contentController = [];
+        for($i = 0; $i < count($announcements); $i++){
+            $contentController[$i] = ContentControlManager::where('ccid',$announcements[$i]->ccid);
+        }        
+        return response()->json(['announcement'=>$announcements, 'contentController'=>$contentController]);
+    }
+
     public function users(){
         $userlist = GeneralUser::all();
         return view('contentController.users.usersList', ['clicked'=>$this->clicker(3), 'userlist'=>$userlist]);
