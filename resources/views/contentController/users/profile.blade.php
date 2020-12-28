@@ -13,11 +13,11 @@
                 <h1>User Profile</h1>
                 <hr class="tm-hr-primary tm-hr-primary-post">
             </div>
-            @if($user->profilepicture != null && count($user->profilepicture) > 0)
-                <img src="/assets/pictures/{{$user->profilepicture  }} " class="profile-img" alt="{{$user->name }}">
+            @if($user->profilepicture != null && strlen($user->profilepicture) > 0)
+                <img src="/assets/contentController/pictures/{{$user->profilepicture  }} " class="profile-img" alt="{{$user->name }}">
             @else
-                <img src="/assets/pictures/no-profile-pic.png" class="profile-img" alt="No profile pic">
-            @endif  
+                <img src="/assets/contentController/pictures/no-profile-pic.png" class="profile-img" alt="No profile pic">
+            @endif 
             <div class="row tm-row tm-row-post">
                 <h3>Name:</h3>{{$user->name}}
             </div>
