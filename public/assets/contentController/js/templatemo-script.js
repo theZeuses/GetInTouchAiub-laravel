@@ -73,15 +73,14 @@ $(function() {
       dataType: "json",
       success: function(userlists) {
         var userlist = userlists.userlist;
-        console.log(userlist);
         var html = '';
         if(userlist.length > 0){
           html = '<table class="table table-custom"><thead class="thead-light"><tr><th scope="col">ID</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Action</th></tr>';
           html += '</thead><tbody>';
           for (var i = 0; i< userlist.length; i++) {
               html += '<tr><td>' + userlist[i].guid + '</td><td>'+ userlist[i].name + '</td><td>' + userlist[i].email + '</td>';
-              html += '<td><div class="tm-prev-next-wrapper d-inline"><a href="/contentcontroller/users/profile/'+userlist[i].guid+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Profile</a>';
-              html += '<a href="/contentcontroller/users/report/'+userlist[i].guid+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Report</a>';
+              html += '<td><div class="tm-prev-next-wrapper d-inline"><a href="/contentcontroller/users/profile/'+userlist[i].id+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Profile</a>';
+              html += '<a href="/contentcontroller/users/report/'+userlist[i].id+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Report</a>';
               html += '</td></tr>';
           }
           html += '</tbody></table>';

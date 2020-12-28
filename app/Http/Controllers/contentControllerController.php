@@ -127,7 +127,7 @@ class contentControllerController extends Controller
 
     public function usersReport($id){
         $data = [];
-        $generalUser = GeneralUser::find($id)->first();
+        $generalUser = GeneralUser::find($id);
         $data[0] = GeneralUserPost::where('guid', $generalUser->guid)->count();
         $notApproved = WarningUser::where('guid', $generalUser->guid)->get();
         $data[1] = 0;
@@ -144,5 +144,17 @@ class contentControllerController extends Controller
         }
         return view('contentController.users.individualReport', ['clicked'=>$this->clicker(3), 'user'=>$generalUser, 'data'=>$data]);
 
+    }
+    public function searchUsers($query){
+        $data = json_decode($query);
+        if(strlen($data->query) > 0){
+            $userlist = GeneralUser::where('guid','LIKE','%'.$data->query.'%')
+                                    ->orWhere('name','LIKE','%'.$data->query.'%')
+                                    ->orWhere('email','LIKE','%'.$data->query.'%')
+                                    ->get();
+        }else{
+            $userlist = GeneralUser::all();
+        }      
+        return response()->json(['userlist'=>$userlist]);
     }
 }
