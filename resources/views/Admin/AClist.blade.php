@@ -53,7 +53,8 @@
                                 
                                
                                 <td>
-                                    <a href="{{route('Admin.ViewNotificationad',$Aclist[$i]['acid'])}}">Notification</a>  |
+                                    
+                                    <a href="{{route('Admin.ViewCreateNotificationad',$Aclist[$i]['acid'])}}">Notification</a>  |
                                     <a href="{{route('Admin.blockac',$Aclist[$i]['acid'])}}">Block</a> | 
                                     <a href="{{route('Admin.deleteac',$Aclist[$i]['acid'])}}">Delete</a>  
                                 </td>
