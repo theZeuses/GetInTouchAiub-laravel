@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\GeneralUser;
 use App\Models\PostRequest;
+use App\Models\WarningUser;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use App\Models\GeneralUserPost;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
-use App\Models\GeneralUserPost;
-use App\Models\WarningUser;
 
 class contentControllerController extends Controller
 {
@@ -120,12 +121,12 @@ class contentControllerController extends Controller
         return view('contentController.users.usersList', ['clicked'=>$this->clicker(3), 'userlist'=>$userlist]);
     }
 
-    public function usersProfile($id){
+    public function userProfile($id){
         $user = GeneralUser::find($id);
         return view('contentController.users.profile', ['clicked'=>$this->clicker(3), 'user'=>$user]);
     }
 
-    public function usersReport($id){
+    public function userReport($id){
         $data = [];
         $generalUser = GeneralUser::find($id);
         $data[0] = GeneralUserPost::where('guid', $generalUser->guid)->count();
@@ -156,5 +157,15 @@ class contentControllerController extends Controller
             $userlist = GeneralUser::all();
         }      
         return response()->json(['userlist'=>$userlist]);
+    }
+
+    public function profile(){
+        $user = ContentControlManager::where('ccid', Session::get('username'))->first();
+        return view('contentController.profile.profile', ['clicked'=>$this->clicker(4), 'user'=>$user]);
+    }
+
+    public function updateProfile(){
+        $user = ContentControlManager::where('ccid', Session::get('username'))->first();
+        return view('contentController.profile.update', ['clicked'=>$this->clicker(4), 'user'=>$user]);
     }
 }
