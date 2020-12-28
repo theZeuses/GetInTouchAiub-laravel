@@ -18,7 +18,11 @@
                     <p class="tm-pt-30">
                         {{ $posts[0]->text }}
                     </p>
-                    
+                    @if($posts[0]->file != null && strlen($posts[0]->file) > 0)
+                        <img src="/assets/contentController/pictures/{{$posts[0]->file  }} " class="profile-img" alt="{{$posts[0]->file }}">
+                    @else
+                        <small>**no photo**</small>
+                    @endif
                     <div class="d-flex justify-content-between tm-pt-45">
                         <span class="tm-color-primary">June 24, 2020</span>
                     </div>
