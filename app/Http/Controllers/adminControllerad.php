@@ -15,6 +15,7 @@ use App\Models\User;
 //use App\Models\AdminModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\notice;
+use App\Http\Requests\insert;
 use Validator;
 
 
@@ -44,6 +45,47 @@ class adminControllerad extends Controller
     }
     public function Viewinsertad(){
         return view('Admin.Insert');
+    }
+    public function Viewinsertpostad(insert $i){
+        if($this->req->type=='Account Control Manager') {
+            $ac=new AccountController;
+            $ac->acid= $this->req->userid;
+            $ac->name= $this->req->name;
+            $ac->email= $this->req->email;
+            $ac->gender= $this->req->gender;
+            $ac->dob= $this->req->dob;
+            $ac->address= $this->req->add;
+            $ac->profilepicture= '';//$this->req->pic;
+            $ac->accountstatus= 'Active';
+            $ac->save();
+            
+            $usr=new User;
+            $usr->userid=$this->req->userid;
+            $usr->password='1';
+            $usr->usertype='Account Control Manager';
+            $usr->accountstatus= 'Active';
+            $usr->save();
+
+        }else{
+            $ac=new ContentController;
+            $ac->ccid= $this->req->userid;
+            $ac->name= $this->req->name;
+            $ac->email= $this->req->email;
+            $ac->gender= $this->req->gender;
+            $ac->dob= $this->req->dob;
+            $ac->address= $this->req->add;
+            $ac->profilepicture='';// $this->req->pic;
+            $ac->accountstatus= 'Active';
+            $ac->save();
+
+            $usr=new User;
+            $usr->userid=$this->req->userid;
+            $usr->password='1';
+            $usr->usertype='Account Control Manager';
+            $usr->accountstatus= 'Active';
+            $usr->save();
+        }
+       //return view('Admin.Insert');
     }
     public function ViewPendingpostad(){
         $penpost=GeneralUserPostRequest::all();
@@ -233,11 +275,7 @@ class adminControllerad extends Controller
 
 
 
-    
-    /*public function Editexsistingnoticesub($id){
-        $ntc=adminnotice::where('id',$id)->get();
-        return view('Admin.addNotification')->with('notice',$ntc);
-    }*/
+ 
 
     public function deleteexsistingnotice($id){
         adminnotice::where('id',$id)->delete();
