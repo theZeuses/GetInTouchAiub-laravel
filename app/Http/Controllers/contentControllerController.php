@@ -168,4 +168,9 @@ class contentControllerController extends Controller
         $user = ContentControlManager::where('ccid', Session::get('username'))->first();
         return view('contentController.profile.update', ['clicked'=>$this->clicker(4), 'user'=>$user]);
     }
+
+    public function reports(){
+        return view('contentController.reports.reports', ['clicked'=>$this->clicker(5)]);
+    }
+    
 }
