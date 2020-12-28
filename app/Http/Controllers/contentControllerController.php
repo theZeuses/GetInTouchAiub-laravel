@@ -11,6 +11,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
+use App\Models\Contribution;
 
 class contentControllerController extends Controller
 {
@@ -179,5 +180,13 @@ class contentControllerController extends Controller
         $data[1] = GeneralUser::where('accountstatus', 'Blocked')->count();
         $data[2] = WarningUser::distinct('guid')->count();
         return view('contentController.reports.usersReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
+    }
+
+    public function contentsReport(){
+        $data = [];
+        $data[0] = GeneralUserPost::all()->count();
+        $data[1] = Contribution::sum('postapproved');
+        $data[2] = Contribution::sum('postdeclined');
+        return view('contentController.reports.contentsReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
     }
 }
