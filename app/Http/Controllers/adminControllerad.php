@@ -214,9 +214,31 @@ class adminControllerad extends Controller
         return view('Admin.Mynotification')->with('notice', $notice);
     }
     
-    public function Editexsistingnotice(){
-        //return view('Admin.Report');
+    public function Editexsistingnotice($id){
+        $ntc=adminnotice::where('id',$id)->get();
+        return view('Admin.editnotify')->with('ntc',$ntc);
     }
+    public function Editexsistingnoticesub($id,notice $n){
+        
+        //print_r('submited');
+        $ntc = adminnotice::find($id);
+       $ntc->adminid = $this->req->adminid;
+       $ntc->subject = $this->req->subject;
+       $ntc->body = $this->req->body;
+       $ntc->towhom = $this->req->userid;
+       $ntc->save();
+       return redirect ('Admin/notification');
+        //return view('Admin.addNotification')->with('userid',$id)->with('adminid',$this->req->session()->get('username'));
+    }
+
+
+
+    
+    /*public function Editexsistingnoticesub($id){
+        $ntc=adminnotice::where('id',$id)->get();
+        return view('Admin.addNotification')->with('notice',$ntc);
+    }*/
+
     public function deleteexsistingnotice($id){
         adminnotice::where('id',$id)->delete();
         return redirect('Admin/notification');
@@ -229,7 +251,7 @@ class adminControllerad extends Controller
     }
     public function ViewCreateNotificationpostad($id,notice $n){
         
-         print_r('submited');
+         //print_r('submited');
          $ntc = new adminnotice;
         $ntc->adminid = $this->req->adminid;
         $ntc->subject = $this->req->subject;
