@@ -303,6 +303,7 @@ class adminControllerad extends Controller
         return view('Admin.Report');
     }
     public function VieweditProfilead(){
-        return view('Admin.EditPro');
+        $info=Admin::where('adminid',$this->req->session()->get('username'))->get();
+        return view('Admin.EditPro')->with('info',$info);
     }
 }

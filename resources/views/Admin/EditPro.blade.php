@@ -25,6 +25,7 @@ https://templatemo.com/tm-553-xtra-blog
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
+                   
                      <form method="post" class="form-inline tm-mb-80">   
                      <table>
                          <tr  style="text-align:center">
@@ -43,7 +44,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Name :</h2>
                             </td>
                             <td>
-                            <input style="height : 70px;"class="form-control tm-search-input" name="name" type="text" placeholder=" Name.." aria-label="country" >
+                            <input style="height : 70px;"class="form-control tm-search-input" name="name" type="text" placeholder=" Name.." aria-label="country" value=" {{$info[0]['name']}}" >
                             </td>
                          </tr>
                             <tr  style="text-align:center">
@@ -51,7 +52,7 @@ https://templatemo.com/tm-553-xtra-blog
                                 <h2 class="tm-pt-30 tm-color-primary tm-post-title">Email :</h2>
                                 </td>
                                 <td>
-                                <input style="height : 70px;"class="form-control tm-search-input"  name="email" type="email" placeholder="something@mail.com" aria-label="vplace" >
+                                <input style="height : 70px;"class="form-control tm-search-input"  name="email" type="email" placeholder="something@mail.com" aria-label="vplace"value=" {{$info[0]['email']}} " >
                                 </td>
                             </tr>
                           <tr  style="text-align:center">
@@ -59,7 +60,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Address :</h2>
                             </td>
                             <td>
-                            <input style="height : 170px;"class="form-control tm-search-input"  name="add" type="text" placeholder="Address.." aria-label="shistory" >
+                            <input style="height : 170px;"class="form-control tm-search-input"  name="add" type="text" placeholder="Address.." aria-label="shistory" value=" {{$info[0]['address']}} ">
                             </td>
                          </tr>
                          <tr  style="text-align:center">
@@ -67,7 +68,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">Gender :</h2>
                             </td>
                             <td>
-                            <select style="height : 70px;"class="form-control tm-search-input" name="gender">
+                            <select style="height : 70px;"class="form-control tm-search-input" name="gender"value=" {{$info[0]['gender']}} ">
                                 <option  value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -80,7 +81,7 @@ https://templatemo.com/tm-553-xtra-blog
                              <h2 class="tm-pt-30 tm-color-primary tm-post-title">DOB :</h2>
                             </td>
                             <td>
-                            <input style="height : 70px;"class="form-control tm-search-input"  name="dob" type="date" placeholder="Cost.." aria-label="cost" >
+                            <input style="height : 70px;"class="form-control tm-search-input"  name="dob" type="text" placeholder="Cost.." aria-label="cost"value=" {{$info[0]['dob']}} ">
                             </td>
                          </tr>
                           
@@ -92,7 +93,7 @@ https://templatemo.com/tm-553-xtra-blog
                         
                           <tr >
                          <td colspan="2">
-                          <input style="margin-left  : 52%;margin-top:25px" class=" tm-new-badge" type="button" onclick="location.href='{{route('Admin.ViewProfilead')}}'" name="" value="Back">
+                          <input style="margin-left  : 52%;margin-top:25px" class=" tm-new-badge" type="submit" onclick="location.href='{{route('Admin.ViewProfilead')}}'" name="" value="Back">
                          </td>
                          </tr>
                          
