@@ -11,8 +11,10 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
+use App\Http\Requests\ContentControllerCredentialsRequest;
 use App\Http\Requests\ContentControllerRequest;
 use App\Models\Contribution;
+use App\Models\User;
 use Carbon\Carbon;
 
 class contentControllerController extends Controller
@@ -195,6 +197,14 @@ class contentControllerController extends Controller
 
     public function account(){
         return view('contentController.profile.account', ['clicked'=>$this->clicker(4)]);
+    }
+
+    public function updateAccount(ContentControllerCredentialsRequest $req){
+        $user = User::where('userid', $req->session()->get('username'))->first();
+        $user->password = $req->pass;
+        $user->save();
+        Toastr::success('Password updated successfully','', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('contentController.account');
     }
 
     public function reports(){
