@@ -11,7 +11,9 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\ContentControlManager;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
+use App\Http\Requests\ContentControllerRequest;
 use App\Models\Contribution;
+use Carbon\Carbon;
 
 class contentControllerController extends Controller
 {
@@ -169,6 +171,30 @@ class contentControllerController extends Controller
     public function updateProfile(){
         $user = ContentControlManager::where('ccid', Session::get('username'))->first();
         return view('contentController.profile.update', ['clicked'=>$this->clicker(4), 'user'=>$user]);
+    }
+
+    public function storeUpdatedProfile(ContentControllerRequest $req){
+        $user = ContentControlManager::where('ccid', Session::get('username'))->first();
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            $imageName = $image->getClientOriginalName().Carbon::now()->timestamp;
+            if($image->move('assets/contentController/pictures/', $imageName)){
+                $user->profilepicture = $imageName;
+            }           
+        }
+        $user->name = $req->name;
+        $user->email = $req->email;
+        $user->gender = $req->gender;
+        $user->dob = $req->dob;
+        $user->address = $req->address;
+
+        $user->save();
+        Toastr::success('Profile updated successfully','', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('contentController.updateProfile');
+    }
+
+    public function account(){
+        return view('contentController.profile.account', ['clicked'=>$this->clicker(4)]);
     }
 
     public function reports(){
