@@ -75,6 +75,7 @@ class contentControllerController extends Controller
         $announcement->body = $req->body;
 
         $announcement->save();
+        Contribution::where('ccid', Session::get('username'))->increment('announcements', 1);
         Toastr::success('New announcement added successfully','', ["positionClass" => "toast-top-right"]);
         return redirect()->route('contentController.announcement');
     }
