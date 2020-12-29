@@ -353,7 +353,24 @@ class adminControllerad extends Controller
         }
         return response()->json(['result'=>$result]);
     }
-  
+    public function searchuser($key){
+        $string=json_decode($key);
+        error_log($string->key);
+        if(strlen($string->key)>0){
+            $result=GeneralUser::where('guid','LIKE','%'.$string->key.'%' )
+                            ->orWhere('name','LIKE','%'.$string->key.'%')
+                            ->orWhere('email','LIKE','%'.$string->key.'%')
+                            ->orWhere('gender','LIKE','%'.$string->key.'%')
+                            ->orWhere('dob','LIKE','%'.$string->key.'%')
+                            ->orWhere('address','LIKE','%'.$string->key.'%')
+                            //->where('accountstatus','Active')
+                            ->get();
+        }
+        else{
+            $result=GeneralUser::where('accountstatus','Active')->get();
+        }
+        return response()->json(['result'=>$result]);
+    }
     public function searchac($key){
         $string=json_decode($key);
         error_log($string->key);

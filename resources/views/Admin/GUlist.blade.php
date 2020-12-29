@@ -13,7 +13,7 @@
             <div class="row tm-row">
                 <div class="col-12">
                     <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
-                        <input class="form-control tm-search-input"id ="adsearcht" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <input class="form-control tm-search-input"id ="usrsrct" name="query" type="text" placeholder="Search..." aria-label="Search">
                        
                                                             
                     </form>
@@ -24,7 +24,7 @@
             </div>           
             <div class="row tm-row">
                 <div>
-                <div id ="adlist">
+                <div id ="userchtab">
                     
                
                     <table border="1">
@@ -72,8 +72,8 @@
             </footer>
         </main>
     </div>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/search.js"></script>
+    <script src="{{asset('/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('/assets/js/search.js')}}"></script>
     
 </body>
 </html>
