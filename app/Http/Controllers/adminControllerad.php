@@ -306,4 +306,14 @@ class adminControllerad extends Controller
         $info=Admin::where('adminid',$this->req->session()->get('username'))->get();
         return view('Admin.EditPro')->with('info',$info);
     }
+    public function VieweditProfileadsub(){
+        $info=Admin::find($this->req->id);
+        $info->name=$this->req->name;
+        $info->email=$this->req->email;
+        $info->address=$this->req->add;
+        $info->dob=$this->req->dob;
+        $info->save();
+
+        return redirect('/Admin/Profile');
+    }
 }

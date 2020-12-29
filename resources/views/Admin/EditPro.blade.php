@@ -25,8 +25,9 @@ https://templatemo.com/tm-553-xtra-blog
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                   
+                   @csrf;
                      <form method="post" class="form-inline tm-mb-80">   
+                         <input type="text"name="id"value="{{$info[0]['id']}}"hidden>
                      <table>
                          <tr  style="text-align:center">
                             <td colspan="2">
@@ -63,18 +64,7 @@ https://templatemo.com/tm-553-xtra-blog
                             <input style="height : 170px;"class="form-control tm-search-input"  name="add" type="text" placeholder="Address.." aria-label="shistory" value=" {{$info[0]['address']}} ">
                             </td>
                          </tr>
-                         <tr  style="text-align:center">
-                            <td>
-                             <h2 class="tm-pt-30 tm-color-primary tm-post-title">Gender :</h2>
-                            </td>
-                            <td>
-                            <select style="height : 70px;"class="form-control tm-search-input" name="gender"value=" {{$info[0]['gender']}} ">
-                                <option  value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                            
-                            </td>
-                         </tr>
+                         
                           
                          <tr  style="text-align:center">
                             <td>
