@@ -189,4 +189,15 @@ class contentControllerController extends Controller
         $data[2] = Contribution::sum('postdeclined');
         return view('contentController.reports.contentsReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
     }
+
+    public function contribution(Request $req){
+        $data = [];
+        $data[0] = Contribution::sum('postapproved');
+        $data[1] = Contribution::select('postapproved')->where('ccid', $req->session()->get('username'))->first()->postapproved;
+        $data[2] = Contribution::sum('postdeclined');
+        $data[3] = Contribution::select('postdeclined')->where('ccid', $req->session()->get('username'))->first()->postdeclined;
+        $data[4] = Contribution::sum('announcements');
+        $data[5] = Contribution::select('announcements')->where('ccid', $req->session()->get('username'))->first()->announcements;
+        return view('contentController.contribution.contribution', ['clicked'=>$this->clicker(6), 'data'=>$data]);
+    }
 }
