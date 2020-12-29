@@ -25,7 +25,13 @@ https://templatemo.com/tm-553-xtra-blog
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                   @csrf;
+                   @csrf
+                   <div style="color: red">
+                    @foreach($errors->all() as $err)
+                **
+                {{$err}}<br>
+                @endforeach
+                </div>
                      <form method="post" class="form-inline tm-mb-80">   
                          <input type="text"name="id"value="{{$info[0]['id']}}"hidden>
                      <table>

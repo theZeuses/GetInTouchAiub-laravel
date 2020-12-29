@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\notice;
 use App\Http\Requests\insert;
+use App\Http\Requests\editpro;
 use Validator;
 
 
@@ -306,7 +307,7 @@ class adminControllerad extends Controller
         $info=Admin::where('adminid',$this->req->session()->get('username'))->get();
         return view('Admin.EditPro')->with('info',$info);
     }
-    public function VieweditProfileadsub(){
+    public function VieweditProfileadsub(editpro $e){
         $info=Admin::find($this->req->id);
         $info->name=$this->req->name;
         $info->email=$this->req->email;
