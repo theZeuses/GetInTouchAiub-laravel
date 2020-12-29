@@ -13,9 +13,8 @@
             <div class="row tm-row">
                 <div class="col-12">
                     <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
-                        <input class="form-control tm-search-input"id ="adsearcht" name="query" type="text" placeholder="Search..." aria-label="Search">
-                       
-                                                            
+                        <input class="form-control tm-search-input"id ="adsearcht" name="searchad" type="text" placeholder="Search..." aria-label="Search">
+                                                                                
                     </form>
                 </div>                
             </div>   
@@ -70,8 +69,18 @@
             </footer>
         </main>
     </div>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/search.js"></script>
+    <script src="{{asset('/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('/assets/js/search.js')}}"></script>
     
 </body>
+<script>
+   /* function searchad(){
+        var key=document.getElementByName('searchad').val();
+        //console.log(key);
+        $.ajax({
+            type::"post",
+            url:
+        })
+    }*/
+</script>
 </html>
