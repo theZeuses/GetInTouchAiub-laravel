@@ -16,6 +16,7 @@ use App\Http\Requests\ContentControllerRequest;
 use App\Models\Contribution;
 use App\Models\User;
 use Carbon\Carbon;
+use PDF;
 
 class contentControllerController extends Controller
 {
@@ -225,6 +226,19 @@ class contentControllerController extends Controller
         $data[1] = Contribution::sum('postapproved');
         $data[2] = Contribution::sum('postdeclined');
         return view('contentController.reports.contentsReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
+    }
+
+    public function saveContentsReport(){
+        $data = [];
+        $data[0] = GeneralUserPost::all()->count();
+        $data[1] = Contribution::sum('postapproved');
+        $data[2] = Contribution::sum('postdeclined');
+        $pdf = PDF::loadView('contentController.reports.contentsReportsPDF',['data'=>$data]);
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf->setOption('enable-smart-shrinking', true);
+        return $pdf->stream();
     }
 
     public function contribution(Request $req){
