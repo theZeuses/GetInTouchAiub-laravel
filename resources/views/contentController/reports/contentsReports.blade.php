@@ -44,6 +44,7 @@
             <div class="row tm-row tm-mt-100 tm-mb-75">
                 <a href="/contentcontroller/reports" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Back</a>
                 <form method="post">
+                    @csrf
                     <input type="submit" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20" value="Save PDF">
                 </form>
             </div>    
