@@ -9,11 +9,11 @@ $(function() {
         };
       console.log(data);
       var json = JSON.stringify(data);
-      console.log(json);
+      //console.log(json);
 
       $.ajax({
               type: 'GET',
-              url: '/Adminhome/SearchAdminlist/'+json,
+              url: '/Admin/searchadmin/'+json,
               contentType: 'application/json',
               dataType: "json",
               success: function(results) {
@@ -44,7 +44,7 @@ $(function() {
                           html += '<td>'+ result[i].dob +'</td>';
                           html += '<td>'+ result[i].address +'</td>';
                           html += '<td>';
-                          html += '<a href="/Adminhome/NotificationAd/'+result[i].adminid+'">Notification</a>';
+                          html += '<a href="/Admin/notification/Create'+result[i].adminid+'">Notification</a>';
                           html += '</td>';
                     }
               }
@@ -73,7 +73,7 @@ $(function() {
 
      $.ajax({
              type: 'GET',
-             url: '/Adminhome/Searchuserlist/'+json,
+             url: '/Admin/Searchuser/'+json,
              contentType: 'application/json',
              dataType: "json",
              success: function(results) {
@@ -104,9 +104,9 @@ $(function() {
                          html += '<td>'+ result[i].dob +'</td>';
                          html += '<td>'+ result[i].address +'</td>';
                          html += '<td>';
-                         html += '<a href="/Adminhome/NotificationAd/'+result[i].guid+'">Notification</a>';
-                         html += '<a href="/Adminhome/Blockuser/'+result[i].guid+'">Block</a>';
-                         html += '<a href="/Adminhome/deleteuser/'+result[i].guid+'">Delete</a>';
+                         html += '<a href="/Admin/notification/Create'+result[i].guid+'">Notification</a>';
+                         html += '<a href="/Admin/Userlist/blockgu'+result[i].guid+'">Block</a>';
+                         html += '<a href="/Admin/Userlist/deleteagu'+result[i].guid+'">Delete</a>';
                          html += '</td>';
                    }
              }
@@ -134,7 +134,7 @@ $(function() {
 
     $.ajax({
             type: 'GET',
-            url: '/Adminhome/Searchcclist/'+json,
+            url: '/Admin/Searchcclist/'+json,
             contentType: 'application/json',
             dataType: "json",
             success: function(results) {
@@ -165,9 +165,9 @@ $(function() {
                         html += '<td>'+ result[i].dob +'</td>';
                         html += '<td>'+ result[i].address +'</td>';
                         html += '<td>';
-                        html += '<a href="/Adminhome/NotificationAd/'+result[i].ccid+'">Notification</a>';
-                        html += '<a href="/Adminhome/BlockContentCont/'+result[i].ccid+'">Block</a>';
-                        html += '<a href="/Adminhome/deleteContentCont/'+result[i].ccid+'">Delete</a>';
+                        html += '<a href="/Admin/notification/Create'+result[i].ccid+'">Notification</a>';
+                        html += '<a href="/Admin/CCList/blockcc'+result[i].ccid+'">Block</a>';
+                        html += '<a href="Admin/CCList/deleteacc'+result[i].ccid+'">Delete</a>';
                         html += '</td>';
                   }
             }
@@ -194,7 +194,7 @@ $(function() {
 
     $.ajax({
             type: 'GET',
-            url: '/Adminhome/Searchaclist/'+json,
+            url: '/Admin/Searchac/'+json,
             contentType: 'application/json',
             dataType: "json",
             success: function(results) {
@@ -225,9 +225,9 @@ $(function() {
                         html += '<td>'+ result[i].dob +'</td>';
                         html += '<td>'+ result[i].address +'</td>';
                         html += '<td>';
-                        html += '<a href="/Adminhome/NotificationAd/'+result[i].acid+'">Notification</a>';
-                        html += '<a href="/Adminhome/BlockAccCont/'+result[i].acid+'">Block</a>';
-                        html += '<a href="/Adminhome/deleteAccCont/'+result[i].acid+'">Delete</a>';
+                        html += '<a href="/Admin/notification/Create'+result[i].acid+'">Notification</a>';
+                        html += '<a href="/Admin/ACList/blockac'+result[i].acid+'">Block</a>';
+                        html += '<a href="Admin/ACList/deleteac'+result[i].acid+'">Delete</a>';
                         html += '</td>';
                   }
             }
@@ -256,28 +256,32 @@ $(function() {
 
    $.ajax({
            type: 'GET',
-           url: '/Adminhome/SearchPost/'+json,
+           url: '/Admin/SearchPost/'+json,
            contentType: 'application/json',
            dataType: "json",
            success: function(results) {
-             var result = results.result;
-         
-             console.log(result);
+             var adminpost = results.result;
+            var gupost=results.res;
+             console.log(gupost);
              var html = '';
-             if(result.length > 0){
+             html +='<div class="tm-site-header ">'          
+             html +=' <h1  style ="color: skyblue;"class="text-center">General User Posts</h1>'
+             html +='</div>'
+             html +=' <div id ="postgu">'
+            if(gupost.length > 0){
               html +='<div class="row tm-row">';
-                for (var i = 0; i< result.length; i++) {
+                for (var i = 0; i< gupost.length; i++) {
                  html +=' <article class="col-12 col-md-6 tm-post">'
                  html += ' <hr class="tm-hr-primary">'
                  html += '<div class="tm-post-link-inner">'
                  html += ' </div>'
                  html += '<span class="position-absolute tm-new-badge">General User</span>'
-                 html += '<h2 class="tm-pt-30 tm-color-primary tm-post-title">'+result[i].guid+'</h2>'
+                 html += '<h2 class="tm-pt-30 tm-color-primary tm-post-title">'+gupost[i].guid+'</h2>'
                  html += '</a> '
                  html +=  '<p class="tm-pt-30">'
-                 html +=  result[i].text  ;         
+                 html +=  gupost[i].text  ;         
                  html +=   '</p>'
-                 html +=  '<span> '+ result[i].file+' </span>'
+                 html +=  '<span> '+ gupost[i].file+' </span>'
                 html += '<div class="d-flex justify-content-between tm-pt-45">';
                        html += '</div>';
                        html += '<hr>';
@@ -285,13 +289,52 @@ $(function() {
                        html += '<span>Comment</span>';
                        html += '</div>';
                        html += '</article>';
-                      
+                       html += '</div>';
+                       html += '</div>';
                  }
            }
+           
 
            else{
                html += '<h4>Not Data Found </h4>';
              }
+             
+
+             html +='<div class="tm-site-header ">'          
+             html +=' <h1  style ="color: skyblue;"class="text-center">Admin Posts</h1>'
+             html +='</div>'
+             html +=' <div id ="postgu">'
+            if(adminpost.length > 0){
+              html +='<div class="row tm-row">';
+                for (var i = 0; i< adminpost.length; i++) {
+                 html +=' <article class="col-12 col-md-6 tm-post">'
+                 html += ' <hr class="tm-hr-primary">'
+                 html += '<div class="tm-post-link-inner">'
+                 html += ' </div>'
+                 html += '<span class="position-absolute tm-new-badge">General User</span>'
+                 html += '<h2 class="tm-pt-30 tm-color-primary tm-post-title">'+adminpost[i].adminid+'</h2>'
+                 html += '</a> '
+                 html +=  '<p class="tm-pt-30">'
+                 html +=  adminpost[i].text  ;         
+                 html +=   '</p>'
+                 html +=  '<span> '+ adminpost[i].file+' </span>'
+                html += '<div class="d-flex justify-content-between tm-pt-45">';
+                       html += '</div>';
+                       html += '<hr>';
+                       html += '<div class="d-flex justify-content-between">';
+                       html += '<span>Comment</span>';
+                       html += '</div>';
+                       html += '</article>';
+                       html += '</div>';
+                       html += '</div>';
+                 }
+           }
+           
+
+           else{
+               html += '<h4>Not Data Found </h4>';
+             }
+            
        
        $('#post').html(html);
      }
