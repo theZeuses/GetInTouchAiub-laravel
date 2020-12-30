@@ -17,6 +17,7 @@ use App\Models\Contribution;
 use App\Models\User;
 use Carbon\Carbon;
 use PDF;
+use DomPDF;
 
 class contentControllerController extends Controller
 {
@@ -228,17 +229,18 @@ class contentControllerController extends Controller
         return view('contentController.reports.contentsReports', ['clicked'=>$this->clicker(5), 'data'=>$data]);
     }
 
-    public function saveContentsReport(){
+    public function saveContentsReport(Request $req){
         $data = [];
         $data[0] = GeneralUserPost::all()->count();
         $data[1] = Contribution::sum('postapproved');
         $data[2] = Contribution::sum('postdeclined');
-        $pdf = PDF::loadView('contentController.reports.contentsReportsPDF',['data'=>$data]);
-        $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
-        $pdf->setOption('no-stop-slow-scripts', true);
-        $pdf->setOption('enable-smart-shrinking', true);
-        return $pdf->stream();
+        $chart = $req->chartData;
+        $pdf = DomPDF::loadView('contentController.reports.contentsReportsPDF',['data'=>$data, 'chart'=>$chart]);
+        // $pdf->setOption('enable-javascript', true);
+        // $pdf->setOption('javascript-delay', 1000);
+        // $pdf->setOption('no-stop-slow-scripts', true);
+        // $pdf->setOption('enable-smart-shrinking', true);
+        return $pdf->stream('content_report_'.Carbon::now()->timestamp.'.pdf');
     }
 
     public function contribution(Request $req){
@@ -249,6 +251,27 @@ class contentControllerController extends Controller
         $data[3] = Contribution::select('postdeclined')->where('ccid', $req->session()->get('username'))->first()->postdeclined;
         $data[4] = Contribution::sum('announcements');
         $data[5] = Contribution::select('announcements')->where('ccid', $req->session()->get('username'))->first()->announcements;
+        $data[6] = Session::get('username');
         return view('contentController.contribution.contribution', ['clicked'=>$this->clicker(6), 'data'=>$data]);
+    }
+
+    public function saveContribution(Request $req){
+        $data = [];
+        $data[0] = Contribution::sum('postapproved');
+        $data[1] = Contribution::select('postapproved')->where('ccid', $req->session()->get('username'))->first()->postapproved;
+        $data[2] = Contribution::sum('postdeclined');
+        $data[3] = Contribution::select('postdeclined')->where('ccid', $req->session()->get('username'))->first()->postdeclined;
+        $data[4] = Contribution::sum('announcements');
+        $data[5] = Contribution::select('announcements')->where('ccid', $req->session()->get('username'))->first()->announcements;
+        $data[6] = Session::get('username');
+        $chart = $req->chartData;
+        // $pdf = PDF::loadView('contentController.contribution.contributionPDF', ['data'=>$data]);
+        // $pdf->setOption('enable-javascript', true);
+        // $pdf->setOption('javascript-delay', 3000);
+        // $pdf->setOption('no-stop-slow-scripts', true);
+        // $pdf->setOption('enable-smart-shrinking', true);
+        //$pdf = DomPDF::loadView('contentController.contribution.contributionPDF', ['data'=>$data])->setOptions(['isPhpEnabled'=>true,'isJavascriptEnabled'=>true, 'isHtml5ParserEnabled'=>true]);
+        $pdf = DomPDF::loadView('contentController.contribution.contributionPDF', ['data'=>$data, 'chart'=>$chart]);
+        return $pdf->stream('contribution_report_'.Carbon::now()->timestamp.'.pdf');
     }
 }
