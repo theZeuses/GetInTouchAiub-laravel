@@ -27,7 +27,8 @@ Route::get('/logout', [logoutController::class,'index']);
 
 Route::group(['middleware' => ['sess']], function () {
     Route::group(['middleware' => ['GeneralUser']], function () {
-        //achome
+        //guhome
         Route::get('/guhome', [generalUserController::class,'guhome'])->name('generalUser.home');
+        Route::get('/profile', [generalUserController::class,'profile'])->name('generalUser.profile');
     });
 });
