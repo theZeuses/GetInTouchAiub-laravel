@@ -11,4 +11,9 @@ class generalUserController extends Controller
         $profile = GeneralUser::where('guid',session('username'))->first();
         return view('generalUser.guHome',['profile'=>$profile]);
     }
+     //profile
+    public function profile(){
+       $generaluser = GeneralUser::where('guid',session('username'))->first();
+           return view('generalUser.profile', $generaluser);
+    }
 }
