@@ -75,6 +75,7 @@ class adminControllerad extends Controller
             $usr->usertype='Account Control Manager';
             $usr->accountstatus= 'Active';
             $usr->save();
+            return redirect('/Admin/ACList');
 
         }else{
             $ac=new ContentController;
@@ -94,8 +95,9 @@ class adminControllerad extends Controller
             $usr->usertype='Account Control Manager';
             $usr->accountstatus= 'Active';
             $usr->save();
+            return redirect('/Admin/CCList');
         }
-       //return view('Admin.Insert');
+       
     }
     public function ViewPendingpostad(){
         $penpost=GeneralUserPostRequest::all();

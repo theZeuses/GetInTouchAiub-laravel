@@ -12,7 +12,8 @@
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
+                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">
+                        @csrf                
                         <input class="form-control tm-search-input"id ="adsearcht" name="searchad" type="text" placeholder="Search..." aria-label="Search">
                                                                                 
                     </form>
@@ -73,14 +74,5 @@
     <script src="{{asset('/assets/js/search.js')}}"></script>
     
 </body>
-<script>
-   /* function searchad(){
-        var key=document.getElementByName('searchad').val();
-        //console.log(key);
-        $.ajax({
-            type::"post",
-            url:
-        })
-    }*/
-</script>
+
 </html>

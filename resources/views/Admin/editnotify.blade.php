@@ -34,7 +34,7 @@ https://templatemo.com/tm-553-xtra-blog
                     </div>
                     
                      <form method="post" class="form-inline tm-mb-80">  
-                       
+                       @csrf
                      <table>
                          
                          <tr  style="text-align:center">

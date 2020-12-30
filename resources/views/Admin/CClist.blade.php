@@ -12,7 +12,8 @@
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
+                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">   
+                        @csrf             
                         <input class="form-control tm-search-input"id ="ccsrct" name="key" type="text" placeholder="Search..." aria-label="Search">
                        
                                                             

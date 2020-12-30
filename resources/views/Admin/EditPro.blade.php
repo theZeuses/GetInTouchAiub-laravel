@@ -25,7 +25,7 @@ https://templatemo.com/tm-553-xtra-blog
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                   @csrf
+                   
                    <div style="color: red">
                     @foreach($errors->all() as $err)
                 **
@@ -33,6 +33,7 @@ https://templatemo.com/tm-553-xtra-blog
                 @endforeach
                 </div>
                      <form method="post" class="form-inline tm-mb-80">   
+                        @csrf
                          <input type="text"name="id"value="{{$info[0]['id']}}"hidden>
                      <table>
                          <tr  style="text-align:center">

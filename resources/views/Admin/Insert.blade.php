@@ -32,7 +32,8 @@ https://templatemo.com/tm-553-xtra-blog
                     {{$err}}<br>
                     @endforeach
                     </div>
-                     <form method="post" class="form-inline tm-mb-80">   
+                     <form method="post" class="form-inline tm-mb-80">  
+                         @csrf 
                      <table>
                          <tr  style="text-align:center">
                             <td colspan="2">
