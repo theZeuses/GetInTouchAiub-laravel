@@ -12,13 +12,7 @@
         <main class="tm-main">
             <!-- Search form -->
             <div class="row tm-row">
-                <div class="col-12">
-                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
-                        <input class="form-control tm-search-input"id ="adsearcht" name="query" type="text" placeholder="Search..." aria-label="Search">
-                       
-                                                            
-                    </form>
-                </div>                
+                               
             </div>   
             <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">Account Controller List</h1>

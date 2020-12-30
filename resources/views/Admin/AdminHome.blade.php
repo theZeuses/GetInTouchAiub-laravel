@@ -34,11 +34,12 @@
                     <span>by Admin Nat</span>
                 </div>
             </article>-->
- 
+            <div id ="post">
+            <div id ="postgu">
             <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">General User Posts</h1>
             </div>
-            <div id ="post">
+           
             <div class="row tm-row">
             
                 
@@ -70,13 +71,13 @@
                 </article>
                 @endfor
                 
-            
+            </div>
         </div>
         <div lass="row tm-row">
             <div class="tm-site-header ">          
                 <h1  style ="color: skyblue;"class="text-center">Admin Posts</h1>
             </div>
-            <div id ="post">
+            <div id ="postadmin">
             <div class="row tm-row">
             
                 
@@ -89,7 +90,7 @@
                                                        
                         </div>
                         <span class="position-absolute tm-new-badge">Admin</span>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title"> {{$adminpost[$i]['guid']}}</h2>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title"> {{$adminpost[$i]['adminid']}}</h2>
                     </a>                    
                     <p class="tm-pt-30">
                          {{$adminpost[$i]['text']}} 
@@ -107,6 +108,7 @@
                 @endfor
         </div>
         </div>
+    </div>
         <div class="row tm-row tm-mt-100 tm-mb-75">
            
             

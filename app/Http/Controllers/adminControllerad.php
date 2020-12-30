@@ -389,4 +389,23 @@ class adminControllerad extends Controller
         }
         return response()->json(['result'=>$result]);
     }
+    public function searchpost($key){
+        $string=json_decode($key);
+        error_log($string->key);
+        if(strlen($string->key)>0){
+            $result=AdminPost::where('adminid','LIKE','%'.$string->key.'%' )
+                            ->orWhere('text','LIKE','%'.$string->key.'%')
+                            ->get();
+            $res=GeneralUserPost::where('guid','LIKE','%'.$string->key.'%' )
+                                    ->orWhere('text','LIKE','%'.$string->key.'%')
+                                    ->orWhere('approvedby','%'.$string->key.'%')
+                                    ->get();
+        }
+        else{
+            $result=AdminPost::all();
+            $res=GeneralUserPost::all();
+        }
+        //error_log($res,$result);
+        return response()->json(['result'=>$result,'res'=>$res]);
+    }
 }

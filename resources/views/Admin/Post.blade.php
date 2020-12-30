@@ -3,17 +3,7 @@
     <main class="tm-main">
 <div class="row tm-row">
     <div class="col-12">
-        <form method="post" class="form-inline tm-mb-80 tm-search-form">                
-            <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
-            <button class="tm-search-button" type="submit">
-                <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
-            </button>
-            <input class="form-control tm-search-input"Style ="height:150px;width:2000px;margin-top:25px;margin-right:10px" name="post" type="text" placeholder="Post..." aria-label="Search">
-            
-            
-                                         
-        </form>
-    </div>                
+                
 </div>   
 <div>
     
