@@ -3,7 +3,21 @@
     <main class="tm-main">
 <div class="row tm-row">
     <div class="col-12">
-                
+
+        <form method="post" class="form-inline tm-mb-80 tm-search-form">                
+           @csrf
+          
+           <div style="color: red">
+            @foreach($errors->all() as $err)
+            **
+             {{$err}}<br>
+        @endforeach
+           </div>
+            <input class="form-control tm-search-input"Style ="height:150px;width:2000px;margin-top:25px;margin-right:10px" name="post" type="text" placeholder="Post..." aria-label="Search">
+            <input style="margin-left  : 45%;margin-top:25px" class=" tm-new-badge" type="submit" name="" value="Create Post">
+            
+                                         
+        </form>         
 </div>   
 <div>
     

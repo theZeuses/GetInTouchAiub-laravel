@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\notice;
 use App\Http\Requests\insert;
 use App\Http\Requests\editpro;
+use App\Http\Requests\post;
 use Validator;
 
 
@@ -38,6 +39,14 @@ class adminControllerad extends Controller
         $adminpst=AdminPost::where('adminid', $req->session()->get('username'))
                                         ->get();
         return view('Admin.Post')->with('ownpost',$adminpst);
+    }
+    public function submitpost(post $p){
+        $adminpst=new AdminPost;
+        $adminpst->adminid=$this->req->session()->get('username');
+        $adminpst->text=$this->req->post;
+        $adminpst->save();
+        return redirect('Admin/post/');
+       // print_r($this->req->post);
     }
     public function deletegupostad($id){
         $post=GeneralUserPost::find($id)->delete();

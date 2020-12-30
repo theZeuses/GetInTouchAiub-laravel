@@ -89,7 +89,7 @@ https://templatemo.com/tm-553-xtra-blog
                         
                           <tr >
                          <td colspan="2">
-                          <input style="margin-left  : 52%;margin-top:25px" class=" tm-new-badge" type="submit" onclick="location.href='{{route('Admin.ViewProfilead')}}'" name="" value="Back">
+                          <input style="margin-left  : 52%;margin-top:25px" class=" tm-new-badge" type="button" onclick="location.href='{{route('Admin.ViewProfilead')}}'" name="" value="Back">
                          </td>
                          </tr>
                          
