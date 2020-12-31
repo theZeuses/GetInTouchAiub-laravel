@@ -1,25 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+use PDF;
+use DomPDF;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\GeneralUser;
 use App\Models\PostRequest;
 use App\Models\WarningUser;
 use App\Models\Announcement;
+use App\Models\Contribution;
 use Illuminate\Http\Request;
 use App\Models\GeneralUserPost;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\WarningRequest;
 use App\Models\ContentControlManager;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
-use App\Http\Requests\ContentControllerCredentialsRequest;
-use App\Http\Requests\ContentControllerRequest;
 use App\Models\ContentControlManagerNotice;
+use App\Http\Requests\ContentControllerRequest;
 use App\Models\ContentControlManagerRequestForAction;
-use App\Models\Contribution;
-use App\Models\User;
-use Carbon\Carbon;
-use PDF;
-use DomPDF;
+use App\Http\Requests\ContentControllerCredentialsRequest;
 
 class contentControllerController extends Controller
 {
@@ -114,6 +115,56 @@ class contentControllerController extends Controller
             }
         }
         return view('contentController.post.analyzePoster', ['clicked'=>$this->clicker(1), 'pid'=>$pid, 'data'=>$data, 'user'=>$generalUser]);
+    }
+
+    public function analyzePosterAction(WarningRequest $req, $pid, $gid){
+        $guid = GeneralUser::find($gid)->guid;
+
+        $request = new ContentControlManagerRequestForAction();
+        $request->ccid = Session::get('username');
+
+        $status = false;
+
+        if(strlen($req->banDays) > 0){
+            if(strlen($req->blockDays) > 0){
+                $request->actiontype = "Block & Ban";
+                $request->text = "Block general user: ".$guid." for ".$req->blockDays." days from posting and ban for ".$req->banDays." days.";
+            }else{
+                $request->actiontype = "Ban";
+                $request->text = "Ban general user: ".$guid." for ".$req->banDays." days.";
+            }
+            $status = true;
+        }else if(strlen($req->blockDays) > 0){
+            $request->actiontype = "Block";
+            $request->text = "Block general user: ".$guid." for ".$req->blockDays." days from posting.";
+            $status = true;
+        }
+
+        if($status){
+            $request->save();
+            if(strlen($req->warning) > 0){
+                $warning = new WarningUser();
+                $warning->guid = $guid;
+                $warning->warningtext = $req->warning;
+                $warning->ccid = Session::get('username');
+
+                $warning->save();
+                return redirect()->route('contentController.declinePost', [$pid]);
+            }else{
+                return redirect()->route('contentController.declinePost', [$pid]);
+            }
+        }else if(strlen($req->warning) > 0){
+            $warning = new WarningUser();
+            $warning->guid = $guid;
+            $warning->warningtext = $req->warning;
+            $warning->ccid = Session::get('username');
+
+            $warning->save();
+            return redirect()->route('contentController.declinePost', [$pid]);
+        }else{
+            Toastr::error('Must ban, block or warn to proceed.','', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('contentController.analyzePoster', [$pid, $gid]);
+        }
     }
 
     public function banForEver($pid, $gid){
