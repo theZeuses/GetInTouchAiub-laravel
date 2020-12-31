@@ -273,6 +273,17 @@ class contentControllerController extends Controller
         return view('contentController.users.individualReport', ['clicked'=>$this->clicker(3), 'user'=>$generalUser, 'data'=>$data]);
 
     }
+
+    public function userReportThroughAPI($id){
+        $generalUser = GeneralUser::find($id);
+        $query = json_encode(['guid'=>$generalUser->guid]);
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'localhost:3000/contentcontroller/api/users/report/'.$query);
+
+        $data=json_decode($res->getBody());
+        return view('contentController.users.individualReport', ['clicked'=>$this->clicker(3), 'user'=>$generalUser, 'data'=>$data]);
+    }
+
     public function searchUsers($query){
         $data = json_decode($query);
         if(strlen($data->query) > 0){
