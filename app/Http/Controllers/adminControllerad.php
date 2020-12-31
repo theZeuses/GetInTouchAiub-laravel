@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 //use app\Models;
 use App\Models\Admin;
 use App\Models\AdminPost;
@@ -312,7 +313,17 @@ class adminControllerad extends Controller
          //return view('Admin.addNotification')->with('userid',$id)->with('adminid',$this->req->session()->get('username'));
      }
     public function ViewReportad(){
-        return view('Admin.Report');
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'localhost:8000/Adminhome/report');
+        //echo $res->getStatusCode();
+        // "200"
+        //echo $res->getHeader('content-type')[0];
+        // 'application/json; charset=utf8'
+        $values= $res->getBody();
+        // {"type":"User"...'
+
+     
+        return view('Admin.Report')->with('values', $values);
     }
     public function VieweditProfilead(){
         $info=Admin::where('adminid',$this->req->session()->get('username'))->get();
