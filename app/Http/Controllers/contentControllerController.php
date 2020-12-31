@@ -14,6 +14,7 @@ use App\Http\Requests\AnnouncementRequest;
 use App\Http\Requests\ContentControllerCredentialsRequest;
 use App\Http\Requests\ContentControllerRequest;
 use App\Models\ContentControlManagerNotice;
+use App\Models\ContentControlManagerRequestForAction;
 use App\Models\Contribution;
 use App\Models\User;
 use Carbon\Carbon;
@@ -96,7 +97,34 @@ class contentControllerController extends Controller
     }
 
     public function analyzePoster($pid, $gid){
+        $data = [];
+        $generalUser = GeneralUser::find($gid);
+        $data[0] = GeneralUserPost::where('guid', $generalUser->guid)->count();
+        $notApproved = WarningUser::where('guid', $generalUser->guid)->get();
+        $data[1] = 0;
+        foreach($notApproved as $obj){
+            if(strlen($obj->warningtext) == 0){
+                $data[1] += 1;
+            }
+        }
+        $data[2] = 0;
+        foreach($notApproved as $obj){
+            if(strlen($obj->warningtext) > 0){
+                $data[2] += 1;
+            }
+        }
+        return view('contentController.post.analyzePoster', ['clicked'=>$this->clicker(1), 'pid'=>$pid, 'data'=>$data, 'user'=>$generalUser]);
+    }
 
+    public function banForEver($pid, $gid){
+        $request = new ContentControlManagerRequestForAction();
+        $request->ccid = Session::get('username');
+        $request->actiontype = "Ban";
+        $request->text = "Ban general user: "+$gid+" forever.";
+
+        $request->save();
+
+        return redirect()->route('contentController.declinePost', [$pid]);
     }
 
     public function announcement(Request $req){
