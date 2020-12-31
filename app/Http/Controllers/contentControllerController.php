@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AnnouncementRequest;
 use App\Http\Requests\ContentControllerCredentialsRequest;
 use App\Http\Requests\ContentControllerRequest;
+use App\Models\ContentControlManagerNotice;
 use App\Models\Contribution;
 use App\Models\User;
 use Carbon\Carbon;
@@ -48,7 +49,27 @@ class contentControllerController extends Controller
     }
 
     public function approvePost($id){
+        $postReq = PostRequest::find($id);
 
+        $post = new GeneralUserPost();
+        $post->guid = $postReq->guid;
+        $post->text = $postReq->text;
+        $post->file = $postReq->file;
+        $post->approvedby = Session::get('username');
+
+        $notice = new ContentControlManagerNotice();
+        $notice->ccid = Session::get('username');
+        $notice->guid = $postReq->guid;
+        $notice->subject = "Approved";
+        $notice->body = "Your post has been approved";
+
+        Contribution::where('ccid', Session::get('username'))->increment('postapproved', 1);
+
+        $post->save();
+        $postReq->delete();
+        $notice->save();
+
+        return redirect()->route('contentController.postRequest');
     }
 
     public function declinePost($id){
