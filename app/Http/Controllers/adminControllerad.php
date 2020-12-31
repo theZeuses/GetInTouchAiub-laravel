@@ -315,14 +315,7 @@ class adminControllerad extends Controller
     public function ViewReportad(){
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', 'localhost:8000/Adminhome/report');
-        //echo $res->getStatusCode();
-        // "200"
-        //echo $res->getHeader('content-type')[0];
-        // 'application/json; charset=utf8'
-        $values= $res->getBody();
-        // {"type":"User"...'
-
-     
+        $values=json_decode( $res->getBody());
         return view('Admin.Report')->with('values', $values);
     }
     public function VieweditProfilead(){
