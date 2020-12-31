@@ -73,7 +73,26 @@ class contentControllerController extends Controller
     }
 
     public function declinePost($id){
+        $postReq = PostRequest::find($id);
 
+        $warning = new WarningUser();
+        $warning->guid = $postReq->guid;
+        $warning->warningtext = "";
+        $warning->ccid = Session::get('username');
+
+        $notice = new ContentControlManagerNotice();
+        $notice->ccid = Session::get('username');
+        $notice->guid = $postReq->guid;
+        $notice->subject = "Delined";
+        $notice->body = "Your post has been declined";
+
+        Contribution::where('ccid', Session::get('username'))->increment('postdeclined', 1);
+
+        $warning->save();
+        $postReq->delete();
+        $notice->save();
+
+        return redirect()->route('contentController.postRequest');
     }
 
     public function analyzePoster($pid, $gid){
