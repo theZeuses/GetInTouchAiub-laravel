@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Profile</title>
-	<link rel="stylesheet" href="assets/generalUser/css/guStyle.css">
+	<title>Delete Profile</title>
+	<link rel="stylesheet" href="/assets/generalUser/css/guStyle.css">
 	<script type="text/javascript" src="/assets/generalUser/js/jquery-3.5.1.js"></script>
 </head>
 <body>
@@ -10,7 +10,7 @@
 	<div id="workspace">
 		<form method="post">
 		<fieldset>
-			<br/>
+			<legend>Delete Profile</legend>
 			<table>
 				<tr>
 					<td>GU Id :</td>
@@ -46,18 +46,17 @@
 				</tr>
 			</table>
 			<div>
-				<a href="/profiledelete/{{$guid}}">
-					<button type="button">
-						Delete Profile
+				<tr>
+				<td colspan="2">
+					<h5>Are you sure to delete This Account?</h5><br>
+					<input type="submit" name="submit" value="Yes">
+					<button>
+						<a href="{{route('generalUser.profile')}}">No</a>
 					</button>
-				</a>
-				<a href="{{route('generalUser.home')}}">
-					<button type="button">
-						Back
-					</button>
-				</a>
+					<input type="hidden" name="_token" value="{{csrf_token()}}">
+				</td>
+			</tr>
 			</div>
-			
 		</fieldset>
 	</form>
 	</div>

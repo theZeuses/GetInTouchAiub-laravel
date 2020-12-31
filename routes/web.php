@@ -30,5 +30,7 @@ Route::group(['middleware' => ['sess']], function () {
         //guhome
         Route::get('/guhome', [generalUserController::class,'guhome'])->name('generalUser.home');
         Route::get('/profile', [generalUserController::class,'profile'])->name('generalUser.profile');
+         Route::get('/profiledelete/{guid}', [generalUserController::class,'profiledelete'])->name('generalUser.profiledelete');
+        Route::post('/profiledelete/{guid}', [generalUserController::class,'profiledestroy']);
     });
 });
