@@ -317,4 +317,33 @@ class accountControllerController extends Controller
             return redirect()->route('accountController.verifygeneraluser');
         }
     }
+    public function approveregrequest($id){
+        $data = RegistrationRequest::find($id);
+        
+        $gu = new GeneralUser();
+        $gu->guid              = $data->guid;
+        $gu->name              = $data->name;
+        $gu->email             = $data->email;
+        $gu->gender            = $data->gender;
+        $gu->dob               = $data->dob;
+        $gu->address           = $data->address;
+        $gu->profilepicture    = $data->profilepicture;
+        $gu->userstatus        = $data->userstatus;
+        $gu->accountstatus     = 'Active';
+        if($gu->save())
+        {    
+            $user = new User();        
+            $user->userid           = $data->guid;
+            $user->password         = $data->guid;
+            $user->usertype         = "General User";
+            $user->accountstatus    = "Active";
+        
+            if($user->save()){
+                $data = RegistrationRequest::find($id);
+                if($data->delete()){
+                    return redirect()->route('accountController.verifygeneraluser');
+                }
+            }
+        }
+    }
 }

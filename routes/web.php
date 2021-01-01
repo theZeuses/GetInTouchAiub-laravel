@@ -60,6 +60,7 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/acverifygeneraluser',[accountControllerController::class,'verifygeneraluser'])->name('accountController.verifygeneraluser');
         Route::get('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequest'])->name('accountController.declineregrequest');
         Route::post('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequestsave'])->name('accountController.declineregrequestsave');
+        Route::get('/acapproveregrequest/{id}',[accountControllerController::class,'approveregrequest'])->name('accountController.approveregrequest');
 
     });
 });
