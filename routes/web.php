@@ -26,8 +26,9 @@ Route::get('/logout', [logoutController::class,'index']);
 
 Route::group(['middleware' => ['sess']], function () {
     Route::group(['middleware' => ['AccountController']], function () {
-        //achome
+        //account controller
         Route::get('/achome', [accountControllerController::class,'achome'])->name('accountController.achome');
+        Route::get('/acgetmyinfo', [accountControllerController::class,'getmyinfo'])->name('accountController.getmyinfo');
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
         Route::get('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');
