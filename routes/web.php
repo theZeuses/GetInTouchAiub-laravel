@@ -50,6 +50,8 @@ Route::group(['middleware' => ['sess']], function () {
         //general user
         Route::get('/acgulist',[accountControllerController::class,'acgulist'])->name('accountController.gulist');
         Route::get('/acsearchgu',[accountControllerController::class,'acsearchgu'])->name('accountController.acsearchgu');
+        Route::get('/acdeletegu/{id}',[accountControllerController::class,'deletegu'])->name('accountController.deletegu');
+        Route::post('/acdeletegu/{id}',[accountControllerController::class,'deletegusave'])->name('accountController.deletegusave');
 
     });
 });

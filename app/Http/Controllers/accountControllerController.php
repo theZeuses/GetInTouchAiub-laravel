@@ -252,4 +252,19 @@ class accountControllerController extends Controller
             $gulist = GeneralUser::where('name','like','%'.$req->key.'%')->get();          
             return json_encode($gulist);
     }
+    public function deletegu($id){
+        $gu = GeneralUser::find($id);
+        return view('accountController.deleteGU', $gu);
+    }
+    public function deletegusave($id){
+        $gu = GeneralUser::find($id);
+        if($gu->delete())
+        {
+            $user = User::where('userid',$gu->guid)->first();
+            if($user->delete()) 
+            {            
+                return redirect()->route("accountController.gulist");
+            }
+        }
+    }
 }
