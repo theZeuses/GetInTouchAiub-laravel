@@ -7,6 +7,7 @@ use App\Models\AccountControlManager;
 use App\Models\Admin;
 use App\Models\ContentControlManager;
 use App\Models\GeneralUser;
+use App\Models\User;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
@@ -75,7 +76,13 @@ class accountControllerController extends Controller
         
         $profile->accountstatus    = "Deactivated";
         if($profile->save()){
-            return redirect('/logout');
+            $user = User::where('userid',session('username'))->first();
+            $user->accountstatus   = "Deactivated";
+            if($user->save()){
+                return redirect('/logout');
+             }else{
+                echo "not saved";
+            }
         }else{
             echo "not saved";
         }
@@ -122,10 +129,20 @@ class accountControllerController extends Controller
                 $cc->dob               = $req->dob;
                 $cc->address           = $req->address;
                 $cc->profilepicture    = '/assets/accountController/profilepicture/cc/'.$location;
-                $cc->accountstatus    = 'Active';
+                $cc->accountstatus     = 'Active';
 
                 if($cc->save()){
-                    return redirect()->route('accountController.cclist');
+                    $user = new User();
+                    
+                    $user->userid           = $req->ccid;
+                    $user->password         = $req->ccid;
+                    $user->usertype         = "Content Control Manager";
+                    $user->accountstatus    = "Active";
+                    if($user->save()){
+                        return redirect()->route('accountController.cclist');
+                    }else{
+                        echo "cc not saved";
+                    }
                 }else{
                     echo "cc not saved";
                 }
@@ -133,8 +150,8 @@ class accountControllerController extends Controller
                 echo "error";
             }
         }
-        else{
-             
+        else{ 
+            
             $cc = new ContentControlManager();
 
             $cc->ccid              = $req->ccid;
@@ -147,9 +164,19 @@ class accountControllerController extends Controller
             $cc->accountstatus    = 'Active';
 
             if($cc->save()){
-                return redirect()->route('accountController.cclist');
+                $user = new User();
+                
+                $user->userid           = $req->ccid;
+                $user->password         = $req->ccid;
+                $user->usertype         = "Content Control Manager";
+                $user->accountstatus    = "Active";
+                if($user->save()){
+                    return redirect()->route('accountController.cclist');
+                }else{
+                    echo "cc not saved";
+                }
             }else{
-                echo "cc not saved";
+                echo "error";
             }
         }
     }
