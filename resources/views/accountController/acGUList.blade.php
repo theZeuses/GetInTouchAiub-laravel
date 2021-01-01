@@ -38,7 +38,7 @@
 				<td>
 					<a href="">Temporarily Block</a> | 
 					<a href="">Banned</a> | 
-					<a href="">Remove</a>
+					<a href="{{route('accountController.deletegu', $gulist[$i]['id'])}}">Remove</a>
 				</td>
 			</tr>
 			@endfor
