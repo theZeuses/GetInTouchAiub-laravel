@@ -52,14 +52,14 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/acsearchgu',[accountControllerController::class,'acsearchgu'])->name('accountController.acsearchgu');
         Route::get('/acdeletegu/{id}',[accountControllerController::class,'deletegu'])->name('accountController.deletegu');
         Route::post('/acdeletegu/{id}',[accountControllerController::class,'deletegusave'])->name('accountController.deletegusave');
-
         Route::get('/acbannedgu/{id}',[accountControllerController::class,'bannedgu'])->name('accountController.bannedgu');
         Route::post('/acbannedgu/{id}',[accountControllerController::class,'bannedgusave'])->name('accountController.bannedgusave');
-
         Route::get('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgu'])->name('accountController.temporarilyblockgu');
         Route::post('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgusave'])->name('accountController.temporarilyblockgusave');
 
         Route::get('/acverifygeneraluser',[accountControllerController::class,'verifygeneraluser'])->name('accountController.verifygeneraluser');
+        Route::get('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequest'])->name('accountController.declineregrequest');
+        Route::post('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequestsave'])->name('accountController.declineregrequestsave');
 
     });
 });

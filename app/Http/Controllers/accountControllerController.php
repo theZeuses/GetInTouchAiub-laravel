@@ -306,4 +306,15 @@ class accountControllerController extends Controller
         $verifygeneraluserlist = RegistrationRequest::All();
         return view('accountController.verifyGeneralUser', ['list'=>$verifygeneraluserlist]);
     }
+    public function declineregrequest($id){
+        $user = RegistrationRequest::find($id);
+        return view('accountController.declineRegRequest', $user);
+    }
+    public function declineregrequestsave($id){
+        $user = RegistrationRequest::find($id);
+        if($user->delete())
+        {
+            return redirect()->route('accountController.verifygeneraluser');
+        }
+    }
 }
