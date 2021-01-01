@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\ContentControlManager;
 use App\Models\GeneralUser;
 use App\Models\User;
+use App\Models\RegistrationRequest;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
@@ -300,5 +301,9 @@ class accountControllerController extends Controller
                 return redirect()->route("accountController.gulist");
             }
         }
+    }
+    public function verifygeneraluser(){
+        $verifygeneraluserlist = RegistrationRequest::All();
+        return view('accountController.verifyGeneralUser', ['list'=>$verifygeneraluserlist]);
     }
 }
