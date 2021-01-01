@@ -11,6 +11,7 @@ use App\Models\User;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
+use App\Http\Requests\editCCRequest;
 
 class accountControllerController extends Controller
 {
@@ -175,6 +176,50 @@ class accountControllerController extends Controller
                 }else{
                     echo "cc not saved";
                 }
+            }else{
+                echo "error";
+            }
+        }
+    }
+    public function editcc($id){
+        $cc = ContentControlManager::find($id);
+        return view('accountController.editCC', $cc);
+    }
+    public function editccsave(editCCRequest $req, $id){
+        if($req->hasFile('profilepicture')){
+            $file = $req->file('profilepicture');
+            $location = time().$file->getClientOriginalName();
+            if($file->move('assets/accountController/profilepicture/cc', $location)){
+               
+                $cc = ContentControlManager::find($id);
+                
+                $cc->name              = $req->name;
+                $cc->email             = $req->email;
+                $cc->dob               = $req->dob;
+                $cc->address           = $req->address;
+                $cc->profilepicture    = '/assets/accountController/profilepicture/cc/'.$location;
+
+                if($cc->save()){
+                    return redirect()->route('accountController.cclist');
+                }else{
+                    echo "cc not saved";
+                }
+            }else{
+                echo "error";
+            }
+        }
+        else{ 
+            
+            $cc = ContentControlManager::find($id);
+
+            $cc->name              = $req->name;
+            $cc->email             = $req->email;
+            $cc->dob               = $req->dob;
+            $cc->address           = $req->address;
+            $cc->profilepicture    = '';
+
+            if($cc->save()){
+                return redirect()->route('accountController.cclist');
             }else{
                 echo "error";
             }
