@@ -36,7 +36,7 @@
 				<td>{{$gulist[$i]['userstatus']}}</td>
 				<td>{{$gulist[$i]['accountstatus']}}</td>
 				<td>
-					<a href="">Temporarily Block</a> | 
+					<a href="{{route('accountController.temporarilyblockgu', $gulist[$i]['id'])}}">Temporarily Block</a> | 
 					<a href="{{route('accountController.bannedgu', $gulist[$i]['id'])}}">Banned</a> | 
 					<a href="{{route('accountController.deletegu', $gulist[$i]['id'])}}">Remove</a>
 				</td>
