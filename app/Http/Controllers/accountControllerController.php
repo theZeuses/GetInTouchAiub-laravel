@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+
 use App\Models\AccountControlManager;
 use App\Models\Admin;
 use App\Models\ContentControlManager;
 use App\Models\GeneralUser;
+
+use App\Http\Requests\updateProfileRequest;
 
 class accountControllerController extends Controller
 {
@@ -21,6 +24,47 @@ class accountControllerController extends Controller
     public function updateprofile(){
         $profile = AccountControlManager::where('acid',session('username'))->first();
         return view('accountController.updateProfile',['profile'=>$profile]);
+    }
+    public function updateprofilesave(updateProfileRequest $req){
+        if($req->hasFile('profilepicture')){
+            $file = $req->file('profilepicture');
+            $location = time().$file->getClientOriginalName();
+            //echo $location;
+
+            if($file->move('assets/accountController/profilepicture', $location)){
+               
+                $profile = AccountControlManager::where('acid',session('username'))->first();
+
+                $profile->name          = $req->name;
+                $profile->email          = $req->email;
+                $profile->dob              = $req->dob;
+                $profile->address              = $req->address;
+                $profile->profilepicture    = '/assets/accountController/profilepicture/'.$location;
+
+                if($profile->save()){
+                    return redirect()->route('accountController.getmyinfo');
+                }else{
+                    echo "not saved";
+                }
+            }else{
+                echo "error";
+            }
+        }
+        else{
+             
+            $profile = AccountControlManager::where('acid',session('username'))->first();
+
+            $profile->name       = $req->name;
+            $profile->email      = $req->email;
+            $profile->dob        = $req->dob;
+            $profile->address    = $req->address;
+
+            if($profile->save()){
+                return redirect()->route('accountController.getmyinfo');
+            }else{
+                echo "not saved";
+            }
+        }
     }
     //admiin
     public function acadminlist(){
