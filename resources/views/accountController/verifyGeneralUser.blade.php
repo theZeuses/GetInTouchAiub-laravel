@@ -33,7 +33,7 @@
 				<td>{{$list[$i]['userstatus']}}</td>
 				<td>
 					<a href="">Approve</a>
-					<a href="">Decline</a>
+					<a href="{{route('accountController.declineregrequest', $list[$i]['id'])}}">Decline</a>
 				</td>
 			</tr>
 			@endfor
