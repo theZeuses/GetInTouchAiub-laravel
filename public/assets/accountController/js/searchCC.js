@@ -30,7 +30,7 @@ $(document).ready(function(){
 					strign=strign+"<td>"+response[i].gender+"</td>";
 					strign=strign+"<td>"+response[i].dob+"</td>";
 					strign=strign+"<td>"+response[i].address+"</td>";
-					strign=strign+"<td>"+response[i].profilepicture+"</td>";
+					strign=strign+"<td><img width='50' height='45' src='"+response[i].profilepicture+"'></td>";
 					strign=strign+"<td>"+response[i].accountstatus+"</td>";
 					strign=strign+"</tr>";
 				}
