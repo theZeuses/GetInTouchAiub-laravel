@@ -1,6 +1,6 @@
     <center>
     <h1>GetinTouchAIUB</h1>
-    <h3>PDF Printed by{{$adminid}}</h3>
+    <h3>PDF Printed by<br> {{$adminid}}</h3>
 
     </cemter>
     <h1>User detail including Admin Account controller Content Controller and General user</h1>

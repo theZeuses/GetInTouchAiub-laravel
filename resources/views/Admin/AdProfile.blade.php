@@ -39,8 +39,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<li><a href="{{route('Admin.Viewhomead')}}" class=""><span>Home</span></a></li>
 						<li><a href="{{route('Admin.VieweditProfilead')}}" ><span>Edit</span></a></li>
-						{{--<li><a href="{{route('Admin.ViewchangePass')}}" ><span>Change_password</span></a></li>
-						<li><a href="{{route('Admin.Viewhomead')}}" ><span>Logout</span></a></li>--}}
+						<li><a href="{{route('Admin.Changepass')}}" ><span>Change_password</span></a></li>
+						<li><a href="{{route('logout.logout')}}" ><span>Logout</span></a></li>
 					
 					</ul> 
 					<span aria-hidden="true" class="stretchy-nav-bg"></span>

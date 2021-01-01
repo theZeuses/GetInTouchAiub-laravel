@@ -84,10 +84,10 @@
                         <i class="far fa-comments"></i>
                        Generate report
                     </a></li>
-                    {{--<li class="tm-nav-item"><a href="{{route('logout.logout')}}" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{{route('logout.logout')}}" class="tm-nav-link">
                         <i class="fas fa-pen"></i>
                         Logout
-                    </a></li>--}}
+                    </a></li>
                 </ul>
             </nav>
             <div class="tm-mb-65">

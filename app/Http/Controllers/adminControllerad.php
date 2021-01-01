@@ -433,5 +433,18 @@ class adminControllerad extends Controller
          return $pdf->stream();
 
     }
+    public function Changepass(){
+        $adminid=$this->req->session()->get('username');
+        $ad=User::where('userid',$adminid)->get();
+        return view('ChangePass.index')->with('ad',$ad);
+    }
+    public function Changepasssub(){
+        $adminid=$this->req->session()->get('username');
+        User::where('userid',$adminid)
+          ->update(['password' => $this->req->newpassword]);
+       
+        $this->req->session()->flush();
+        return redirect('/login');
+    }
   
 }
