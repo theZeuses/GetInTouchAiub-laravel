@@ -29,6 +29,7 @@ Route::group(['middleware' => ['sess']], function () {
         //account controller
         Route::get('/achome', [accountControllerController::class,'achome'])->name('accountController.achome');
         Route::get('/acgetmyinfo', [accountControllerController::class,'getmyinfo'])->name('accountController.getmyinfo');
+        Route::get('/acupdateprofile', [accountControllerController::class,'updateprofile'])->name('accountController.updateprofile');
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
         Route::get('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');

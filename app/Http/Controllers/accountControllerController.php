@@ -18,6 +18,10 @@ class accountControllerController extends Controller
         $profile = AccountControlManager::where('acid',session('username'))->first();
         return view('accountController.myProfile',['profile'=>$profile]);
     }
+    public function updateprofile(){
+        $profile = AccountControlManager::where('acid',session('username'))->first();
+        return view('accountController.updateProfile',['profile'=>$profile]);
+    }
     //admiin
     public function acadminlist(){
         $adminlist = Admin::all();

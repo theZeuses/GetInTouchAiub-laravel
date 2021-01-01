@@ -48,7 +48,7 @@
 			</table>
 			<div>
 				
-				<a href="">
+				<a href="{{route('accountController.updateprofile')}}">
 					<button type="button">
 						Update Profile
 					</button>
@@ -68,7 +68,7 @@
 						Back
 					</button>
 				</a>
-				<input type="hidden" name="acid" value="<%=user[0].acid %>">
+				<input type="hidden" name="acid" value="{{$profile['acid']}}">
 			</div>
 		</fieldset>
 	</form>
