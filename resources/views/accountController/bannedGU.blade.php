@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Delete User</title>
+	<title>Banned User</title>
 	<link rel="stylesheet" href="/assets/accountController/css/acStyle.css">
 </head>
 <body>
@@ -9,8 +9,7 @@
 	<div id="workspace">
 		<form method="post">
 		<fieldset>
-			<h2>Delete General User</h2>
-			<br>
+			<h2>Banned General User</h2>
 			<table id="view">
 				<tr>
 					<td>Gu Id :</td>
