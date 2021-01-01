@@ -44,6 +44,8 @@ Route::group(['middleware' => ['sess']], function () {
         Route::post('/accreatecc',[accountControllerController::class,'createccsave'])->name('accountController.createccsave');
         Route::get('/aceditcc/{id}',[accountControllerController::class,'editcc'])->name('accountController.editcc');
         Route::post('/aceditcc/{id}',[accountControllerController::class,'editccsave'])->name('accountController.editccsave');
+        Route::get('/acdeletecc/{id}',[accountControllerController::class,'deletecc'])->name('accountController.deletecc');
+        Route::post('/acdeletecc/{id}',[accountControllerController::class,'deleteccsave'])->name('accountController.deleteccsave');
         
         //general user
         Route::get('/acgulist',[accountControllerController::class,'acgulist'])->name('accountController.gulist');

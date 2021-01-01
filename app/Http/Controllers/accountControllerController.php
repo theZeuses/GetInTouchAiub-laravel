@@ -225,6 +225,21 @@ class accountControllerController extends Controller
             }
         }
     }
+    public function deletecc($id){
+        $cc = ContentControlManager::find($id);
+        return view('accountController.deleteCC', $cc);
+    }
+    public function deleteccsave($id){
+        $cc = ContentControlManager::find($id);
+        if($cc->delete())
+        {
+            $user = User::where('userid',$cc->ccid)->first();
+            if($user->delete()) 
+            {            
+                return redirect()->route("accountController.cclist");
+            }
+        }
+    }
 
 
     //general user
