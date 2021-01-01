@@ -32,7 +32,7 @@
 				<td><img width="50" height="45" src="{{$list[$i]['profilepicture']}}"></td>
 				<td>{{$list[$i]['userstatus']}}</td>
 				<td>
-					<a href="">Approve</a>
+					<a href="{{route('accountController.approveregrequest', $list[$i]['id'])}}">Approve</a>
 					<a href="{{route('accountController.declineregrequest', $list[$i]['id'])}}">Decline</a>
 				</td>
 			</tr>
