@@ -267,4 +267,21 @@ class accountControllerController extends Controller
             }
         }
     }
+    public function bannedgu($id){
+        $gu = GeneralUser::find($id);
+        return view('accountController.bannedGU', $gu);
+    }
+    public function bannedgusave($id){
+        $gu = GeneralUser::find($id);
+        $gu->accountstatus = "Banned";
+        if($gu->save())
+        {
+            $user = User::where('userid',$gu->guid)->first();
+            $user->accountstatus = "Banned";
+            if($user->save()) 
+            {            
+                return redirect()->route("accountController.gulist");
+            }
+        }
+    }
 }
