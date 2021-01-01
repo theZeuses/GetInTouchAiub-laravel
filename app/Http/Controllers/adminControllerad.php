@@ -19,6 +19,7 @@ use App\Http\Requests\notice;
 use App\Http\Requests\insert;
 use App\Http\Requests\editpro;
 use App\Http\Requests\post;
+use PDF;
 use Validator;
 
 
@@ -423,4 +424,14 @@ class adminControllerad extends Controller
         //error_log($res,$result);
         return response()->json(['result'=>$result,'res'=>$res]);
     }
+    public function convertpdf(){
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'localhost:8000/Adminhome/report');
+        $values=json_decode( $res->getBody());
+        $admin=$this->req->session()->get('username');
+        $pdf = PDF::loadView('Admin.pdf',['values' => $values,'adminid'=>$admin]);
+         return $pdf->stream();
+
+    }
+  
 }

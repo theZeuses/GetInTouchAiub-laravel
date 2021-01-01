@@ -48,12 +48,40 @@
             <h1  style ="color: skyblue;"class="text-center">Reports</h1>
         </div> 
         <main class="tm-main">
-            <input style="margin-left  : 20%;margin-top:25px" class=" tm-new-badge" type="button" onclick="location.href='#'" name="" value="Download PDF">
+            <input style="margin-left  : 20%;margin-top:25px" class=" tm-new-badge" type="button" onclick="location.href='{{route('Admin.convertpdf')}}'" name="" value="Download PDF">
             <input style="margin-left  : 20%;margin-top:25px" class=" tm-new-badge" type="button" onclick="location.href='#'" name="" value="Download Exel">
 
             <div class="row tm-row">
                 <div id="chart_div" style="width:900px; height:450px"></div>
             </div> 
+            <div>
+                <table border="1">
+                    <th>      
+                           <b> Status</b>
+                    </th>
+                    <th>  <b>numbers Of users</b></th>
+                    <tr>
+                        <td>Admin</td>
+                        <td>{{$values->adcount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Account Controll Manager</td>
+                        <td>{{$values->account}}</td>
+                    </tr>
+                    <tr>
+                        <td>Content Controll Manager</td>
+                        <td>{{$values->cccount}}</td>
+                    </tr>
+                    <tr>
+                        <td>General Users</td>
+                        <td>{{$values->gucount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Blocked Users</td>
+                        <td>{{$values->bloccount}}</td>
+                    </tr>
+                </table>
+            </div>
         </main>
     </div>
     
