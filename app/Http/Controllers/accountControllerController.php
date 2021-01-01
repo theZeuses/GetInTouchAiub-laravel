@@ -30,7 +30,6 @@ class accountControllerController extends Controller
             $file = $req->file('profilepicture');
             $location = time().$file->getClientOriginalName();
             //echo $location;
-
             if($file->move('assets/accountController/profilepicture', $location)){
                
                 $profile = AccountControlManager::where('acid',session('username'))->first();
@@ -66,6 +65,21 @@ class accountControllerController extends Controller
             }
         }
     }
+    public function deactivateprofile(){
+        $profile = AccountControlManager::where('acid',session('username'))->first();
+        return view('accountController.deactivateProfile',['profile'=>$profile]);
+    }
+    public function deactivateprofilesave(){
+        $profile = AccountControlManager::where('acid',session('username'))->first();
+        
+        $profile->accountstatus    = "Deactivated";
+        if($profile->save()){
+            return redirect('/logout');
+        }else{
+            echo "not saved";
+        }
+    }
+
     //admiin
     public function acadminlist(){
         $adminlist = Admin::all();
@@ -76,6 +90,8 @@ class accountControllerController extends Controller
 	        $adminlist = Admin::where('name','like','%'.$req->key.'%')->get();			
 			return json_encode($adminlist);
     }
+
+
     //content controller
     public function accclist(){
         $cclist = ContentControlManager::all();
@@ -86,6 +102,8 @@ class accountControllerController extends Controller
             $cclist = ContentControlManager::where('name','like','%'.$req->key.'%')->get();          
             return json_encode($cclist);
     }
+
+
     //general user
     public function acgulist(){
         $gulist = GeneralUser::all();
