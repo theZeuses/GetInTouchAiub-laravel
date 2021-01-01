@@ -284,4 +284,21 @@ class accountControllerController extends Controller
             }
         }
     }
+    public function temporarilyblockgu($id){
+        $gu = GeneralUser::find($id);
+        return view('accountController.temporarilyBlockGU', $gu);
+    }
+    public function temporarilyblockgusave($id){
+        $gu = GeneralUser::find($id);
+        $gu->accountstatus = "Temporarily Blocked";
+        if($gu->save())
+        {
+            $user = User::where('userid',$gu->guid)->first();
+            $user->accountstatus = "Temporarily Blocked";
+            if($user->save()) 
+            {            
+                return redirect()->route("accountController.gulist");
+            }
+        }
+    }
 }

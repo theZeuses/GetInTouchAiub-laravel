@@ -56,5 +56,8 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/acbannedgu/{id}',[accountControllerController::class,'bannedgu'])->name('accountController.bannedgu');
         Route::post('/acbannedgu/{id}',[accountControllerController::class,'bannedgusave'])->name('accountController.bannedgusave');
 
+        Route::get('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgu'])->name('accountController.temporarilyblockgu');
+        Route::post('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgusave'])->name('accountController.temporarilyblockgusave');
+
     });
 });
