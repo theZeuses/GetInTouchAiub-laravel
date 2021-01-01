@@ -2,54 +2,55 @@
 <html>
 <head>
 	<title>Delete Content Control Manager</title>
-	<link rel="stylesheet" href="/assets/accountControlManager/css/acStyle.css">
-	<script type="text/javascript" src="/assets/accountControlManager/js/jquery-3.5.1.js"></script>
+	<link rel="stylesheet" href="/assets/accountController/css/acStyle.css">
 </head>
 <body>
-	<%- include('acNavBar') %>
+	@include('accountController.acNavBar')
 	<div id="workspace">
+		<h5>Delete Content Control Manager</h5>
+		<br/>
 		<form method="post">
 		<fieldset>
-			<legend>Delete Content Control Manager</legend>
 			<table>
 				<tr>
 					<td>CC Id :</td>
-					<td><%=value[0].ccid %></td>
+					<td>{{$ccid}}</td>
 				</tr>
 				<tr>
 					<td>Name :</td>
-					<td><%=value[0].name %></td>
+					<td>{{$name}}</td>
 				</tr>
 				<tr>
 					<td>Email :</td>
-					<td><%=value[0].email %></td>
+					<td>{{$email}}</td>
 				</tr>
 				<tr>
 					<td>Gender :</td>
-					<td><%=value[0].gender %></td>
+					<td>{{$gender}}</td>
 				</tr>
 				<tr>
 					<td>Date Of Birth :</td>
-					<td><%=value[0].dob %></td>
+					<td>{{$dob}}</td>
 				</tr>
 				<tr>
 					<td>Address :</td>
-					<td><%=value[0].address %></td>
+					<td>{{$address}}</td>
 				</tr>
 				<tr>
-					<td>accountstatus :</td>
-					<td><%=value[0].accountstatus %></td>
+					<td>Account Status :</td>
+					<td>{{$accountstatus}}</td>
 				</tr>
 			</table>
 			<div>
 				<h3>Are you sure?</h3>
-				<a href="/acCCController/CClist">
+				<input type="hidden" name="ccid" value="{{$ccid}}">
+				<input type="hidden" name="_token" value="{{csrf_token()}}">
+				<input type="submit" name="submit" value="Confirm">
+				<a href="{{route('accountController.cclist')}}">
 					<button type="button">
 						Back
 					</button>
 				</a>
-				<input type="hidden" name="ccid" value="<%=value[0].ccid %>">
-				<input type="submit" name="submit" value="Confirm">
 			</div>
 		</fieldset>
 	</form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Content COntrol Manager List</title>
+	<title>Content Control Manager List</title>
 	<link rel="stylesheet" href="/assets/accountController/css/acStyle.css">
 	<script type="text/javascript" src="/assets/accountController/js/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="/assets/accountController/js/searchCC.js"></script>
@@ -35,7 +35,7 @@
 				<td>{{$cclist[$i]['accountstatus']}}</td>
 				<td>
 					<a href="{{route('accountController.editcc', $cclist[$i]['id'])}}">Edit</a> | 
-					<a href="">Delete</a>
+					<a href="{{route('accountController.deletecc', $cclist[$i]['id'])}}">Delete</a>
 				</td>
 			</tr>
 			@endfor
