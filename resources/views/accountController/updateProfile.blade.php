@@ -46,13 +46,17 @@
 							</button>
 						</a>
 						<input type="hidden" name="acid" value="{{$profile['acid']}}">
+						<input type="hidden" name="_token" value="{{csrf_token()}}">
 					</td>
 				</tr>
 			</table>
 		</fieldset>
 	</form>
-	</div>
 	<div id="result">
+		@foreach($errors->all() as $err)
+			{{$err}} <br>
+		@endforeach
+	</div>
 	</div>
 </body>
 </html>
