@@ -40,6 +40,8 @@ Route::group(['middleware' => ['sess']], function () {
         //content controller
         Route::get('/accclist',[accountControllerController::class,'accclist'])->name('accountController.cclist');
         Route::get('/acsearchcc',[accountControllerController::class,'acsearchcc'])->name('accountController.acsearchcc');
+        Route::get('/accreatecc',[accountControllerController::class,'createcc'])->name('accountController.createcc');
+        Route::post('/accreatecc',[accountControllerController::class,'createccsave'])->name('accountController.createccsave');
         
         //general user
         Route::get('/acgulist',[accountControllerController::class,'acgulist'])->name('accountController.gulist');

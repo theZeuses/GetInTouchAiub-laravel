@@ -9,6 +9,7 @@ use App\Models\ContentControlManager;
 use App\Models\GeneralUser;
 
 use App\Http\Requests\updateProfileRequest;
+use App\Http\Requests\createCCRequest;
 
 class accountControllerController extends Controller
 {
@@ -34,10 +35,10 @@ class accountControllerController extends Controller
                
                 $profile = AccountControlManager::where('acid',session('username'))->first();
 
-                $profile->name          = $req->name;
-                $profile->email          = $req->email;
-                $profile->dob              = $req->dob;
-                $profile->address              = $req->address;
+                $profile->name              = $req->name;
+                $profile->email             = $req->email;
+                $profile->dob               = $req->dob;
+                $profile->address           = $req->address;
                 $profile->profilepicture    = '/assets/accountController/profilepicture/'.$location;
 
                 if($profile->save()){
@@ -101,6 +102,56 @@ class accountControllerController extends Controller
    
             $cclist = ContentControlManager::where('name','like','%'.$req->key.'%')->get();          
             return json_encode($cclist);
+    }
+    public function createcc(){
+        return view('accountController.createCC');
+    }
+    public function createccsave(createCCRequest $req){
+        if($req->hasFile('profilepicture')){
+            $file = $req->file('profilepicture');
+            $location = time().$file->getClientOriginalName();
+            //echo $location;
+            if($file->move('assets/accountController/profilepicture/cc', $location)){
+               
+                $cc = new ContentControlManager();
+
+                $cc->ccid              = $req->ccid;
+                $cc->name              = $req->name;
+                $cc->email             = $req->email;
+                $cc->gender            = $req->gender;
+                $cc->dob               = $req->dob;
+                $cc->address           = $req->address;
+                $cc->profilepicture    = '/assets/accountController/profilepicture/cc/'.$location;
+                $cc->accountstatus    = 'Active';
+
+                if($cc->save()){
+                    return redirect()->route('accountController.cclist');
+                }else{
+                    echo "cc not saved";
+                }
+            }else{
+                echo "error";
+            }
+        }
+        else{
+             
+            $cc = new ContentControlManager();
+
+            $cc->ccid              = $req->ccid;
+            $cc->name              = $req->name;
+            $cc->email             = $req->email;
+            $cc->gender            = $req->gender;
+            $cc->dob               = $req->dob;
+            $cc->address           = $req->address;
+            $cc->profilepicture    = '';
+            $cc->accountstatus    = 'Active';
+
+            if($cc->save()){
+                return redirect()->route('accountController.cclist');
+            }else{
+                echo "cc not saved";
+            }
+        }
     }
 
 
