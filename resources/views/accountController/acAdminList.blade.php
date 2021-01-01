@@ -29,7 +29,7 @@
 				<td>{{$adminlist[$i]['gender']}}</td>
 				<td>{{$adminlist[$i]['dob']}}</td>
 				<td>{{$adminlist[$i]['address']}}</td>
-				<td>{{$adminlist[$i]['profilepicture']}}</td>
+				<td><img width="50" height="45" src="{{$adminlist[$i]['profilepicture']}}"></td>
 			</tr>
 			@endfor
 		</table>

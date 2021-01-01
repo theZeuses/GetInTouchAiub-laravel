@@ -32,7 +32,7 @@
 				<td>{{$gulist[$i]['gender']}}</td>
 				<td>{{$gulist[$i]['dob']}}</td>
 				<td>{{$gulist[$i]['address']}}</td>
-				<td>{{$gulist[$i]['profilepicture']}}</td>
+				<td><img width="50" height="45" src="{{$gulist[$i]['profilepicture']}}"></td>
 				<td>{{$gulist[$i]['userstatus']}}</td>
 				<td>{{$gulist[$i]['accountstatus']}}</td>
 				<td>
