@@ -31,7 +31,7 @@
 				<td>{{$cclist[$i]['gender']}}</td>
 				<td>{{$cclist[$i]['dob']}}</td>
 				<td>{{$cclist[$i]['address']}}</td>
-				<td>{{$cclist[$i]['profilepicture']}}</td>
+				<td><img width="50" src="{{$cclist[$i]['profilepicture']}}"></td>
 				<td>{{$cclist[$i]['accountstatus']}}</td>
 				<td>
 					<a href="">Edit</a> | 
@@ -47,7 +47,6 @@
 			<input type="text" id="searchkey" name="searchkey">
 			<input type="button" name="search" value="Search">
 		</form>
-
 		<div id="searchresult">
 		</div>
 	</div>

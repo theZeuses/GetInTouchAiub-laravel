@@ -44,7 +44,7 @@
 				</table>
 				<div>
 					<h3>Are you sure?</h3>
-					<input type="hidden" name="acid" value="<%=user[0].acid %>">
+					<input type="hidden" name="acid" value="{{$profile['acid']}}">
 					<input type="hidden" name="_token" value="{{csrf_token()}}">
 					<input type="submit" name="submit" value="Confirm">
 					<a href="{{route('accountController.getmyinfo')}}">
