@@ -53,7 +53,7 @@
 						Update Profile
 					</button>
 				</a>
-				<a href="">
+				<a href="{{route('accountController.deactivateprofile')}}">
 					<button type="button">
 						Deactivate Profile
 					</button>
