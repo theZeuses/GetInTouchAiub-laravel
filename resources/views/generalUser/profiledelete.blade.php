@@ -14,49 +14,47 @@
 			<table>
 				<tr>
 					<td>GU Id :</td>
-					<td>{{$guid}}</td>
+					<td>{{$profile['guid']}}</td>
 				</tr>
 				<tr>
 					<td>Name :</td>
-					<td>{{$name}}</td>
+					<td>{{$profile['name']}}</td>
 				</tr>
 				<tr>
 					<td>Email :</td>
-					<td>{{$email}}</td>
+					<td>{{$profile['acid']}}email</td>
 				</tr>
 				<tr>
 					<td>Gender :</td>
-					<td>{{$gender}}</td>
+					<td>{{$profile['gender']}}</td>
 				</tr>
 				<tr>
 					<td>Date Of Birth :</td>
-					<td>{{$dob}}</td>
+					<td>{{$profile['dob']}}</td>
 				</tr>
 				<tr>
 					<td>Address :</td>
-					<td>{{$address}}</td>
+					<td>{{$profile['address']}}</td>
 				</tr>
 				<tr>
 					<td>User Status :</td>
-					<td>{{$userstatus}}</td>
+					<td>{{$profile['userstatus']}}</td>
 				</tr>
 				<tr>
 					<td>Account Status :</td>
-					<td>{{$accountstatus}}</td>
+					<td>{{$profile['accountstatus']}}</td>
 				</tr>
 			</table>
 			<div>
-				<tr>
-				<td colspan="2">
-					<h5>Are you sure to delete This Account?</h5><br>
-					<input type="submit" name="submit" value="Yes">
-					<button>
-						<a href="{{route('generalUser.profile')}}">No</a>
-					</button>
+					<h3>Are you sure to delete this Account?</h3>
 					<input type="hidden" name="_token" value="{{csrf_token()}}">
-				</td>
-			</tr>
-			</div>
+					<input type="submit" name="submit" value="Confirm">
+					<a href="{{route('generalUser.profile')}}">
+						<button type="button">
+							Back
+						</button>
+					</a>
+				</div>
 		</fieldset>
 	</form>
 	</div>

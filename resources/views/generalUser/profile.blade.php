@@ -10,43 +10,49 @@
 	<div id="workspace">
 		<form method="post">
 		<fieldset>
+			<h2>{{$profile['name']}}</h2>
 			<br/>
 			<table>
 				<tr>
 					<td>GU Id :</td>
-					<td>{{$guid}}</td>
+					<td>{{$profile['guid']}}</td>
 				</tr>
 				<tr>
 					<td>Name :</td>
-					<td>{{$name}}</td>
+					<td>{{$profile['name']}}</td>
 				</tr>
 				<tr>
 					<td>Email :</td>
-					<td>{{$email}}</td>
+					<td>{{$profile['email']}}</td>
 				</tr>
 				<tr>
 					<td>Gender :</td>
-					<td>{{$gender}}</td>
+					<td>{{$profile['gender']}}</td>
 				</tr>
 				<tr>
 					<td>Date Of Birth :</td>
-					<td>{{$dob}}</td>
+					<td>{{$profile['dob']}}</td>
 				</tr>
 				<tr>
 					<td>Address :</td>
-					<td>{{$address}}</td>
+					<td>{{$profile['address']}}</td>
 				</tr>
 				<tr>
 					<td>User Status :</td>
-					<td>{{$userstatus}}</td>
+					<td>{{$profile['userstatus']}}</td>
 				</tr>
 				<tr>
 					<td>Account Status :</td>
-					<td>{{$accountstatus}}</td>
+					<td>{{$profile['accountstatus']}}</td>
 				</tr>
 			</table>
 			<div>
-				<a href="/profiledelete/{{$guid}}">
+				<a href="{{route('generalUser.profileedit')}}">
+					<button type="button">
+						Update Profile
+					</button>
+				</a>
+				<a href="{{route('generalUser.profiledelete')}}">
 					<button type="button">
 						Delete Profile
 					</button>
@@ -57,7 +63,7 @@
 					</button>
 				</a>
 			</div>
-			
+			<input type="hidden" name="guid" value="{{$profile['guid']}}">
 		</fieldset>
 	</form>
 	</div>
