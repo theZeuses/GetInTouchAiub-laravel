@@ -9,10 +9,12 @@ use App\Models\ContentControlManager;
 use App\Models\GeneralUser;
 use App\Models\User;
 use App\Models\RegistrationRequest;
+use App\Models\AccountControllerText;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
 use App\Http\Requests\editCCRequest;
+use App\Http\Requests\createTextRequest;
 
 class accountControllerController extends Controller
 {
@@ -87,6 +89,19 @@ class accountControllerController extends Controller
             }
         }else{
             echo "not saved";
+        }
+    }
+    public function createtext(){
+        return view('accountController.createText');
+    }
+    public function createtextsave(createTextRequest $req){
+        $text = new AccountControllerText();
+        $text->acid         =   session('username'); 
+        $text->text         =   $req->text;
+        $text->receiverid   =   $req->receiverid;
+        if($text->save()){
+            $req->session()->flash('msg', 'Message send!');
+            return redirect()->route('accountController.createtext');
         }
     }
 

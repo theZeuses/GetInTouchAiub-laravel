@@ -33,6 +33,9 @@ Route::group(['middleware' => ['sess']], function () {
         Route::post('/acupdateprofile', [accountControllerController::class,'updateprofilesave'])->name('accountController.updateprofilesave');
         Route::get('/acdeactivateprofile', [accountControllerController::class,'deactivateprofile'])->name('accountController.deactivateprofile');
         Route::post('/acdeactivateprofile', [accountControllerController::class,'deactivateprofilesave'])->name('accountController.deactivateprofilesave');
+        Route::get('/accreatetext', [accountControllerController::class,'createtext'])->name('accountController.createtext');
+        Route::post('/accreatetext', [accountControllerController::class,'createtextsave'])->name('accountController.createtextsave');
+
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
         Route::get('/acsearchadmin',[accountControllerController::class,'acsearchadmin'])->name('accountController.acsearchadmin');
@@ -56,7 +59,6 @@ Route::group(['middleware' => ['sess']], function () {
         Route::post('/acbannedgu/{id}',[accountControllerController::class,'bannedgusave'])->name('accountController.bannedgusave');
         Route::get('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgu'])->name('accountController.temporarilyblockgu');
         Route::post('/actemporarilyblockgu/{id}',[accountControllerController::class,'temporarilyblockgusave'])->name('accountController.temporarilyblockgusave');
-
         Route::get('/acverifygeneraluser',[accountControllerController::class,'verifygeneraluser'])->name('accountController.verifygeneraluser');
         Route::get('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequest'])->name('accountController.declineregrequest');
         Route::post('/acdeclineregrequest/{id}',[accountControllerController::class,'declineregrequestsave'])->name('accountController.declineregrequestsave');
