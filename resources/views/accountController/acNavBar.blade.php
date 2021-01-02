@@ -19,7 +19,7 @@
 			<li><a href="{{route('accountController.createcc')}}"><i class="fas fa-plus"></i>Add New Content Controller</a></li>
 			<li><a href="{{route('accountController.verifygeneraluser')}}"><i class="fas fa-user-check"></i>Verify General User</a></li>
 			<li><a href="{{route('accountController.viewtext')}}"><i class="fas fa-inbox"></i>Inbox</a></li>
-			<li><a href="/acNotice/Notices"><i class="fas fa-bell"></i>Notification</a></li>
+			<li><a href="{{route('accountController.viewnotice')}}"><i class="fas fa-bell"></i>Notification</a></li>
 			<li><a href="{{route('accountController.createtext')}}"><i class="fas fa-mail-bulk"></i>Send Message</a></li>
 			<li><a href="/acNotice/CreateNotice"><i class="fas fa-paper-plane"></i>Send Notification</a></li>
 			<li><a href="{{route('accountController.acadminlist')}}"><i class="fas fa-list-ol"></i>Admin List</a></li>
