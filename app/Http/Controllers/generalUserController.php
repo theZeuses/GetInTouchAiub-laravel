@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GeneralUser;
 use App\Models\User;
+use App\Models\GuPost;
 use App\Http\Requests\updateProfileRequest;
 
 class generalUserController extends Controller
@@ -55,9 +56,20 @@ class generalUserController extends Controller
         $profile->save();
         
         return redirect()->route('generalUser.profile');
-                
-           
-        
+                      
+    }
+
+    //All Post
+    public function allpost(){
+        $allpost = GuPost::all();
+        return view('generalUser.allpost',['allpost'=>$allpost]);
+    }
+
+    //search any post
+     public function searchanypost(Request $req){
+   
+            $allpost = GuPost::where('text','like','%'.$req->key.'%')->get();          
+            return json_encode($allpost);
     }
 }
 
