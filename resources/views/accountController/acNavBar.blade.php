@@ -21,7 +21,7 @@
 			<li><a href="{{route('accountController.viewtext')}}"><i class="fas fa-inbox"></i>Inbox</a></li>
 			<li><a href="{{route('accountController.viewnotice')}}"><i class="fas fa-bell"></i>Notification</a></li>
 			<li><a href="{{route('accountController.createtext')}}"><i class="fas fa-mail-bulk"></i>Send Message</a></li>
-			<li><a href="/acNotice/CreateNotice"><i class="fas fa-paper-plane"></i>Send Notification</a></li>
+			<li><a href="{{route('accountController.createnotice')}}"><i class="fas fa-paper-plane"></i>Send Notification</a></li>
 			<li><a href="{{route('accountController.acadminlist')}}"><i class="fas fa-list-ol"></i>Admin List</a></li>
 			<li><a href="{{route('accountController.cclist')}}"><i class="fas fa-list-ol"></i>Content Controller List</a></li>
 			<li><a href="{{route('accountController.gulist')}}"><i class="fas fa-list-ol"></i>General User List</a></li>
