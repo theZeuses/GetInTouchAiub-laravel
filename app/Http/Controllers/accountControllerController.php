@@ -10,6 +10,8 @@ use App\Models\GeneralUser;
 use App\Models\User;
 use App\Models\RegistrationRequest;
 use App\Models\AccountControllerText;
+use App\Models\GeneralUserText;
+use App\Models\ContentControllerRequestForAction;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
@@ -103,6 +105,17 @@ class accountControllerController extends Controller
             $req->session()->flash('msg', 'Message send!');
             return redirect()->route('accountController.createtext');
         }
+    }
+    public function viewtext(){
+        return view('accountController.text');
+    }
+    public function viewtextcc(){
+        $cctext = ContentControllerRequestForAction::all();
+        return view('accountController.textCC',['cctext'=>$cctext]);
+    }
+    public function viewtextgu(){
+        $gutext = GeneralUserText::where('receiverid',session('username'))->get();
+        return view('accountController.textGU',['gutext'=>$gutext]);
     }
 
     //admiin
