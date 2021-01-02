@@ -5,6 +5,7 @@ use App\Http\Controllers\logoutController;
 use App\Http\Controllers\accountControllerController;
 use App\Http\Controllers\generalUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\registrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::get('/', function(){
 Route::get('/login', [loginController::class,'index']);
 Route::post('/login', [loginController::class,'verify']);
 Route::get('/logout', [logoutController::class,'index']);
+Route::get('/guregistrationform', [registrationController::class,'registrationform'])->name('generalUser.registrationform');
+Route::post('/guregistrationform', [registrationController::class,'signup'])->name('generalUser.signup');
 
 Route::group(['middleware' => ['sess']], function () {
      Route::group(['middleware' => ['GeneralUser']], function () {
