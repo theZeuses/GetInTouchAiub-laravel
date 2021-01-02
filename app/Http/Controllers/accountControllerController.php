@@ -19,6 +19,7 @@ use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
 use App\Http\Requests\editCCRequest;
 use App\Http\Requests\createTextRequest;
+use App\Http\Requests\createNoticeRequest;
 
 class accountControllerController extends Controller
 {
@@ -120,14 +121,35 @@ class accountControllerController extends Controller
         $gutext = GeneralUserText::where('receiverid',session('username'))->get();
         return view('accountController.textGU',['gutext'=>$gutext]);
     }
-    //notice api
+    //notice
+    public function createnotice(){
+        return view('accountController.createNotice');
+    }
+    //api
+    public function createnoticesave(createNoticeRequest $req){
+        $client  = new Client();
+        $res     = $client->request('POST', 'http://127.0.0.1:3000/acnotice/createnoticeAPI', [
+            'form_params'   => [
+                'acid'      =>  session('username'),   
+                'subject'   =>  $req->noticesubject,
+                'body'      =>  $req->noticebody,
+                'towhom'    =>  $req->towhom
+            ]
+        ]);
+        $response    = json_decode($res->getBody());
+        if($response->status=="Notice Uploaded!!")
+        {
+            $req->session()->flash('msg', 'Notice Uploaded!!');
+            return redirect()->route('accountController.createnotice');
+        }
+    }
     public function viewnotice(){
         //laravel HTTP client
         //$response = Http::get('http://127.0.0.1:3000/acnotice/noticesAPI');
         //Guzzle HTTP Client
-        $client = new Client();
-        $res    = $client->request('GET', 'http://127.0.0.1:3000/acnotice/noticesAPI');
-        $notices   =json_decode($res->getBody());
+        $client     = new Client();
+        $res        = $client->request('GET', 'http://127.0.0.1:3000/acnotice/noticesAPI');
+        $notices    = json_decode($res->getBody());
         //print_r($notices);
         return view('accountController.notice',['notices'=>$notices]);
     }

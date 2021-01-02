@@ -39,8 +39,10 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/acviewtext', [accountControllerController::class,'viewtext'])->name('accountController.viewtext');
         Route::get('/acviewtextcc', [accountControllerController::class,'viewtextcc'])->name('accountController.viewtextcc');
         Route::get('/acviewtextgu', [accountControllerController::class,'viewtextgu'])->name('accountController.viewtextgu');
-        //notice api
+        //notice
         Route::get('/acviewnotice', [accountControllerController::class,'viewnotice'])->name('accountController.viewnotice');
+        Route::get('/accreatenotice', [accountControllerController::class,'createnotice'])->name('accountController.createnotice');
+        Route::post('/accreatenotice', [accountControllerController::class,'createnoticesave'])->name('accountController.createnoticesave');
 
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
