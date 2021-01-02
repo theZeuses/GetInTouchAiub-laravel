@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GeneralUser;
 use App\Models\User;
+use App\Http\Requests\updateProfileRequest;
 
 class generalUserController extends Controller
 {
@@ -12,30 +13,52 @@ class generalUserController extends Controller
         $profile = GeneralUser::where('guid',session('username'))->first();
         return view('generalUser.guHome',['profile'=>$profile]);
     }
-     //profile
+
+    //profile
     public function profile(){
-       $generaluser = GeneralUser::where('guid',session('username'))->first();
-           return view('generalUser.profile', $generaluser);
-    }
-    
-    //profileDelete 
-     public function profiledelete($guid){
-           //echo $guid;
-           $generaluser = GeneralUser::where('guid',$guid)->first();
-           return view('generalUser.profiledelete', $generaluser);
+       $profile = GeneralUser::where('guid',session('username'))->first();
+           return view('generalUser.profile', ['profile'=>$profile]);
     }
 
-    //profileDestroy 
-    public function profiledestroy($guid){
-         $generaluser = GeneralUser::where('guid',$guid)->first();
-            if($generaluser->delete())
+    //profileDelete 
+     public function profiledelete(){
+           $profile = GeneralUser::where('guid',session('username'))->first();
+        return view('generalUser.profiledelete',['profile'=>$profile]);
+    }
+
+    public function profiledestroy(){
+        $generaluser = GeneralUser::where('guid',session('username'))->first();
+        if($generaluser->delete())
+        {
+            $user = User::where('userid',session('username'))->first();
+            if($user->delete())
             {
-                $user = User::where('userid',$guid)->first();
-                if($user->delete())
-                {
-                    return redirect('/logout');
-                }
+                return redirect('/logout');
             }
+        }
+    }
+
+    //ProfileUpdate
+    public function profileedit(){
+        $profile = GeneralUser::where('guid',session('username'))->first();
+        return view('generalUser.profileedit',['profile'=>$profile]);
+    }
+    public function profileupdate(updateProfileRequest $req){
+           
+               
+        $profile = GeneralUser::where('guid',session('username'))->first();
+
+        $profile->name              = $req->name;
+        $profile->email             = $req->email;
+        $profile->dob               = $req->dob;
+        $profile->address           = $req->address;
+        $profile->save();
+        
+        return redirect()->route('generalUser.profile');
+                
+           
         
     }
 }
+
+ 
