@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 use App\Models\AccountControlManager;
 use App\Models\Admin;
@@ -93,6 +95,7 @@ class accountControllerController extends Controller
             echo "not saved";
         }
     }
+    //text
     public function createtext(){
         return view('accountController.createText');
     }
@@ -116,6 +119,17 @@ class accountControllerController extends Controller
     public function viewtextgu(){
         $gutext = GeneralUserText::where('receiverid',session('username'))->get();
         return view('accountController.textGU',['gutext'=>$gutext]);
+    }
+    //notice api
+    public function viewnotice(){
+        //laravel HTTP client
+        //$response = Http::get('http://127.0.0.1:3000/acnotice/noticesAPI');
+        //Guzzle HTTP Client
+        $client = new Client();
+        $res    = $client->request('GET', 'http://127.0.0.1:3000/acnotice/noticesAPI');
+        $notices   =json_decode($res->getBody());
+        //print_r($notices);
+        return view('accountController.notice',['notices'=>$notices]);
     }
 
     //admiin

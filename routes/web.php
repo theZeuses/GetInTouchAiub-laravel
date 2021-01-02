@@ -33,11 +33,14 @@ Route::group(['middleware' => ['sess']], function () {
         Route::post('/acupdateprofile', [accountControllerController::class,'updateprofilesave'])->name('accountController.updateprofilesave');
         Route::get('/acdeactivateprofile', [accountControllerController::class,'deactivateprofile'])->name('accountController.deactivateprofile');
         Route::post('/acdeactivateprofile', [accountControllerController::class,'deactivateprofilesave'])->name('accountController.deactivateprofilesave');
+        //text
         Route::get('/accreatetext', [accountControllerController::class,'createtext'])->name('accountController.createtext');
         Route::post('/accreatetext', [accountControllerController::class,'createtextsave'])->name('accountController.createtextsave');
         Route::get('/acviewtext', [accountControllerController::class,'viewtext'])->name('accountController.viewtext');
         Route::get('/acviewtextcc', [accountControllerController::class,'viewtextcc'])->name('accountController.viewtextcc');
         Route::get('/acviewtextgu', [accountControllerController::class,'viewtextgu'])->name('accountController.viewtextgu');
+        //notice api
+        Route::get('/acviewnotice', [accountControllerController::class,'viewnotice'])->name('accountController.viewnotice');
 
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
