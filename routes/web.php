@@ -32,10 +32,17 @@ Route::group(['middleware' => ['sess']], function () {
      Route::group(['middleware' => ['GeneralUser']], function () {
         //guhome
         Route::get('/guhome', [generalUserController::class,'guhome'])->name('generalUser.home');
+
         Route::get('/profile', [generalUserController::class,'profile'])->name('generalUser.profile');
+
         Route::get('/profiledelete', [generalUserController::class,'profiledelete'])->name('generalUser.profiledelete');
         Route::post('/profiledelete', [generalUserController::class,'profiledestroy']);
+
         Route::get('/profileedit', [generalUserController::class,'profileedit'])->name('generalUser.profileedit');
         Route::post('/profileedit', [generalUserController::class,'profileupdate']);
+        
+        Route::get('/allpost', [generalUserController::class,'allpost'])->name('generalUser.allpost');
+        Route::get('/searchanypost', [generalUserController::class,'searchanypost'])->name('generalUser.searchanypost');
+
     });
 });
