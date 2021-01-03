@@ -6,6 +6,7 @@ use App\Models\GeneralUser;
 use App\Models\User;
 use App\Models\GuPost;
 use App\Models\GuText;
+use App\Models\AdminNotice;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\sendtextRequest;
 
@@ -94,6 +95,17 @@ class generalUserController extends Controller
      public function receivetext(){
         $receivetext = GuText::all();
         return view('generalUser.receivetext',['receivetext'=>$receivetext]);
+    }
+
+    //view notice
+     public function viewnotice(){
+        // $client     = new Client();
+        // $res        = $client->request('GET', 'http://127.0.0.1:3000/acnotice/noticesAPI');
+        // $viewnotice    = json_decode($res->getBody());
+        // //print_r($notices);
+        // return view('accountController.viewnotice',['viewnotice'=>$viewnotice]);
+        $viewnotice = AdminNotice::all();
+        return view('generalUser.viewnotice',['viewnotice'=>$viewnotice]);
     }
 }
 
