@@ -46,6 +46,7 @@ Route::group(['middleware' => ['sess']], function () {
         //report
         Route::get('/acreportgenerate', [accountControllerController::class,'reportgenerate'])->name('accountController.reportgenerate');
         Route::get('/acuserreportgenerate', [accountControllerController::class,'userreportgenerate'])->name('accountController.userreportgenerate');
+        Route::get('/acnoticereportgenerate', [accountControllerController::class,'noticereportgenerate'])->name('accountController.noticereportgenerate');
 
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');

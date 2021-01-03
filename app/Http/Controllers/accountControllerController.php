@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use PDF;
 
 use App\Models\AccountControlManager;
 use App\Models\Admin;
@@ -14,6 +15,7 @@ use App\Models\RegistrationRequest;
 use App\Models\AccountControllerText;
 use App\Models\GeneralUserText;
 use App\Models\ContentControllerRequestForAction;
+use App\Models\AccountControllerNotice;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\createCCRequest;
@@ -156,6 +158,25 @@ class accountControllerController extends Controller
     //report
     public function reportgenerate(){
         return view('accountController.reportGenerate');
+    }
+    public function noticereportgenerate(){
+        $notices = AccountControllerNotice::all();
+        $gu=0;
+        $cc=0;
+        for($i=0; $i < count($notices); $i++)
+        {   
+            if($notices[$i]->towhom == "General User")
+            {
+                $gu=$gu+1;
+            }   
+            else
+            {
+                $cc=$cc+1;
+            }    
+            
+        }
+        $pdf = PDF::loadView('accountController.pdf', ['notices'=>$notices ,'cc'=>$cc , 'gu'=>$gu]);
+        return $pdf->download('noticereport.pdf');
     }
     //api
     public function userreportgenerate(){
