@@ -16,6 +16,15 @@
 		</a>
 		<br/>
 		<br/>
+		<h2 align='center'>Generate Notice Info</h2>
+		<br/>
+		<a href="{{route('accountController.noticereportgenerate')}}">
+			<button type="button">
+				Click Here
+			</button>
+		</a>
+		<br/>
+		<br/>
 		<div style="color: red">{{session('msg')}} </div>
 	</div>
 </body>
