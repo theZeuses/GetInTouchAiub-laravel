@@ -5,7 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\GeneralUser;
 use App\Models\User;
 use App\Models\GuPost;
+use App\Models\GuText;
 use App\Http\Requests\updateProfileRequest;
+use App\Http\Requests\sendtextRequest;
 
 class generalUserController extends Controller
 {
@@ -70,6 +72,28 @@ class generalUserController extends Controller
    
             $allpost = GuPost::where('text','like','%'.$req->key.'%')->get();          
             return json_encode($allpost);
+    }
+
+    //send text
+    public function sendtext(){
+        return view('generalUser.sendtext');
+    }
+    public function sendtextsave(sendtextRequest $req){
+        
+        $text = new GuText();
+        $text->guid         =   session('username'); 
+        $text->text         =   $req->text;
+        $text->receiverid   =   $req->receiverid;
+        if($text->save()){
+            $req->session()->flash('msg', 'Send Message...');
+            return redirect()->route('generalUser.sendtext');
+        }
+    }
+
+    //received text
+     public function receivetext(){
+        $receivetext = GuText::all();
+        return view('generalUser.receivetext',['receivetext'=>$receivetext]);
     }
 }
 
