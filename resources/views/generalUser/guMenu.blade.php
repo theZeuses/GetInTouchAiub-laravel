@@ -23,7 +23,7 @@
 			<li><a href="/userController/SearchGU"><i class="fas fa-search"></i>Search Other Account</a></li>
 			<li><a href="{{route('generalUser.sendtext')}}"><i class="fas fa-envelope"></i>Send Message</a></li>
 			<li><a href="{{route('generalUser.receivetext')}}"><i class="fas fa-envelope-open"></i>Receive Message</a></li>
-			<li><a href="/userController/Notifications"><i class="fas fa-bell"></i>Notifications</a></li>
+			<li><a href="{{route('generalUser.viewnotice')}}"><i class="fas fa-bell"></i>Notifications</a></li>
 			<li><a href="/userController/Report"><i class="fas fa-file-upload"></i>Report</a></li>
 			<li><a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 		</ul>
