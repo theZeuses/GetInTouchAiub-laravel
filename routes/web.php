@@ -49,5 +49,7 @@ Route::group(['middleware' => ['sess']], function () {
 
         Route::get('/receivetext', [generalUserController::class,'receivetext'])->name('generalUser.receivetext');
 
+        Route::get('/viewnotice', [generalUserController::class,'viewnotice'])->name('generalUser.viewnotice');
+
     });
 });
