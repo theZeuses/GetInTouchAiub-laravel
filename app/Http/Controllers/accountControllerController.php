@@ -153,6 +153,23 @@ class accountControllerController extends Controller
         //print_r($notices);
         return view('accountController.notice',['notices'=>$notices]);
     }
+    //report
+    public function reportgenerate(){
+        return view('accountController.reportGenerate');
+    }
+    //api
+    public function userreportgenerate(){
+        $client     = new Client();
+        $res        = $client->request('GET', 'http://127.0.0.1:3000/acreportgenerate/generateuserinfoAPI');
+        $pdf    = json_decode($res->getBody());
+        //print_r($pdf->status);
+        if($pdf->status == "Report generated!!")
+        {
+            $req = Request();
+            $req->session()->flash('msg', 'User Report generated!!');
+            return redirect()->route('accountController.reportgenerate');
+        }
+    }
 
     //admiin
     public function acadminlist(){

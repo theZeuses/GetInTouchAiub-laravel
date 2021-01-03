@@ -43,6 +43,9 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/acviewnotice', [accountControllerController::class,'viewnotice'])->name('accountController.viewnotice');
         Route::get('/accreatenotice', [accountControllerController::class,'createnotice'])->name('accountController.createnotice');
         Route::post('/accreatenotice', [accountControllerController::class,'createnoticesave'])->name('accountController.createnoticesave');
+        //report
+        Route::get('/acreportgenerate', [accountControllerController::class,'reportgenerate'])->name('accountController.reportgenerate');
+        Route::get('/acuserreportgenerate', [accountControllerController::class,'userreportgenerate'])->name('accountController.userreportgenerate');
 
         //admin
         Route::get('/acadminlist',[accountControllerController::class,'acadminlist'])->name('accountController.acadminlist');
