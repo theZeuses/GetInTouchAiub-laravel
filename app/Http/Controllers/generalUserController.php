@@ -76,17 +76,16 @@ class generalUserController extends Controller
     }
 
     //send text
-    public function sendtext(){
+     public function sendtext(){
         return view('generalUser.sendtext');
     }
     public function sendtextsave(sendtextRequest $req){
-        
-        $text = new GuText();
-        $text->guid         =   session('username'); 
-        $text->text         =   $req->text;
-        $text->receiverid   =   $req->receiverid;
-        if($text->save()){
-            $req->session()->flash('msg', 'Send Message...');
+        $sendtext = new GuText();
+        $sendtext->guid         =   session('username'); 
+        $sendtext->text         =   $req->text;
+        $sendtext->receiverid   =   $req->receiverid;
+        if($sendtext->save()){
+            $req->session()->flash('msg', 'Message Send Successfully!!!...');
             return redirect()->route('generalUser.sendtext');
         }
     }
