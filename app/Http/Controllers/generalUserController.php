@@ -11,7 +11,9 @@ use App\Models\GuPostRequest;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\sendtextRequest;
 use App\Http\Requests\postnewcontentRequest;
+use App\Http\Requests\requesttoapproveRequest;
 use PDF;
+use GuzzleHttp\Client;
 
 class generalUserController extends Controller
 {
@@ -197,6 +199,36 @@ class generalUserController extends Controller
             return redirect()->route('generalUser.mypostlist');
         }
     }
+    public function pendingpostlist(){
+        $pendingpostlist = GuPostRequest::where('guid',session('username'))->get();
+        return view('generalUser.pendingpostlist',['pendingpostlist'=>$pendingpostlist]);
+    }
+    public function requesttoapprove(){
+        return view('generalUser.requesttoapprove');
+    }
+    public function requesttoapprovesend(requesttoapproveRequest $req){
+        //guzzle http request
+        $client  = new Client();
+        $res     = $client->request('POST', 'http://127.0.0.1:3000/userController/requesttoapprove/API', [
+            'form_params'   => [
+                'guid'      =>  session('username'),   
+                'towhom'   =>  $req->towhom,
+                'actiontype'      =>  $req->actiontype,
+                'text'    =>  $req->text
+            ]
+        ]);
+        $response    = json_decode($res->getBody());
+        if($response->result == "Request Sent Successfully!")
+        {
+            $req->session()->flash('msg', "Request Sent Successfully!");
+            return redirect()->route('generalUser.requesttoapprove');
+        }
+        else
+        {
+            echo $response->result;
+        }
+    }
+
 
     //report
     public function report(){
