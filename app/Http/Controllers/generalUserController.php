@@ -7,8 +7,10 @@ use App\Models\User;
 use App\Models\GuPost;
 use App\Models\GuText;
 use App\Models\AdminNotice;
+use App\Models\GuPostRequest;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\sendtextRequest;
+use App\Http\Requests\postnewcontentRequest;
 
 class generalUserController extends Controller
 {
@@ -106,6 +108,35 @@ class generalUserController extends Controller
         $viewnotice = AdminNotice::all();
         return view('generalUser.viewnotice',['viewnotice'=>$viewnotice]);
     }
-}
 
+    //Post new content
+    public function postnewcontent(){
+        return view('generalUser.postnewcontent');
+    }
+    public function postnewcontentsave(postnewcontentRequest $req){
+        if($req->hasFile('file')){
+            $file = $req->file('file');
+            $name = time().$file->getClientOriginalName();
+            if($file->move('assets/generalUser/post', $name)){
+                $postnewcontent = new GuPostRequest();
+                $postnewcontent->guid         =   session('username'); 
+                $postnewcontent->text         =   $req->text;
+                $postnewcontent->file         =   "/assets/generalUser/post/".$name;
+                if($postnewcontent->save()){
+                    $req->session()->flash('msg', 'Post send!');
+                    return redirect()->route('generalUser.postnewcontent');
+                }
+            }
+        }
+        else{
+            $postnewcontent = new GuPostRequest();
+            $postnewcontent->guid         =   session('username'); 
+            $postnewcontent->text         =   $req->text;
+            if($postnewcontent->save()){
+                $req->session()->flash('msg', 'Post send!');
+                return redirect()->route('generalUser.postnewcontent');
+            }
+        }
+    }
+}
  
