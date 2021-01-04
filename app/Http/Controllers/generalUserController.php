@@ -11,6 +11,7 @@ use App\Models\GuPostRequest;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\sendtextRequest;
 use App\Http\Requests\postnewcontentRequest;
+use PDF;
 
 class generalUserController extends Controller
 {
@@ -197,5 +198,25 @@ class generalUserController extends Controller
         }
     }
 
+    //report
+    public function report(){
+        return view('generalUser.gureport');
+    }
+
+    public function postreport(){
+        $postlist = GuPost::where('guid',session('username'))->get();
+        $postcount=count($postlist);
+        $pendingpostlist = GuPostRequest::where('guid',session('username'))->get();
+        $pendingpostcount=count($pendingpostlist);
+        $pdf = PDF::loadView('generalUser.postreport', ['postlist'=>$postlist, 'pendingpostlist'=>$pendingpostlist ,'postcount'=>$postcount , 'pendingpostcount'=>$pendingpostcount]);
+        return $pdf->download('postreport.pdf');
+    }
+
+    public function noticereport(){
+        $notices = AdminNotice::all();
+        $noticecount=count($notices);
+        $pdf = PDF::loadView('generalUser.noticereport', ['notices'=>$notices, 'noticecount'=>$noticecount]);
+        return $pdf->download('noticereport.pdf');
+    }
 }
  
