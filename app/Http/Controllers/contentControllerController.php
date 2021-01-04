@@ -13,6 +13,7 @@ use App\Models\Contribution;
 use Illuminate\Http\Request;
 use App\Models\GeneralUserPost;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\WarningRequest;
 use App\Models\ContentControlManager;
 use Illuminate\Support\Facades\Session;
@@ -24,6 +25,22 @@ use App\Http\Requests\ContentControllerCredentialsRequest;
 
 class contentControllerController extends Controller
 {
+
+    private function init(){
+        $func = 'function function1($id, $gid, $ccid, $actiontype, $text){
+            $tdate = date("Y-m-d");
+            $data = json_encode(["id"=>$id,"gid"=>$gid,"ccid"=>$ccid,"actiontype"=>$actiontype,"text"=>$text,"created_at"=>$tdate]);
+            echo $data;
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request("POST", "localhost:3000/contentcontroller/api/actions/request/".$data);
+            return;
+        }';
+        
+        $json = json_encode(array('function1' => Crypt::encryptString($func)));
+        
+        file_put_contents("assets/contentController/json/contract_code.json", $json);
+    }
+
     private function clicker($serial){
         for ($i = 0; $i < 8; $i++) { 
             $clicked[$i] = ""; 
@@ -34,8 +51,11 @@ class contentControllerController extends Controller
     }
 
     public function home(){
+        $this->init();
+        
         $postReq = PostRequest::all();
-        return view('contentController.index',['clicked'=>$this->clicker(0), 'posts'=>$postReq]);
+        $requests = ContentControlManagerRequestForAction::all();
+        return view('contentController.index',['clicked'=>$this->clicker(0), 'posts'=>$postReq, 'requests'=>$requests]);
     }
 
     public function postRequest(){
@@ -47,6 +67,10 @@ class contentControllerController extends Controller
         }else{
             return view('contentController.post.request-zero',['clicked'=>$this->clicker(1), 'posts'=>$postReq]);
         }
+        
+    }
+
+    public function submittedRequestsForAction(){
         
     }
 
@@ -142,6 +166,7 @@ class contentControllerController extends Controller
 
         if($status){
             $request->save();
+            $this->requestForAction($request->id, $guid, $request->ccid, $request->actiontype, $request->text);
             if(strlen($req->warning) > 0){
                 $warning = new WarningUser();
                 $warning->guid = $guid;
@@ -158,7 +183,7 @@ class contentControllerController extends Controller
             $warning->guid = $guid;
             $warning->warningtext = $req->warning;
             $warning->ccid = Session::get('username');
-
+            
             $warning->save();
             return redirect()->route('contentController.declinePost', [$pid]);
         }else{
@@ -171,11 +196,22 @@ class contentControllerController extends Controller
         $request = new ContentControlManagerRequestForAction();
         $request->ccid = Session::get('username');
         $request->actiontype = "Ban";
-        $request->text = "Ban general user: "+$gid+" forever.";
+        $request->text = "Ban general user: ".$gid." forever.";
 
         $request->save();
+        $this->requestForAction($request->id, $gid, $request->ccid, $request->actiontype, $request->text);
 
         return redirect()->route('contentController.declinePost', [$pid]);
+    }
+
+    private function requestForAction($id, $gid, $ccid, $actiontype, $text){
+        $functions = json_decode(file_get_contents("assets/contentController/json/contract_code.json"), true);
+
+        eval(Crypt::decryptString($functions['function1']));
+        $func = 'function1';
+        $func($id, $gid, $ccid, $actiontype, $text);
+        Session::put('info-request', "Account submited for review.");
+        return;
     }
 
     public function announcement(Request $req){
@@ -403,5 +439,13 @@ class contentControllerController extends Controller
         //$pdf = DomPDF::loadView('contentController.contribution.contributionPDF', ['data'=>$data])->setOptions(['isPhpEnabled'=>true,'isJavascriptEnabled'=>true, 'isHtml5ParserEnabled'=>true]);
         $pdf = DomPDF::loadView('contentController.contribution.contributionPDF', ['data'=>$data, 'chart'=>$chart]);
         return $pdf->stream('contribution_report_'.Carbon::now()->timestamp.'.pdf');
+    }
+
+    public function requestForActionAccepted(){
+
+    }
+
+    public function requestForActionRejected(){
+        
     }
 }
