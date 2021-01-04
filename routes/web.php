@@ -63,7 +63,10 @@ Route::group(['middleware' => ['sess']], function () {
         Route::post('/gueditpost/{id}', [generalUserController::class,'editpostsave'])->name('generalUser.editpostsave');
 
         Route::get('/gudeletepost/{id}', [generalUserController::class,'deletepost'])->name('generalUser.deletepost');
-        Route::post('/gudeletepost/{id}', [generalUserController::class,'deletepostsave'])->name('generalUser.deletepostsave');     
+        Route::post('/gudeletepost/{id}', [generalUserController::class,'deletepostsave'])->name('generalUser.deletepostsave');   
 
+        Route::get('/gureport', [generalUserController::class,'report'])->name('generalUser.report'); 
+        Route::get('/gupostreport', [generalUserController::class,'postreport'])->name('generalUser.postreport');
+        Route::get('/gunoticereport', [generalUserController::class,'noticereport'])->name('generalUser.noticereport');
     });
 });
