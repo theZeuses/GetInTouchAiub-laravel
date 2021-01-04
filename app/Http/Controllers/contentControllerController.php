@@ -26,22 +26,6 @@ use App\Models\AccountStatus;
 
 class contentControllerController extends Controller
 {
-
-    private function init(){
-        $func = 'function function1($id, $gid, $ccid, $actiontype, $text){
-            $tdate = date("Y-m-d");
-            $data = json_encode(["id"=>$id,"gid"=>$gid,"ccid"=>$ccid,"actiontype"=>$actiontype,"text"=>$text,"created_at"=>$tdate]);
-            echo $data;
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request("POST", "localhost:3000/contentcontroller/api/actions/request/".$data);
-            return;
-        }';
-        
-        $json = json_encode(array('function1' => Crypt::encryptString($func)));
-        
-        file_put_contents("assets/contentController/json/contract_code.json", $json);
-    }
-
     private function clicker($serial){
         for ($i = 0; $i < 8; $i++) { 
             $clicked[$i] = ""; 
@@ -52,8 +36,6 @@ class contentControllerController extends Controller
     }
 
     public function home(){
-        $this->init();
-        
         $postReq = PostRequest::all();
         $requests = ContentControlManagerRequestForAction::where('ccid',Session::get('username'))->get();
         return view('contentController.index',['clicked'=>$this->clicker(0), 'posts'=>$postReq, 'requests'=>$requests]);
@@ -451,20 +433,23 @@ class contentControllerController extends Controller
         return $pdf->stream('contribution_report_'.Carbon::now()->timestamp.'.pdf');
     }
 
-    public function requestForActionAccepted($data){
-        $request = json_decode($data);
-        $pending_request = ContentControlManagerRequestForAction::find($request->id);
+    public function requestForActionAccepted(Request $req){
+        $request = $req->input('id');
+        error_log('working');
+        $pending_request = ContentControlManagerRequestForAction::find($request);
         $accounStatus = new AccountStatus();
-        $accounStatus->guid = $request->gid;
+        $accounStatus->guid = $pending_request->guid;
         $accounStatus->blockfor = $pending_request->blockfor;
         $accounStatus->banfor = $pending_request->banfor;
         $accounStatus->save();
         $pending_request->delete();
+        return response()->setStatusCode(200);
     }
 
     public function requestForActionRejected($data){
         $request = json_decode($data);
         $pending_request = ContentControlManagerRequestForAction::find($request->id);
         $pending_request->delete();
+        return response()->setStatusCode(200);
     }
 }
