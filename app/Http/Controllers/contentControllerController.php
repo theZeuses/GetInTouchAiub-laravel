@@ -22,6 +22,7 @@ use App\Models\ContentControlManagerNotice;
 use App\Http\Requests\ContentControllerRequest;
 use App\Models\ContentControlManagerRequestForAction;
 use App\Http\Requests\ContentControllerCredentialsRequest;
+use App\Models\AccountStatus;
 
 class contentControllerController extends Controller
 {
@@ -54,7 +55,7 @@ class contentControllerController extends Controller
         $this->init();
         
         $postReq = PostRequest::all();
-        $requests = ContentControlManagerRequestForAction::all();
+        $requests = ContentControlManagerRequestForAction::where('ccid',Session::get('username'))->get();
         return view('contentController.index',['clicked'=>$this->clicker(0), 'posts'=>$postReq, 'requests'=>$requests]);
     }
 
@@ -71,9 +72,9 @@ class contentControllerController extends Controller
     }
 
     public function submittedRequestsForAction(){
-        $requests = ContentControlManagerRequestForAction::all();
+        $requests = ContentControlManagerRequestForAction::where('ccid',Session::get('username'))->get();
 
-        return view('contentController.actionRequest.list',['clicked'=>$this->clicker(0), 'requests'=>$requests])
+        return view('contentController.actionRequest.list',['clicked'=>$this->clicker(0), 'requests'=>$requests]);
     }
 
     public function approvePost($id){
@@ -148,20 +149,25 @@ class contentControllerController extends Controller
 
         $request = new ContentControlManagerRequestForAction();
         $request->ccid = Session::get('username');
+        $request->guid = $guid;
 
         $status = false;
 
         if(strlen($req->banDays) > 0){
             if(strlen($req->blockDays) > 0){
                 $request->actiontype = "Block & Ban";
+                $request->banfor = $req->banDays;
+                $request->blockfor = $req->blockDays;
                 $request->text = "Block general user: ".$guid." for ".$req->blockDays." days from posting and ban for ".$req->banDays." days.";
             }else{
+                $request->banfor = $req->banDays;
                 $request->actiontype = "Ban";
                 $request->text = "Ban general user: ".$guid." for ".$req->banDays." days.";
             }
             $status = true;
         }else if(strlen($req->blockDays) > 0){
             $request->actiontype = "Block";
+            $request->blockfor = $req->blockDays;
             $request->text = "Block general user: ".$guid." for ".$req->blockDays." days from posting.";
             $status = true;
         }
@@ -198,6 +204,8 @@ class contentControllerController extends Controller
         $request = new ContentControlManagerRequestForAction();
         $request->ccid = Session::get('username');
         $request->actiontype = "Ban";
+        $request->guid = $gid;
+        $request->banfor = -1;
         $request->text = "Ban general user: ".$gid." forever.";
 
         $request->save();
@@ -443,11 +451,18 @@ class contentControllerController extends Controller
         return $pdf->stream('contribution_report_'.Carbon::now()->timestamp.'.pdf');
     }
 
-    public function requestForActionAccepted(){
-
+    public function requestForActionAccepted($data){
+        $request = json_decode($data);
+        $pending_request = ContentControlManagerRequestForAction::find($request->id);
+        $accounStatus = new AccountStatus();
+        $accounStatus->guid = $request->gid;
+        $accounStatus->blockfor = $pending_request->blockfor;
+        $accounStatus->banfor = $pending_request->banfor;
+        $accounStatus->save();
+        $pending_request->delete();
     }
 
-    public function requestForActionRejected(){
+    public function requestForActionRejected($data){
         
     }
 }
