@@ -51,5 +51,8 @@ Route::group(['middleware' => ['sess']], function () {
 
         Route::get('/viewnotice', [generalUserController::class,'viewnotice'])->name('generalUser.viewnotice');
 
+        Route::get('/postnewcontent', [generalUserController::class,'postnewcontent'])->name('generalUser.postnewcontent');
+        Route::post('/postnewcontent', [generalUserController::class,'postnewcontentsave'])->name('generalUser.postnewcontentsave');
+
     });
 });
