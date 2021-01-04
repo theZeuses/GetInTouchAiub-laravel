@@ -159,10 +159,19 @@ class generalUserController extends Controller
         return view('generalUser.mypostlist',['postlist'=>$postlist]);
     }
     public function editpost($id){
-        
+        $post = GuPost::find($id);
+        print_r($post);
     }
     public function deletepost($id){
-        
+        $post = GuPost::find($id);
+        return view('generalUser.mypostdelete' , $post);
+    }
+    public function deletepostsave($id){
+        $post = GuPost::find($id);
+        if($post->delete())
+        {
+            return redirect()->route('generalUser.mypostlist');
+        }
     }
 
 }
