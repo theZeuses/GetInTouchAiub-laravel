@@ -56,5 +56,11 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/postnewcontent', [generalUserController::class,'postnewcontent'])->name('generalUser.postnewcontent');
         Route::post('/postnewcontent', [generalUserController::class,'postnewcontentsave'])->name('generalUser.postnewcontentsave');
 
+        Route::get('/gumypost', [generalUserController::class,'mypost'])->name('generalUser.mypost');
+        Route::get('/gupendingpostlist', [generalUserController::class,'pendingpostlist'])->name('generalUser.pendingpostlist');
+        Route::get('/gumypostlist', [generalUserController::class,'mypostlist'])->name('generalUser.mypostlist');
+        Route::get('/gueditpost/{id}', [generalUserController::class,'editpost'])->name('generalUser.editpost');
+        Route::get('/gudeletepost/{id}', [generalUserController::class,'deletepost'])->name('generalUser.deletepost');       
+
     });
 });
