@@ -148,5 +148,22 @@ class generalUserController extends Controller
             }
         }
     }
+
+    //My Post
+    public function mypost(){
+        return view('generalUser.mypost');
+    }
+
+    public function mypostlist(){
+        $postlist = GuPost::where('guid',session('username'))->get();
+        return view('generalUser.mypostlist',['postlist'=>$postlist]);
+    }
+    public function editpost($id){
+        
+    }
+    public function deletepost($id){
+        
+    }
+
 }
  
