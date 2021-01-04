@@ -43,6 +43,8 @@ Route::group(['middleware' => ['sess']], function () {
         
         Route::get('/allpost', [generalUserController::class,'allpost'])->name('generalUser.allpost');
         Route::get('/searchanypost', [generalUserController::class,'searchanypost'])->name('generalUser.searchanypost');
+        Route::get('/searchgu', [generalUserController::class,'searchgu'])->name('generalUser.searchgu');
+        Route::post('/searchgu', [generalUserController::class,'searchguresult'])->name('generalUser.searchguresult');
 
         Route::get('/sendtext', [generalUserController::class,'sendtext'])->name('generalUser.sendtext');
         Route::post('/sendtext', [generalUserController::class,'sendtextsave'])->name('generalUser.sendtextsave');
