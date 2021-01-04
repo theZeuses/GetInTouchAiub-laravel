@@ -60,7 +60,13 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/gupendingpostlist', [generalUserController::class,'pendingpostlist'])->name('generalUser.pendingpostlist');
         Route::get('/gurequesttoapprove', [generalUserController::class,'requesttoapprove'])->name('generalUser.requesttoapprove');
         Route::post('/gurequesttoapprove', [generalUserController::class,'requesttoapprovesend'])->name('generalUser.requesttoapprovesend');
+        
 
+        //request to check id problem
+        Route::get('/requesttocheckidproblem', [generalUserController::class,'requesttocheckidproblem'])->name('generalUser.requesttocheckidproblem');
+        Route::post('/requesttocheckidproblem', [generalUserController::class,'requesttocheckidproblemsend'])->name('generalUser.requesttocheckidproblemsend');
+
+        //posts
         Route::get('/gumypostlist', [generalUserController::class,'mypostlist'])->name('generalUser.mypostlist');
         Route::get('/gueditpost/{id}', [generalUserController::class,'editpost'])->name('generalUser.editpost');
         Route::post('/gueditpost/{id}', [generalUserController::class,'editpostsave'])->name('generalUser.editpostsave');
@@ -73,5 +79,6 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/gureport', [generalUserController::class,'report'])->name('generalUser.report'); 
         Route::get('/gupostreport', [generalUserController::class,'postreport'])->name('generalUser.postreport');
         Route::get('/gunoticereport', [generalUserController::class,'noticereport'])->name('generalUser.noticereport');
+
     });
 });

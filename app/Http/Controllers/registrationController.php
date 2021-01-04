@@ -14,7 +14,7 @@ class registrationController extends Controller
 
     public function signup(registrationFormRequest $req){
         $file = $req->file('image');
-        $filename = $file->getClientOriginalName().time();
+        $filename = time().$file->getClientOriginalName();
         if($file->move('assets/generalUser/profilepicture', $filename)){
 			$rr = new RegistrationRequest();
 			$rr->guid = $req->guid;

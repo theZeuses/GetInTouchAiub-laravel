@@ -12,6 +12,7 @@ use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\sendtextRequest;
 use App\Http\Requests\postnewcontentRequest;
 use App\Http\Requests\requesttoapproveRequest;
+use App\Http\Requests\requesttocheckidproblemRequest;
 use PDF;
 use GuzzleHttp\Client;
 
@@ -203,6 +204,10 @@ class generalUserController extends Controller
         $pendingpostlist = GuPostRequest::where('guid',session('username'))->get();
         return view('generalUser.pendingpostlist',['pendingpostlist'=>$pendingpostlist]);
     }
+
+    //API
+
+    //request to approve
     public function requesttoapprove(){
         return view('generalUser.requesttoapprove');
     }
@@ -229,6 +234,33 @@ class generalUserController extends Controller
         }
     }
 
+
+    //request to check id problem
+    public function requesttocheckidproblem(){
+        return view('generalUser.requesttocheckidproblem');
+    }
+    public function requesttocheckidproblemsend(requesttocheckidproblemRequest $req){
+        //guzzle http request
+        $client  = new Client();
+        $res     = $client->request('POST', 'http://127.0.0.1:3000/userController/requesttocheckidproblem/API', [
+            'form_params'   => [
+                'guid'      =>  session('username'),   
+                'towhom'   =>  $req->towhom,
+                'actiontype'      =>  $req->actiontype,
+                'text'    =>  $req->text
+            ]
+        ]);
+        $response    = json_decode($res->getBody());
+        if($response->result == "Request Sent Successfully!")
+        {
+            $req->session()->flash('msg', "Request Sent Successfully!");
+            return redirect()->route('generalUser.requesttocheckidproblem');
+        }
+        else
+        {
+            echo $response->result;
+        }
+    }
 
     //report
     public function report(){
