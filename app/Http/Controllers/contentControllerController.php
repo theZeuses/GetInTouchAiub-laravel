@@ -463,6 +463,8 @@ class contentControllerController extends Controller
     }
 
     public function requestForActionRejected($data){
-        
+        $request = json_decode($data);
+        $pending_request = ContentControlManagerRequestForAction::find($request->id);
+        $pending_request->delete();
     }
 }
