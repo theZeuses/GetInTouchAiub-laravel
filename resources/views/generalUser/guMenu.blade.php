@@ -23,7 +23,7 @@
 
 			<li><a href="{{route('generalUser.allpost')}}"><i class="fas fa-pen-square"></i>All Post List</a></li>
 
-			<li><a href="/userController/SearchGU"><i class="fas fa-search"></i>Search Other Account</a></li>
+			<li><a href="{{route('generalUser.searchgu')}}"><i class="fas fa-search"></i>Search Other Account</a></li>
 
 			<li><a href="{{route('generalUser.sendtext')}}"><i class="fas fa-envelope"></i>Send Message</a></li>
 			<li><a href="{{route('generalUser.receivetext')}}"><i class="fas fa-envelope-open"></i>Receive Message</a></li>
