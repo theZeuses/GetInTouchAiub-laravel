@@ -29,7 +29,7 @@
 			<li><a href="{{route('generalUser.receivetext')}}"><i class="fas fa-envelope-open"></i>Receive Message</a></li>
 			<li><a href="{{route('generalUser.viewnotice')}}"><i class="fas fa-bell"></i>Notifications</a></li>
 			
-			<li><a href=""><i class="fas fa-file-upload"></i>Report</a></li>
+			<li><a href="{{route('generalUser.report')}}"><i class="fas fa-file-upload"></i>Report</a></li>
 			<li><a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 		</ul>
 		</nav>
