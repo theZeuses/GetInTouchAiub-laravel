@@ -25,6 +25,15 @@
 		</a>
 		<br/>
 		<br/>
+		<h2 align='center'>Generate General User Info</h2>
+		<br/>
+		<a href="{{route('accountController.gureportgenerate')}}">
+			<button type="button">
+				Click Here
+			</button>
+		</a>
+		<br/>
+		<br/>
 		<div style="color: red">{{session('msg')}} </div>
 	</div>
 </body>

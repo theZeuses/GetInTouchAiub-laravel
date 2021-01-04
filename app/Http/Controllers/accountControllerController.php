@@ -178,6 +178,31 @@ class accountControllerController extends Controller
         $pdf = PDF::loadView('accountController.pdf', ['notices'=>$notices ,'cc'=>$cc , 'gu'=>$gu]);
         return $pdf->download('noticereport.pdf');
     }
+    public function gureportgenerate(){
+        $gulist = GeneralUser::all();
+        $total=count($gulist);
+        $active=0;
+        $banned=0;
+        $tb=0;
+        for($i=0; $i < count($gulist); $i++)
+        {   
+            if($gulist[$i]->accountstatus == "Active")
+            {
+                $active=$active+1;
+            }   
+            elseif($gulist[$i]->accountstatus == "Temporarily Blocked")
+            {
+                $tb=$tb+1;
+            }
+            else
+            {
+                $banned=$banned+1; 
+            }
+            
+        }
+        $pdf = PDF::loadView('accountController.gupdf', ['gulist'=>$gulist ,'total'=>$total , 'active'=>$active , 'banned'=>$banned , 'tb'=>$tb]);
+        return $pdf->download('gureport.pdf');
+    }
     //api
     public function userreportgenerate(){
         $client     = new Client();
