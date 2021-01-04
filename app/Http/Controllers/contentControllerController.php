@@ -71,7 +71,9 @@ class contentControllerController extends Controller
     }
 
     public function submittedRequestsForAction(){
-        
+        $requests = ContentControlManagerRequestForAction::all();
+
+        return view('contentController.actionRequest.list',['clicked'=>$this->clicker(0), 'requests'=>$requests])
     }
 
     public function approvePost($id){
