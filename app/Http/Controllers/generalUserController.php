@@ -160,7 +160,30 @@ class generalUserController extends Controller
     }
     public function editpost($id){
         $post = GuPost::find($id);
-        print_r($post);
+        return view('generalUser.mypostedit' , $post);
+    }
+    public function editpostsave($id , postnewcontentRequest $req){
+        if($req->hasFile('file')){
+            $file = $req->file('file');
+            $name = time().$file->getClientOriginalName();
+            if($file->move('assets/generalUser/post', $name)){
+                $post = GuPost::find($id);
+                $post->guid         =   session('username'); 
+                $post->text         =   $req->text;
+                $post->file         =   "/assets/generalUser/post/".$name;
+                if($post->save()){
+                    return redirect()->route('generalUser.mypostlist');
+                }
+            }
+        }
+        else{
+            $post = GuPost::find($id);
+            $post->guid         =   session('username'); 
+            $post->text         =   $req->text;
+            if($post->save()){
+                return redirect()->route('generalUser.mypostlist');
+            }
+        }
     }
     public function deletepost($id){
         $post = GuPost::find($id);
