@@ -26,13 +26,14 @@
 				</tr>
 				<tr>
 					<td>Approvedby :</td>
-					<td>{{$approveby}}</td>
+					<td>{{$approvedby}}</td>
 				</tr>
 			</table>
 			<div>
 				<h3>Are you sure to delete your post?</h3>
 				<input type="submit" name="submit" value="Confirm">
-				<a href="{{route('generalUser.MyPostList')}}">
+				<input type="hidden" id="_token" name="_token" value="{{csrf_token()}}">
+				<a href="{{route('generalUser.mypostlist')}}">
 					<button type="button">
 						Back
 					</button>
