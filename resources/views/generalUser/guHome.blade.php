@@ -6,7 +6,7 @@
 <body>
 	@include('generalUser.guMenu')
 	<div id="workspace">
-		<h1 align='center'>Welcome Back</h1>
+		<h1 align='center'>Welcome Home</h1>
 		<br/>
 		<h5>{{$profile['name']}}</h5>
 	</div>
