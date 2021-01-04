@@ -43,7 +43,11 @@
             
         </main>
     </div>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/templatemo-script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    @if(Session::has('info-request'))
+        <script>
+            toastr.success("{{ Session::pull('info-request') }}");
+        </script>
+    @endif
 </body>
 </html>
