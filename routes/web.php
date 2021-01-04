@@ -60,7 +60,8 @@ Route::group(['middleware' => ['sess']], function () {
         Route::get('/gupendingpostlist', [generalUserController::class,'pendingpostlist'])->name('generalUser.pendingpostlist');
         Route::get('/gumypostlist', [generalUserController::class,'mypostlist'])->name('generalUser.mypostlist');
         Route::get('/gueditpost/{id}', [generalUserController::class,'editpost'])->name('generalUser.editpost');
-        Route::get('/gudeletepost/{id}', [generalUserController::class,'deletepost'])->name('generalUser.deletepost');       
+        Route::get('/gudeletepost/{id}', [generalUserController::class,'deletepost'])->name('generalUser.deletepost');
+        Route::post('/gudeletepost/{id}', [generalUserController::class,'deletepostsave'])->name('generalUser.deletepostsave');        
 
     });
 });
