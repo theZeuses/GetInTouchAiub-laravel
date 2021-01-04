@@ -71,14 +71,24 @@ class generalUserController extends Controller
     }
 
     //search any post
-     public function searchanypost(Request $req){
+    public function searchanypost(Request $req){
    
-            $allpost = GuPost::where('text','like','%'.$req->key.'%')->get();          
-            return json_encode($allpost);
+        $allpost = GuPost::where('text','like','%'.$req->key.'%')->get();          
+        return json_encode($allpost);
     }
 
+    //search gu
+    public function searchgu(){
+        return view('generalUser.searchgu');
+    }
+    public function searchguresult(Request $req){
+        $gulists = GeneralUser::where('guid','like','%'.$req->key.'%')->get();          
+        return json_encode($gulists);
+    }
+
+
     //send text
-     public function sendtext(){
+    public function sendtext(){
         return view('generalUser.sendtext');
     }
     public function sendtextsave(sendtextRequest $req){
