@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ContentControlManagerRequestForAction extends Model
 {
     use HasFactory;
-    protected $table = 'ccrequestforaction';
+    protected $table = 'contentcontrollerrequestforaction';
     public $timestamps = false;
 }
