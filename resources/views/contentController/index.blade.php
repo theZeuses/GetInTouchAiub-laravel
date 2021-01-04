@@ -26,7 +26,15 @@
                 <div class="tm-prev-next-wrapper">
                     <a href="/contentcontroller/post/request" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Inspect</a>
                 </div>              
-            </div>            
+            </div>  
+            <div class="row tm-row">
+                <h2 class="index__card">{{ count($requests) }} submitted requests for action</h2>
+            </div>
+            <div class="row tm-row tm-mt-100 tm-mb-75">
+                <div class="tm-prev-next-wrapper">
+                    <a href="{{ route('contentController.submittedRequestsForAction') }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">View</a>
+                </div>              
+            </div>          
             <footer class="row tm-row">
                 <hr class="col-12">              
             </footer>
