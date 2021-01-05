@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -26,6 +25,8 @@ class loginController extends Controller
                   return redirect(route('contentController.home'));
               }else if($req->session()->get('type') == "Account Control Manager"){
                   return redirect(route('accountController.achome'));
+              }else if($req->session()->get('type') == "Admin"){
+                  return redirect('/Admin');
               }else if($req->session()->get('type') == "General User"){
                   if($user->accountstatus == 'Active'){
                       return redirect(route('generalUser.home'));
