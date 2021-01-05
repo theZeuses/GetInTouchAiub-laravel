@@ -156,7 +156,6 @@ class contentControllerController extends Controller
 
         if($status){
             $request->save();
-            $this->requestForAction($request->id, $guid, $request->ccid, $request->actiontype, $request->text);
             if(strlen($req->warning) > 0){
                 $warning = new WarningUser();
                 $warning->guid = $guid;
@@ -164,8 +163,10 @@ class contentControllerController extends Controller
                 $warning->ccid = Session::get('username');
 
                 $warning->save();
+                $this->requestForAction($request->id, $guid, $request->ccid, $request->actiontype, $request->text);
                 return redirect()->route('contentController.declinePost', [$pid]);
             }else{
+                $this->requestForAction($request->id, $guid, $request->ccid, $request->actiontype, $request->text);
                 return redirect()->route('contentController.declinePost', [$pid]);
             }
         }else if(strlen($req->warning) > 0){
@@ -174,7 +175,7 @@ class contentControllerController extends Controller
             $warning->warningtext = $req->warning;
             $warning->ccid = Session::get('username');
             
-            $warning->save();
+            error_log($warning->save());
             return redirect()->route('contentController.declinePost', [$pid]);
         }else{
             Toastr::error('Must ban, block or warn to proceed.','', ["positionClass" => "toast-top-right"]);
@@ -446,9 +447,9 @@ class contentControllerController extends Controller
         return response()->setStatusCode(200);
     }
 
-    public function requestForActionRejected($data){
-        $request = json_decode($data);
-        $pending_request = ContentControlManagerRequestForAction::find($request->id);
+    public function requestForActionRejected(Request $req){
+        $request = $req->input('id');
+        $pending_request = ContentControlManagerRequestForAction::find($request);
         $pending_request->delete();
         return response()->setStatusCode(200);
     }
