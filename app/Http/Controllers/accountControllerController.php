@@ -17,7 +17,7 @@ use App\Models\GeneralUserText;
 use App\Models\ContentControllerRequestForAction;
 use App\Models\AccountControllerNotice;
 
-use App\Http\Requests\updateProfileRequest;
+use App\Http\Requests\acupdateProfileRequest;
 use App\Http\Requests\createCCRequest;
 use App\Http\Requests\editCCRequest;
 use App\Http\Requests\createTextRequest;
@@ -38,7 +38,7 @@ class accountControllerController extends Controller
         $profile = AccountControlManager::where('acid',session('username'))->first();
         return view('accountController.updateProfile',['profile'=>$profile]);
     }
-    public function updateprofilesave(updateProfileRequest $req){
+    public function updateprofilesave(acupdateProfileRequest $req){
         if($req->hasFile('profilepicture')){
             $file = $req->file('profilepicture');
             $location = time().$file->getClientOriginalName();
