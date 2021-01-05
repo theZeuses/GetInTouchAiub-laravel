@@ -109,7 +109,9 @@ $(function() {
         var cc = announcements.contentController;
         console.log(announcement);
         var html = '';
+        var html1 = '';
         if(announcement.length > 0){
+          html1 += '<h1>'+announcement.length+' Announcements</h1>';
           for (var i = 0; i< announcement.length; i++) {
             html += '<div class="row tm-row tm-row-post"><article class="col-12 col-md-6 tm-post tm-post-post"><hr class="tm-hr-primary tm-hr-primary-post">';
             html += '<h2 class="tm-pt-30 tm-color-primary tm-post-title">'+announcement[i].subject+'</h2><p class="tm-pt-30">'+announcement[i].body+'</p>';
@@ -120,10 +122,12 @@ $(function() {
             html += '<a href="/contentcontroller/announcement/delete/'+announcement[i].id+'" class="mb-2 tm-btn tm-btn-primary tm-prev-next announcement__btn__delete">Delete</a></div></div>';
           }
         }else{
+          html1 += '<h1>0 Announcements</h1>';
           html += '<h4>Not Data Found </h4>';
         }
         
-        $('#update-announcemnet-list').html(html);
+        $('#update-announcement-list').html(html);
+        $('#announcement-list-count').html(html1);
       }
     });
   });

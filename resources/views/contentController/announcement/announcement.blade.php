@@ -13,10 +13,12 @@
                 <input id="query-announcement" class="form-control tm-search-input" name="query-announcement" type="text" placeholder="Search by Title..."  aria-label="Search">
             </div>   
             <div class="row tm-row announcement__header">
-                <h1>{{count($announcements)}} Announcements</h1>
+                <div id="announcement-list-count">
+                    <h1>{{count($announcements)}} Announcements</h1>
+                </div>              
                 <a href="{{ route('contentController.createAnnouncement') }}" class="mb-2 tm-btn tm-btn-primary tm-prev-next request__btn__approve">Add New</a>
             </div>
-            <div id="update-announcemnet-list">
+            <div id="update-announcement-list">
                 @for($i=0; $i< count($announcements); $i++ )
                     <div class="row tm-row tm-row-post">
                         <article class="col-12 col-md-6 tm-post tm-post-post">
