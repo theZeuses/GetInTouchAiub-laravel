@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login/','loginController@viewlogin')->name('viewlogin');
 Route::post('login/','loginController@verifyuser');
-Route::get('/changePass', function () {
-    return view('ChangePass.index');
-});
+Route::get('logout/','loginController@logout')->name('logout.logout');
+
 Route::group(['middleware' => ['sess','verifyadmin']], function () {
 
     Route::get('Admin/','adminControllerad@Viewhomead')->name('Admin.Viewhomead');
@@ -29,6 +28,10 @@ Route::group(['middleware' => ['sess','verifyadmin']], function () {
 
     Route::get('Admin/insert','adminControllerad@Viewinsertad')->name('Admin.Viewinsertad');
     Route::post('Admin/insert','adminControllerad@Viewinsertpostad')->name('Admin.Viewinsertadpost');
+
+    Route::get('Admin/pendingManagement','adminControllerad@pendingmanagement')->name('Admin.pendingmanagement');
+    Route::get('Admin/Approve/ac{id}','adminControllerad@approveac')->name('Admin.approveac');
+    Route::get('Admin/Approve/cc{id}','adminControllerad@approvecc')->name('Admin.approvecc');
 
     Route::get('Admin/PendingPostReq/','adminControllerad@ViewPendingpostad')->name('Admin.ViewPendingPostReqad');
     Route::get('Admin/PendingPostReq/Approve/{id}','adminControllerad@approvepenpostreq')->name('Admin.approvepenpostreq');
@@ -81,13 +84,14 @@ Route::group(['middleware' => ['sess','verifyadmin']], function () {
     Route::get('Admin/Report/','adminControllerad@ViewReportad')->name('Admin.ViewReportad');
     Route::get('Admin/editProfile/','adminControllerad@VieweditProfilead')->name('Admin.VieweditProfilead');
     Route::post('Admin/editProfile/','adminControllerad@VieweditProfileadsub')->name('Admin.VieweditProfileadsub');
+    Route::get('Admin/Changepass','adminControllerad@Changepass')->name('Admin.Changepass');
+    Route::post('Admin/Changepass','adminControllerad@Changepasssub')->name('Admin.Changepasssub');
 
     Route::get('Admin/searchadmin/{key}','adminControllerad@searchadmin')->name('Admin.searchadmin');
     Route::get('Admin/Searchcclist/{key}','adminControllerad@searchcc')->name('Admin.searchcc');
     Route::get('Admin/Searchuser/{key}','adminControllerad@searchuser')->name('Admin.searchuser');
     Route::get('Admin/Searchac/{key}','adminControllerad@searchac')->name('Admin.searchac');
     Route::get('Admin/SearchPost/{key}','adminControllerad@searchpost')->name('Admin.searchpost');
+    Route::get('Admin/Convert/pdf','adminControllerad@convertpdf')->name('Admin.convertpdf');
 
 });
-//Route::get('Admin/notification','adminControllerad@ViewchangePass')->name('Admin.ViewchangePass');
-//Route::get('Admin/Report/','adminControllerad@ViewReportad')->name('Admin.ViewReportad');

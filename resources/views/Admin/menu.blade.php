@@ -44,6 +44,10 @@
                         <i class="fas fa-users"></i>
                         Insert
                     </a></li>
+                    <li class="tm-nav-item"><a href="{{route('Admin.pendingmanagement')}}" class="tm-nav-link">
+                        <i class="fas fa-users"></i>
+                        Pending AC/CC Request
+                    </a></li>
                     <li class="tm-nav-item"><a href="{{route('Admin.ViewPendingPostReqad')}}" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         Prnding Post Request

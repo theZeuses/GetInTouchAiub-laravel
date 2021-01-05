@@ -60,7 +60,26 @@ class adminControllerad extends Controller
     }
     public function Viewinsertpostad(insert $i){
         if($this->req->type=='Account Control Manager') {
-            $ac=new AccountController;
+            //echo($this->req->session()->get());
+            $client = new \GuzzleHttp\Client();
+           // $res = $client->request('GET', 'localhost:8000/Adminhome/report');
+            $response = $client->request('POST', 'localhost:8000/Adminhome/accontroller', [
+                'form_params' => [
+                    'Acid' => $this->req->userid,
+                    'name' => $this->req->name,
+                    'email' =>$this->req->email,
+                    'gender' => $this->req->gender,
+                    'dob' => $this->req->dob,
+                    'address' =>$this->req->add,
+                    'created_by'=>$this->req->session()->get('username'),
+                    'type' =>'Account Control Manager',
+                     'Voted_by'=>[],
+                    'profilepicture' => ''//$this->req->dob,
+                    //'accountstatus' =>$this->req->add,
+                ]
+            ]);
+            
+            /*$ac=new AccountController;
             $ac->acid= $this->req->userid;
             $ac->name= $this->req->name;
             $ac->email= $this->req->email;
@@ -77,10 +96,29 @@ class adminControllerad extends Controller
             $usr->usertype='Account Control Manager';
             $usr->accountstatus= 'Active';
             $usr->save();
-            return redirect('/Admin/ACList');
+            return redirect('/Admin/ACList');*/
 
         }else{
-            $ac=new ContentController;
+            $client = new \GuzzleHttp\Client();
+            // $res = $client->request('GET', 'localhost:8000/Adminhome/report');
+             $response = $client->request('POST', 'localhost:8000/Adminhome/cccontroller', [
+                 'form_params' => [
+                     'Ccid' => $this->req->userid,
+                     'name' => $this->req->name,
+                     'email' =>$this->req->email,
+                     'gender' => $this->req->gender,
+                     'dob' => $this->req->dob,
+                     'address' =>$this->req->add,
+                     'created_by'=>$this->req->session()->get('username'),
+                     'type' =>'Content Control Manager',
+                     'Voted_by'=>[],
+                     'profilepicture' => ''//$this->req->dob,
+                     //'accountstatus' =>$this->req->add,
+                 ]
+             ]);
+           
+             /*$ac=
+           /* $ac=new ContentController;
             $ac->ccid= $this->req->userid;
             $ac->name= $this->req->name;
             $ac->email= $this->req->email;
@@ -97,9 +135,75 @@ class adminControllerad extends Controller
             $usr->usertype='Account Control Manager';
             $usr->accountstatus= 'Active';
             $usr->save();
-            return redirect('/Admin/CCList');
+            return redirect('/Admin/CCList');*/
         }
+        return redirect('/Admin/insert');
        
+    }
+    public function pendingmanagement(){
+        $client = new \GuzzleHttp\Client();
+         $res = $client->request('GET', 'localhost:8000/Adminhome/getpending/management');
+        $values=json_decode($res->getBody());
+      $acpendinglist=array();
+      $ccpendinglist=array();
+     // print_r($values[0]->accontroller);
+            for($i=0;$i<count($values[0]->accontroller);$i++)
+            {
+                if($values[0]->accontroller[$i]->created_by != $this->req->session()->get('username'))
+                {
+                    for($j=0;$j<count($values[0]->accontroller[$i]->Voted_by);$j++){
+                        if($values[0]->accontroller[$i]->Voted_by[$j] != $this->req->session()->get('username'))
+                    {
+                        //print_r($values[0]->accontroller[$i]);
+                        array_push($acpendinglist,$values[0]->accontroller[$i]);
+                    }
+                    }
+                    
+                }
+
+            }
+            for($i=0;$i<count($values[1]->cccontroller);$i++)
+            {
+                if($values[1]->cccontroller[$i]->created_by != $this->req->session()->get('username'))
+                {
+                    for($j=0;$j<count($values[1]->cccontroller[$i]->Voted_by);$j++){
+                    if($values[1]->cccontroller[$i]->Voted_by[$j] != $this->req->session()->get('username'))
+                    {
+                        //print_r($values[1]->cccontroller[$i]);
+                        array_push($ccpendinglist,$values[1]->cccontroller[$i]);
+                    }
+                }
+                }
+
+            }
+       // print_r($acpendinglist);
+       // print_r($ccpendinglist);
+        return view('Admin.PendingManagement')->with('acpendinglist',$acpendinglist)->with('ccpendinglist',$ccpendinglist);
+    }
+    public function approveac ($id){
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', 'localhost:8000/Adminhome/Approveac',[
+            'form_params' => [
+                'userid' => $this->req->session()->get('username'),
+                'acid' => $id
+            ]
+        ]);
+       //$values=json_decode($res->getBody());
+        //print_r($id);
+        return redirect('Admin/pendingManagement');
+    }
+    public function approvecc($id){
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', 'localhost:8000/Adminhome/Approvecc',[
+            'form_params' => [
+                'userid' => $this->req->session()->get('username'),
+                'ccid' => $id
+            ]
+        ]);
+      
+        //print_r($id);
+        return redirect('Admin/pendingManagement');
+
     }
     public function ViewPendingpostad(){
         $penpost=GeneralUserPostRequest::all();
