@@ -175,7 +175,7 @@ class contentControllerController extends Controller
             $warning->warningtext = $req->warning;
             $warning->ccid = Session::get('username');
             
-            error_log($warning->save());
+            $warning->save();
             return redirect()->route('contentController.declinePost', [$pid]);
         }else{
             Toastr::error('Must ban, block or warn to proceed.','', ["positionClass" => "toast-top-right"]);
