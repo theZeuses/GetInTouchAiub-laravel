@@ -1,40 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class loginController extends Controller
 {
-    public function viewlogin(){
-        return view('Login.index');
+    public function index(){
+    	return view('contentController.login');
     }
-    public function verifyuser(Request $req){
-      
-       //print_r( $req->password);
-       //$validation= UserModel::all();
-       //print_r($validation);
-       $validation= User::where('userid',$req->username)
-                            ->where('password',$req->password)
-                            ->get();
-        if ($validation[0]['usertype']=='Admin'&& $validation[0]['accountstatus']=='Active')
-        {
-            //print_r($validation);
-            $req->session()->put('username' , $req->username);
-            $req->session()->put('type',$validation[0]['usertype']=='Admin');
-            return redirect('/Admin');
-        }
-        else{
-            return redirect('/login');
 
+    public function verify(Request $req){
+
+        $user  = User::where('userid', $req->username)
+                        ->where('password', $req->password)
+                        ->first();
+
+        if($user != null){
+
+              $req->session()->put('username', $req->username);
+              $req->session()->put('type', $user->usertype);
+
+              if($req->session()->get('type') == "Content Control Manager"){
+                  return redirect(route('contentController.home'));
+              }else if($req->session()->get('type') == "Account Control Manager"){
+                  return redirect(route('accountController.achome'));
+              }else if($req->session()->get('type') == "Admin"){
+                  return redirect('/Admin');
+              }else if($req->session()->get('type') == "General User"){
+                  if($user->accountstatus == 'Active'){
+                      return redirect(route('generalUser.home'));
+                  }else{
+                      return redirect()->route('generalUser.requesttocheckidproblem');
+                  }
+              }else{
+                  return redirect('/login');
+              }
+        }else{
+          return redirect('/login');
         }
-    
-                    
-        //
-    }
-    public function logout(Request $req)
-    {
-        $req->session()->flush();
-        return redirect ('/login');
     }
 }
