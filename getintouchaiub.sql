@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 06, 2020 at 03:28 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Host: localhost:3306
+-- Generation Time: Dec 25, 2020 at 02:46 PM
+-- Server version: 8.0.22-0ubuntu0.20.04.3
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -130,6 +131,7 @@ INSERT INTO `adminnotice` (`id`, `adminid`, `subject`, `body`, `towhom`) VALUES
 (5, 'shazib1', 'demo', 'welcome Content controller', 'shamil1'),
 (6, 'shahriyar', 'welcome', 'welcome to our system', 'shazib1');
 
+
 -- --------------------------------------------------------
 
 --
@@ -150,11 +152,19 @@ CREATE TABLE `adminpost` (
 --
 
 CREATE TABLE `ccannouncement` (
-  `id` int(20) NOT NULL,
+  `id` int NOT NULL,
   `ccid` varchar(50) NOT NULL,
   `subject` varchar(100) NOT NULL,
   `body` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `ccannouncement`
+--
+
+INSERT INTO `ccannouncement` (`id`, `ccid`, `subject`, `body`) VALUES
+(6, 'shamil1', 'Announcement', 'Body updated'),
+(9, 'shamil1', 'Testing', 'Ho ho ho....');
 
 -- --------------------------------------------------------
 
@@ -163,12 +173,33 @@ CREATE TABLE `ccannouncement` (
 --
 
 CREATE TABLE `ccnotice` (
-  `id` int(20) NOT NULL,
+  `id` int NOT NULL,
   `ccid` varchar(50) NOT NULL,
+  `guid` varchar(155) NOT NULL,
   `subject` varchar(100) NOT NULL,
-  `body` varchar(1000) NOT NULL,
-  `guid` varchar(155) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `body` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `ccnotice`
+--
+
+INSERT INTO `ccnotice` (`id`, `ccid`, `guid`, `subject`, `body`) VALUES
+(1, 'shamil1', '18-36176-1', 'Approved', 'Your post has been approved'),
+(2, 'shamil1', '18-36176-1', 'Approved', 'Your post has been approved'),
+(3, 'shamil1', '18-36176-1', 'Approved', 'Your post has been approved'),
+(4, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(5, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(6, 'shamil1', '18-36176-1', 'Approved!', 'Your post has been approved.'),
+(7, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(8, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(9, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(10, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(11, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(12, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(13, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.'),
+(14, 'shamil1', '18-36176-1', 'Approved!', 'Your post has been approved.'),
+(15, 'shamil1', '18-36176-1', 'Declined.', 'Your post has been declined.');
 
 -- --------------------------------------------------------
 
@@ -188,7 +219,13 @@ CREATE TABLE `ccrequestforaction` (
 --
 
 INSERT INTO `ccrequestforaction` (`id`, `ccid`, `actiontype`, `text`) VALUES
-(1, 'shamil1', 'Block', 'Please, block this user.');
+(1, 'shamil1', 'Ban', 'Ban general user: 18-36176-1 forever.'),
+(2, 'shamil1', 'Ban', 'Ban general user: 18-36176-1 for 4 days.'),
+(3, 'shamil1', 'Block', 'Block general user: 18-36176-1 for  days from posting.'),
+(4, 'shamil1', 'Ban', 'Ban general user: 18-36176-1 for 8 days.'),
+(5, 'shamil1', 'Block', 'Block general user: 18-36176-1 for  days from posting.'),
+(6, 'shamil1', 'Block & Ban', 'Block general user: 18-36176-1 for 6 days from posting and ban for 5 days.'),
+(7, 'shamil1', 'Ban', 'Ban general user: 18-36176-1 for 5 days.');
 
 -- --------------------------------------------------------
 
@@ -213,6 +250,8 @@ CREATE TABLE `contentcontrolmanager` (
 --
 
 INSERT INTO `contentcontrolmanager` (`id`, `ccid`, `name`, `email`, `gender`, `dob`, `address`, `profilepicture`, `accountstatus`) VALUES
+(1, 'shamil1', 'Shamil', 'shamil@email.com', 'Male', '22/11/1998', 'Kuratoli', '1606225477493unnamed.jpg', 'Active'),
+(2, 'ccid2', 'TesterCC', 'testtercc@email.com', 'Female', '1/2/2020', '', '', 'Active');
 (8, 'n111', 'Hasan', 'hasan11111@aiub.edu', 'Male', '1998-08-10', 'Badda,Dhaka', '', 'Active'),
 (9, '12345', 'Hasan', 'hasan@aiub.edu', 'Male', '1998-10-10', 'Badda,Dhaka', '', 'Active'),
 (10, '1234a', 'Sakif', 'sakif@gmail.com', 'Male', '1998-01-01', 'Badda,Dhaka,Bangladesh', '', 'Active'),
@@ -225,12 +264,19 @@ INSERT INTO `contentcontrolmanager` (`id`, `ccid`, `name`, `email`, `gender`, `d
 --
 
 CREATE TABLE `contribution` (
-  `id` int(20) NOT NULL,
+  `id` int NOT NULL,
   `ccid` varchar(30) NOT NULL,
-  `postapproved` int(30) NOT NULL DEFAULT 0,
-  `postdeclined` int(30) NOT NULL DEFAULT 0,
-  `announcements` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `postapproved` int NOT NULL DEFAULT '0',
+  `postdeclined` int NOT NULL DEFAULT '0',
+  `announcements` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `contribution`
+--
+
+INSERT INTO `contribution` (`id`, `ccid`, `postapproved`, `postdeclined`, `announcements`) VALUES
+(2, 'shamil1', 4, 12, 8);
 
 -- --------------------------------------------------------
 
@@ -256,6 +302,10 @@ CREATE TABLE `generaluser` (
 --
 
 INSERT INTO `generaluser` (`id`, `guid`, `name`, `email`, `gender`, `dob`, `address`, `profilepicture`, `userstatus`, `accountstatus`) VALUES
+(1, '18-36176-1', 'Shamil', 'shamil@email.com', 'male', '22/11/1998', 'wdw', '', 'Student', 'Active'),
+(2, '18-37916-2', 'Snigdho Dip', 'dip@gmail.com', 'Male', '11/01/1997', 'Dhanmondi, Dhaka', '', 'Student', 'Active'),
+(3, '1709-111-2', 'Md Al-Amin', 'alamin@aiub.edu', 'Male', '24/01/195', 'Dhaka', '', 'Teacher', 'Active'),
+(4, '07-11454-3', 'Arifa Sultana', 'arifa@gmail.com', 'Female', '5/9/1987', 'Khulna', '', 'Alumni', 'Active');
 (12, '18-36572-1', 'akash mollah', 'akash@gmail.com', 'Male', '18/05/2000', 'dhaka,Bangladesh', '', 'Student', 'Active'),
 (13, 'shanin12', 'Shanin Islam', 'shanin@gmail.com', 'Male', '20.1.1989', 'Banasree, Dhaka, Bangladesh', '', 'Student', 'Active');
 
@@ -303,9 +353,13 @@ CREATE TABLE `gupost` (
 --
 
 INSERT INTO `gupost` (`id`, `guid`, `text`, `file`, `approvedby`) VALUES
-(1, '18-36612-1', 'can any one help me about the current curriculum of CSE in aiub -thanks ', NULL, 'shazib1'),
-(5, '18-36612-1', 'hello', 'null', 'shazib1'),
-(6, '18-36612-1', 'can anyone provide me Alamin Sir Contuct information!!', 'null', 'shazib1');
+(1, '18-36176-1', 'hey hey', NULL, 'shamil1'),
+(2, '18-36176-1', 'hey hey, look at the sky', NULL, 'shamil1'),
+(3, '18-36176-1', 'How you doing?', NULL, 'shamil1'),
+(4, '18-36176-1', 'post', NULL, 'shamil1'),
+(5, '18-36176-1', 'this is another post', NULL, 'shamil1'),
+(6, '18-36176-1', 'This is a post', NULL, 'shamil1');
+
 
 -- --------------------------------------------------------
 
@@ -320,13 +374,17 @@ CREATE TABLE `gupostrequest` (
   `file` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
 --
 -- Dumping data for table `gupostrequest`
 --
 
 INSERT INTO `gupostrequest` (`id`, `guid`, `text`, `file`) VALUES
+(23, '18-37916-2', 'Can anyone share with me the routine for fall 2021?', NULL),
+(24, '18-37916-2', 'Can anyone share with me the cv format for applying for TAship at our varsity?', NULL);
 (7, '18-36610-1', 'Hi EveryOne', NULL),
 (8, 'eva4', 'Text', './assets/generalUser/post/1606257196435testprofilepicture.jpg');
+
 
 -- --------------------------------------------------------
 
@@ -356,6 +414,7 @@ INSERT INTO `gurequestforaction` (`id`, `guid`, `towhom`, `actiontype`, `text`) 
 --
 
 CREATE TABLE `gutext` (
+
   `id` int(20) NOT NULL,
   `guid` varchar(50) NOT NULL,
   `text` varchar(100) NOT NULL,
@@ -403,7 +462,7 @@ INSERT INTO `user` (`id`, `userid`, `password`, `usertype`, `accountstatus`) VAL
 (2, 'nayeem2', 'nayeem2', 'Account Control Manager', 'Active'),
 (3, 'shamil1', 'shamil1', 'Content Control Manager', 'Active'),
 (4, 'eva4', 'eva4', 'General User', 'Active'),
-(6, 'shahriyar231', '', 'Admin', 'Active'),
+(6, 'ccid2', '123456', 'Content Control Manager', 'Active');
 (7, 'sabit', '', 'Account Control Manager', 'Active'),
 (8, 'sadik', '', 'Content Control Manager', 'Active'),
 (12, 'n111', 'n111', 'Content Control Manager', 'Active'),
@@ -420,11 +479,31 @@ INSERT INTO `user` (`id`, `userid`, `password`, `usertype`, `accountstatus`) VAL
 --
 
 CREATE TABLE `warninguser` (
-  `id` int(20) NOT NULL,
+  `id` int NOT NULL,
   `ccid` varchar(30) NOT NULL,
   `guid` varchar(30) NOT NULL,
   `warningtext` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `warninguser`
+--
+
+INSERT INTO `warninguser` (`id`, `ccid`, `guid`, `warningtext`) VALUES
+(1, 'shamil1', '18-36176-1', ''),
+(2, 'shamil1', '18-36176-1', ''),
+(3, 'shamil1', '18-36176-1', ''),
+(4, 'shamil1', '18-36176-1', ''),
+(5, 'shamil1', '18-36176-1', 'yy'),
+(6, 'shamil1', '18-36176-1', ''),
+(7, 'shamil1', '18-36176-1', ''),
+(8, 'shamil1', '18-36176-1', '7'),
+(9, 'shamil1', '18-36176-1', ''),
+(10, 'shamil1', '18-36176-1', 'warning'),
+(11, 'shamil1', '18-36176-1', 'warning'),
+(12, 'shamil1', '18-36176-1', ''),
+(13, 'shamil1', '18-36176-1', ''),
+(14, 'shamil1', '18-36176-1', '');
 
 --
 -- Indexes for dumped tables
@@ -564,31 +643,32 @@ ALTER TABLE `warninguser`
 -- AUTO_INCREMENT for table `accountcontrolmanager`
 --
 ALTER TABLE `accountcontrolmanager`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 
 --
 -- AUTO_INCREMENT for table `acnotice`
 --
 ALTER TABLE `acnotice`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `actext`
 --
 ALTER TABLE `actext`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `adminnotice`
 --
 ALTER TABLE `adminnotice`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ccannouncement`
@@ -606,7 +686,7 @@ ALTER TABLE `ccnotice`
 -- AUTO_INCREMENT for table `ccrequestforaction`
 --
 ALTER TABLE `ccrequestforaction`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `contentcontrolmanager`
@@ -624,19 +704,19 @@ ALTER TABLE `contribution`
 -- AUTO_INCREMENT for table `generaluser`
 --
 ALTER TABLE `generaluser`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `gucomment`
 --
 ALTER TABLE `gucomment`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gufollow`
 --
 ALTER TABLE `gufollow`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gupost`

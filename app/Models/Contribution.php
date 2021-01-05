@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GeneralUser extends Model
+class Contribution extends Model
 {
     use HasFactory;
-    protected $table = 'generaluser';
-    protected $primaryKey = "id";
-    public $timestamps = false;
+    protected $table = 'contribution';
+	public $timestamps = false;
 }
