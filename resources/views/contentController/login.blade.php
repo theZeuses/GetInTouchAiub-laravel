@@ -67,7 +67,7 @@
 					</div>
 
 					<div class="text-center w-full">
-						<a class="txt1" href="/userController/registrationform">
+						<a class="txt1" href="{{route('generalUser.registrationform')}}">
 							Create new account
 							<i class="fa fa-long-arrow-right"></i>						
 						</a>

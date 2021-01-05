@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.wrapper{
+  height: 100%;
+  width: 300px;
+  position: relative;
+}
+#sidebar{
+  position: fixed;
+  background: #404040;
+  height: 100%;
+  width: 270px;
+  overflow: hidden;
+  left: 0px;
+  transition: all 0.3s ease;
+}
+#sidebar .title{
+  line-height: 60px;
+  text-align: center;
+  background: #333;
+  font-size: 25px;
+  font-weight: 600;
+  color: #f2f2f2;
+  border-bottom: 1px solid #222;
+}
+#sidebar .subtitle{
+  line-height: 40px;
+  text-align: center;
+  background: #333;
+  font-size: 15px;
+  font-weight: 300;
+  color: #f2f2f2;
+  border-bottom: 1px solid #222;
+}
+#sidebar .list-items{
+  position: relative;
+  background: #404040;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+}
+#sidebar .list-items li{
+  padding-left: 20px;
+  line-height: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #333;
+  transition: all 0.3s ease;
+}
+#sidebar .list-items li:hover{
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 0px 10px 3px #222;
+}
+#sidebar .list-items li:first-child{
+  border-top: none;
+}
+#sidebar .list-items li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 300;
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+#sidebar .list-items li a i{
+  margin-right: 20px;
+}
+#sidebar .list-items .icons{
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  position: absolute;
+  bottom: 100px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#sidebar .list-items .icons a{
+  height: 100%;
+  width: 40px;
+  display: block;
+  margin: 0 5px;
+  font-size: 18px;
+  color: #f2f2f2;
+  background: #4a4a4a;
+  border-radius: 5px;
+  border: 1px solid #383838;
+  transition: all 0.3s ease;
+}
+#sidebar .list-items .icons a:hover{
+  background: #404040;
+}
+.list-items .icons a:first-child{
+  margin-left: 0px;
+}
+#workspace{
+  top: absolute;
+  left: 280px;
+  right: 10px;
+  bottom: 10px absolute;
+  position: absolute;
+  color: #202020;
+  z-index: -1;
+  text-align: center;
+  border: 1px solid #383838;
+}
+#workspace .header{
+  font-size: 30px;
+  font-weight: 600;
+}
+#workspace p{
+  font-size: 20px;
+  font-weight: 600;
+}
+#workspace h1{
+  font-size: 100px;
+  font-weight: 700;
+}
+#workspace h2{
+  font-size: 50px;
+  font-weight: 700;
+}
+#workspace h5{
+  font-size: 50px;
+  font-weight: 700;
+}

@@ -1,0 +1,81 @@
+.index__card{
+    margin-left: 40%;
+    font-weight: 800;
+    color: red;
+}
+
+.request__btn__approve{
+    background-color: green;
+}
+
+.request__btn__decline{
+    background-color: red;
+}
+
+.request__btn__report{
+    background-color: darkred;
+}
+
+.tm-row-post{
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.tm-post-post{
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.tm-hr-primary-post{
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.announcement__btn__update{
+    background-color: lawngreen;
+}
+
+.announcement__btn__delete{
+    background-color: red;
+}
+
+.announcement__haeder{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0; /* required */
+}
+
+.tm-search-input-body{
+    min-height: 170px;
+}
+
+.report__container{
+    min-height: 500px;
+    min-width: 100%;
+}
+
+.table-custom{
+    min-width: 115%;
+}
+
+.ban__days{
+    width: 15%;
+}
+
+.block__days{
+    width: 67%;
+}
+
+.form-control{
+    bottom: 0;
+}
+
+.tm-search-input{
+    bottom: 0;
+}
+
+.profile-img{
+    max-width: 20%;
+    max-height: 20%;
+
+}
