@@ -29,6 +29,7 @@
 		<div class="container-login100" style="background-image: url('/assets/images/img-01.jpg');">
 			<div class="wrap-login100 p-t-190 p-b-30">
 				<form class="login100-form validate-form" method="post">
+					@csrf
 					<div class="login100-form-avatar">
                     <img src="{{asset('/assets/images/avatar-01.jpg')}}" alt="AVATAR">
 					</div>
@@ -38,7 +39,7 @@
 					</span>
 
 					<div style ="margin-top:20px;margin-bottom:20px"class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" name="username" placeholder="Username"value="{{$ad[0]['userid']}}" readonly>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user"></i>
@@ -46,7 +47,7 @@
 					</div>
 
 					<div  style ="margin-top:20px;margin-bottom:20px" class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password"value="{{$ad[0]['password']}}" readonly>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock"></i>
