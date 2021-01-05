@@ -14,7 +14,7 @@
         "brian2694/laravel-toastr": "^5.54",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5"
     },

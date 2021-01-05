@@ -9,5 +9,6 @@ class GeneralUser extends Model
 {
     use HasFactory;
     protected $table = 'generaluser';
-	public $timestamps = false;
+    protected $primaryKey = "id";
+    public $timestamps = false;
 }

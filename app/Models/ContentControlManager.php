@@ -9,5 +9,6 @@ class ContentControlManager extends Model
 {
     use HasFactory;
     protected $table = 'contentcontrolmanager';
+    protected $primaryKey = "id";
     public $timestamps = false;
 }
