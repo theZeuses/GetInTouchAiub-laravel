@@ -16,9 +16,11 @@ class loginController extends Controller
         $user  = User::where('userid', $req->username)
                         ->where('password', $req->password)
                         ->first();
+
         //echo $req->username;
         //echo $req->password;
         //echo $user;
+
     	if($user != null){
 
             $req->session()->put('username', $req->username);
@@ -26,14 +28,15 @@ class loginController extends Controller
             
             if($req->session()->get('type') == "Content Control Manager"){
                 return redirect(route('contentController.home'));
+            }elseif($req->session()->get('type') == "Account Control Manager"){
+                return redirect(route('accountController.achome'));
             }elseif($req->session()->get('type') == "General User"){
                 if($user->accountstatus == 'Active'){
                     return redirect(route('generalUser.home'));
                 }else{
                     return redirect()->route('generalUser.requesttocheckidproblem');
                 }
-            }
-            else{
+            }else{
                 return redirect('/login');
             }
     	}else{
