@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<link rel="stylesheet" href="/assets/accountControlManager/css/acStyle.css">
+</head>
+<body>
+	<h1>Content Control Manager Validator Home</h1>
+	<a href="/home">Home</a> | 
+	<a href="/logout">logout</a>
+	<div id="workspace">
+		<br/>
+		<table id="view">
+			<tr>
+				<td>CCID</td>
+				<td>Name</td>
+				<td>Email</td>
+				<td>Gender</td>
+				<td>Date Of Birth</td>
+				<td>Address</td>
+				<td>Profile Picture</td>
+				<td>Account Status</td>
+				<td>Created At</td>
+				<td>Vote</td>
+				<td>Action</td>
+			</tr>
+			<% for(var i=0; i< list.length; i++ ){ %>
+			<tr>
+				<td><%= list[i].ccid %></td>
+				<td><%= list[i].name %></td>
+				<td><%= list[i].email %></td>
+				<td><%= list[i].gender %></td>
+				<td><%= list[i].dob %></td>
+				<td><%= list[i].address %></td>
+				<td><%= list[i].profilepicture %></td>
+				<td><%= list[i].accountstatus %></td>
+				<td><%= list[i].created_at%></td>
+				<td><%= list[i].vote%></td>
+				<td>
+					<a href="/acvalidationrequest/vote/<%= list[i].ccid%>">Vote</a>
+				</td>
+			</tr>
+		<% } %>
+	</table>
+</body>
+</html>

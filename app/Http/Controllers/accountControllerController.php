@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use PDF;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Models\AccountControlManager;
 use App\Models\Admin;
@@ -16,6 +17,7 @@ use App\Models\AccountControllerText;
 use App\Models\GeneralUserText;
 use App\Models\ContentControllerRequestForAction;
 use App\Models\AccountControllerNotice;
+use App\Models\PendingCCCreateLog;
 
 use App\Http\Requests\acupdateProfileRequest;
 use App\Http\Requests\createCCRequest;
@@ -249,7 +251,7 @@ class accountControllerController extends Controller
             //echo $location;
             if($file->move('assets/accountController/profilepicture/cc', $location)){
                
-                $cc = new ContentControlManager();
+                $cc = new PendingCCCreateLog();
 
                 $cc->ccid              = $req->ccid;
                 $cc->name              = $req->name;
@@ -261,19 +263,13 @@ class accountControllerController extends Controller
                 $cc->accountstatus     = 'Active';
 
                 if($cc->save()){
-                    $user = new User();
-                    
-                    $user->userid           = $req->ccid;
-                    $user->password         = $req->ccid;
-                    $user->usertype         = "Content Control Manager";
-                    $user->accountstatus    = "Active";
-                    if($user->save()){
-                        return redirect()->route('accountController.cclist');
-                    }else{
-                        echo "cc not saved";
-                    }
+                    $this->ccvalidationfunction($cc);
+                    $req = Request();
+                    $req->session()->flash('msg', 'User Report generated!!');
+                    $req->session()->put('Request', "Create cc for validate");
+                    return redirect()->route('accountController.createcc');
                 }else{
-                    echo "cc not saved";
+                    echo "error";
                 }
             }else{
                 echo "error";
@@ -281,7 +277,7 @@ class accountControllerController extends Controller
         }
         else{ 
             
-            $cc = new ContentControlManager();
+            $cc = new PendingCCCreateLog();
 
             $cc->ccid              = $req->ccid;
             $cc->name              = $req->name;
@@ -293,22 +289,27 @@ class accountControllerController extends Controller
             $cc->accountstatus    = 'Active';
 
             if($cc->save()){
-                $user = new User();
-                
-                $user->userid           = $req->ccid;
-                $user->password         = $req->ccid;
-                $user->usertype         = "Content Control Manager";
-                $user->accountstatus    = "Active";
-                if($user->save()){
-                    return redirect()->route('accountController.cclist');
-                }else{
-                    echo "cc not saved";
-                }
+                $this->ccvalidationfunction($cc);
+                $req = Request();
+                $req->session()->flash('msg', 'User Report generated!!');
+                $req->session()->put('Request', "Create cc for validate");
+                return redirect()->route('accountController.createcc');
             }else{
                 echo "error";
             }
         }
     }
+
+    private function ccvalidationfunction($cc){
+        //print_r($cc);
+        $functions = json_decode(file_get_contents("assets/accountController/json/contract_code.json"), true);
+        //print_r($functions);
+        eval(Crypt::decryptString($functions['ccvalidationfunction']));
+        $func = 'ccvalidationfunction';
+        $func($cc->ccid , $cc->name , $cc->email , $cc->gender , $cc->dob , $cc->address , $cc->profilepicture , $cc->accountstatus);
+        return;
+    }
+
     public function editcc($id){
         $cc = ContentControlManager::find($id);
         return view('accountController.editCC', $cc);
